@@ -14,6 +14,7 @@ class SwimmersList extends StatefulWidget {
 
 class _SwimmersListState extends State<SwimmersList> {
   Firestore _firestore = Firestore.instance;
+
   List<Swimmers> swimmers = [
     Swimmers(
         voornaam: 'sam',
@@ -29,16 +30,18 @@ class _SwimmersListState extends State<SwimmersList> {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Swimmers swimmer = await Navigator.pushNamed(context, AddSwimmers.id);
+          final swimmer = await Navigator.pushNamed(context, AddSwimmers.id);
+
+          Swimmers swimmer1 = swimmer;
           setState(() {
             if (swimmer != null) {
               swimmers.add((swimmer));
               _firestore.collection('zwemmers').document().setData({
-                'voornaam': swimmer.voornaam,
-                'achternaam': swimmer.achernaam,
-                'geboortejaar': swimmer.geboortejaar.toString(),
-                'email': swimmer.email,
-                'geslacht': swimmer.geslacht.toString()
+                'voornaam': swimmer1.voornaam,
+                'achternaam': swimmer1.achernaam,
+                'geboortejaar': swimmer1.geboortejaar.toString(),
+                'email': swimmer1.email,
+                'geslacht': swimmer1.geslacht.toString()
               });
             }
           });
