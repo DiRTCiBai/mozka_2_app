@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/data_swimmers.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/tile_swimmers.dart';
 import 'package:mozka_2_app/screens/individueel_data_swimmer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SwimList extends StatefulWidget {
   final List<Swimmers> swimmers;
@@ -13,15 +12,12 @@ class SwimList extends StatefulWidget {
 }
 
 class _SwimListState extends State<SwimList> {
-  Firestore _firestore = Firestore.instance;
-
   List<Swimmers> swimmers = [];
 
   @override
   void initState() {
     super.initState();
     swimmers = widget.swimmers;
-    print(swimmers[0].voornaam);
   }
 
   @override

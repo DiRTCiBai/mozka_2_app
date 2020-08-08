@@ -46,22 +46,21 @@ class _SwimmersListState extends State<SwimmersList> {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-//          final swimmer = await Navigator.pushNamed(context, AddSwimmers.id);
-//
-//          Swimmers swimmer1 = swimmer;
-//          setState(() {
-//            if (swimmer != null) {
-//              swimmers.add((swimmer));
-//              _firestore.collection('zwemmers').document().setData({
-//                'voornaam': swimmer1.voornaam,
-//                'achternaam': swimmer1.achernaam,
-//                'geboortejaar': swimmer1.geboortejaar.toString(),
-//                'email': swimmer1.email,
-//                'geslacht': swimmer1.geslacht.toString()
-//              });
-//            }
-//          });
-          GetStreamData();
+          final swimmer = await Navigator.pushNamed(context, AddSwimmers.id);
+
+          Swimmers swimmer1 = swimmer;
+          setState(() {
+            if (swimmer != null) {
+              swimmers.add((swimmer));
+              _firestore.collection('zwemmers').document().setData({
+                'voornaam': swimmer1.voornaam,
+                'achternaam': swimmer1.achernaam,
+                'geboortejaar': swimmer1.geboortejaar.toString(),
+                'email': swimmer1.email,
+                'geslacht': swimmer1.geslacht.toString()
+              });
+            }
+          });
         },
         child: Icon(Icons.add),
       ),
