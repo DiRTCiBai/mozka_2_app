@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "138528056037",
+    "firebase_url": "https://mozka-app.firebaseio.com",
+    "project_id": "mozka-app",
+    "storage_bucket": "mozka-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138528056037:android:d48e021b99f5c8e1ab2a0c",
+        "android_client_info": {
+          "package_name": "com.mozka_2_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138528056037-rdgbjah0sk46dl1pkihkd2tjhu65jhn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClshZQA0s3HbhzT-ezGdtuAaJqvcioYW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138528056037-rdgbjah0sk46dl1pkihkd2tjhu65jhn9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
