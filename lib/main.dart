@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: TestScreen.id,
+      initialRoute: SwimmersList.id,
       routes: {
         SwimmersList.id: (context) => SwimmersList(),
         AddSwimmers.id: (context) => AddSwimmers(),

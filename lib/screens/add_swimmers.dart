@@ -3,7 +3,7 @@ import 'package:mozka_2_app/modules/data_swimmers.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_numbers.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_text.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/add_screen_button.dart';
-import 'package:mozka_2_app/modules/gender.dart';
+
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_email.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/gender_selecter_button.dart';
 import 'package:mozka_2_app/constants.dart';
@@ -25,12 +25,13 @@ class _AddSwimmersState extends State<AddSwimmers> {
       gender = !gender;
     });
 
-    if (gender) {
-      tempSwimmer.geslacht = Gender.vrouw;
-    } else {
-      tempSwimmer.geslacht = Gender.man;
-    }
+//    if (gender) {
+//      tempSwimmer.geslacht = Gender.vrouw;
+//    } else {
+//      tempSwimmer.geslacht = Gender.man;
+//    }
     tempSwimmer.ToggleGender();
+    print(tempSwimmer.geslacht);
   }
 
   Future<void> CheckSaveData() async {

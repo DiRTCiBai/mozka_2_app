@@ -3,19 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/widgets/swimmer_list/listview_swimmers.dart';
 import 'package:mozka_2_app/modules/data_swimmers.dart';
 
-class TestScreen extends StatelessWidget {
-  static const String id = 'TestScreen';
-  Firestore _firestore = Firestore.instance;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: zwemList(),
-    ));
-  }
-}
-
 class zwemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/gender.dart';
 import 'package:mozka_2_app/constants.dart';
 import 'package:mozka_2_app/modules/data_swimmers.dart';
 
@@ -17,7 +16,7 @@ class SwimmerTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor:
-                swimmer.geslacht == Gender.man ? kmanColor : kfemakeColor,
+                swimmer.geslacht == 'man' ? kmanColor : kfemakeColor,
             child: Text(
               '${swimmer.voornaam[0].toUpperCase()}${swimmer.achernaam[0].toUpperCase()}',
               style: TextStyle(color: kcircleAvatarTextColor),

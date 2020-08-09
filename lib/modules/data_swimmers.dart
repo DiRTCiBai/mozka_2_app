@@ -1,25 +1,23 @@
-import 'package:mozka_2_app/modules/gender.dart';
-
 class Swimmers {
   String voornaam;
   String achernaam;
   int geboortejaar;
   String email;
-  Gender geslacht;
+  String geslacht;
 
   Swimmers({
     this.voornaam,
     this.achernaam,
     this.geboortejaar,
     this.email,
-    this.geslacht = Gender.man,
+    this.geslacht = 'man',
   });
 
   void ToggleGender() {
-    if (geslacht == Gender.man) {
-      geslacht = Gender.vrouw;
-    } else if (geslacht == Gender.vrouw) {
-      geslacht = Gender.man;
+    if (geslacht == 'man') {
+      geslacht = 'vrouw';
+    } else if (geslacht == 'vrouw') {
+      geslacht = 'man';
     }
   }
 

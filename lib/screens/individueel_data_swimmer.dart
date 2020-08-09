@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/data_swimmers.dart';
-import 'package:mozka_2_app/modules/gender.dart';
 import 'package:mozka_2_app/widgets/add_screen/add_screen_button.dart';
 import 'package:mozka_2_app/constants.dart';
 
@@ -38,7 +37,7 @@ class SwimmerData extends StatelessWidget {
               style: kstyle,
             ),
             Text(
-              swimmer.geslacht == Gender.man ? 'Man' : 'Vrouw',
+              swimmer.geslacht,
               style: kstyle,
             ),
             Text(

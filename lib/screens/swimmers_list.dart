@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/listview_swimmers.dart';
 import 'package:mozka_2_app/screens/add_swimmers.dart';
 import 'package:mozka_2_app/modules/data_swimmers.dart';
-import 'package:mozka_2_app/modules/gender.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mozka_2_app/screens/test_screen.dart';
 
 class SwimmersList extends StatefulWidget {
   static const String id = 'SwimmersList';
@@ -15,14 +14,7 @@ class SwimmersList extends StatefulWidget {
 class _SwimmersListState extends State<SwimmersList> {
   Firestore _firestore = Firestore.instance;
 
-  List<Swimmers> swimmers = [
-    Swimmers(
-        voornaam: 'sam',
-        achernaam: 'beyens',
-        geboortejaar: 1998,
-        email: 'sam.beyens@hotmail.com',
-        geslacht: Gender.man),
-  ];
+  List<Swimmers> swimmers = [];
 
   void GetData() async {
     final swimmerData = await _firestore.collection('zwemmers').getDocuments();
@@ -67,7 +59,7 @@ class _SwimmersListState extends State<SwimmersList> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(20.0),
-          child: SwimList(swimmers: swimmers),
+          child: zwemList(),
         ),
       ),
     );
