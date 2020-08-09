@@ -1,45 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/tile_swimmers.dart';
-import 'package:mozka_2_app/screens/individueel_data_swimmer.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/listtile_swimmer.dart';
+import 'package:mozka_2_app/screens/swimmer_personal_data_screen.dart';
 
-class SwimList extends StatefulWidget {
-  final List<Swimmers> swimmers;
-  SwimList({this.swimmers});
+class ListviewSwimmer extends StatefulWidget {
+  final List<SwimmerData> swimmerDataList;
+  ListviewSwimmer({this.swimmerDataList});
 
   @override
-  _SwimListState createState() => _SwimListState();
+  _ListviewSwimmerState createState() => _ListviewSwimmerState();
 }
 
-class _SwimListState extends State<SwimList> {
-  List<Swimmers> swimmers = [];
+class _ListviewSwimmerState extends State<ListviewSwimmer> {
+  List<SwimmerData> swimmerDataList = [];
 
   @override
   void initState() {
     super.initState();
-    swimmers = widget.swimmers;
+    swimmerDataList = widget.swimmerDataList;
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return SwimmerTile(
-          swimmer: swimmers[index],
+        return ListTileSwimmer(
+          swimmerData: swimmerDataList[index],
           onTap: () {
-            //ga naar persoonlijke info scherm
-            //swimmers[index].PrintData();
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SwimmerData(
-                    swimmer: swimmers[index],
+                  builder: (context) => SwimmerPersonalDataScreen(
+                    swimmerData: swimmerDataList[index],
                   ),
                 ));
           },
         );
       },
-      itemCount: swimmers.length,
+      itemCount: swimmerDataList.length,
     );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/constants.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
 
-class SwimmerTile extends StatelessWidget {
-  final Swimmers swimmer;
+class ListTileSwimmer extends StatelessWidget {
+  final SwimmerData swimmerData;
   final Function onTap;
 
-  SwimmerTile({this.onTap, this.swimmer});
+  ListTileSwimmer({this.onTap, this.swimmerData});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class SwimmerTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor:
-                swimmer.geslacht == 'man' ? kmanColor : kfemakeColor,
+                swimmerData.geslacht == 'man' ? kmanColor : kfemakeColor,
             child: Text(
-              '${swimmer.voornaam[0].toUpperCase()}${swimmer.achernaam[0].toUpperCase()}',
+              '${swimmerData.voornaam[0].toUpperCase()}${swimmerData.achernaam[0].toUpperCase()}',
               style: TextStyle(color: kcircleAvatarTextColor),
             ),
           ),
           title: Text(
-            '${swimmer.voornaam} ${swimmer.achernaam}',
+            '${swimmerData.voornaam} ${swimmerData.achernaam}',
             style: TextStyle(fontSize: 25.0),
           ),
           trailing: Icon(Icons.more_vert),

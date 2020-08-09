@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/screens/add_swimmers.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
+import 'package:mozka_2_app/screens/add_swimmer_screen.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/screens/test_screen.dart';
 
@@ -14,23 +14,7 @@ class SwimmersList extends StatefulWidget {
 class _SwimmersListState extends State<SwimmersList> {
   Firestore _firestore = Firestore.instance;
 
-  List<Swimmers> swimmers = [];
-
-  void GetData() async {
-    final swimmerData = await _firestore.collection('zwemmers').getDocuments();
-    for (var data in swimmerData.documents) {
-      print(data.data);
-    }
-  }
-
-  void GetStreamData() async {
-    await for (var snapshot in _firestore.collection('zwemmers').snapshots()) {
-      for (var data in snapshot.documents) {
-        print(data.data);
-      }
-    }
-    ;
-  }
+  List<SwimmerData> swimmers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +24,7 @@ class _SwimmersListState extends State<SwimmersList> {
         onPressed: () async {
           final swimmer = await Navigator.pushNamed(context, AddSwimmers.id);
 
-          Swimmers swimmer1 = swimmer;
+          SwimmerData swimmer1 = swimmer;
           setState(() {
             if (swimmer != null) {
               swimmers.add((swimmer));

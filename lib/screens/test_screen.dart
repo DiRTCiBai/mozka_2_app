@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/widgets/swimmer_list/listview_swimmers.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
 
 class TestScreen extends StatelessWidget {
   static const String id = 'TestScreen';
@@ -28,7 +28,7 @@ class zwemList extends StatelessWidget {
             return new Text('Loading...');
           default:
             final zwemmerdocuments = snapshot.data.documents;
-            List<Swimmers> zwemmerslijst = [];
+            List<SwimmerData> zwemmerslijst = [];
             for (var document in zwemmerdocuments) {
               final voornaam = document.data['voornaam'];
               final achternaam = document.data['achternaam'];
@@ -36,7 +36,7 @@ class zwemList extends StatelessWidget {
               final email = document.data['email'];
               final geslacht = document.data['geslacht'];
 
-              final zwemmer = Swimmers(
+              final zwemmer = SwimmerData(
                   voornaam: voornaam,
                   achernaam: achternaam,
                   geboortejaar: int.parse(geboortejaar),
@@ -45,8 +45,8 @@ class zwemList extends StatelessWidget {
 
               zwemmerslijst.add(zwemmer);
             }
-            return SwimList(
-              swimmers: zwemmerslijst,
+            return ListviewSwimmer(
+              swimmerDataList: zwemmerslijst,
             );
         }
       },

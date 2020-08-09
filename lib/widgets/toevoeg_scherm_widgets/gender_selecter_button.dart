@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class GenderSelecterCard extends StatelessWidget {
   final Function onTap;
-  final String text;
+  final String displayText;
   final Color color;
 
-  GenderSelecterCard({this.text, this.color = Colors.white, this.onTap});
+  GenderSelecterCard({this.displayText, this.color = Colors.white, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class GenderSelecterCard extends StatelessWidget {
               height: 50.0,
               child: Center(
                   child: Text(
-                text,
+                displayText,
                 style: TextStyle(fontSize: 20.0),
               ))),
         ),

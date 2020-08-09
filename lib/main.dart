@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/swimmers_list.dart';
-import 'screens/add_swimmers.dart';
-import 'screens/individueel_data_swimmer.dart';
+import 'screens/list_swimmer_screen.dart';
+import 'screens/add_swimmer_screen.dart';
+import 'screens/swimmer_personal_data_screen.dart';
 import 'screens/test_screen.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SwimmersList.id: (context) => SwimmersList(),
         AddSwimmers.id: (context) => AddSwimmers(),
-        SwimmerData.id: (context) => SwimmerData(),
+        SwimmerPersonalDataScreen.id: (context) => SwimmerPersonalDataScreen(),
         TestScreen.id: (context) => TestScreen(),
       },
     );

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_numbers.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_text.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/add_screen_button.dart';
-
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/inputfield_email.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/add_screen/gender_selecter_button.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/inputfield_email.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/inputfield_text.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/gender_selecter_button.dart';
+import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
 import 'package:mozka_2_app/constants.dart';
 
 class AddSwimmers extends StatefulWidget {
@@ -18,20 +17,14 @@ class AddSwimmers extends StatefulWidget {
 class _AddSwimmersState extends State<AddSwimmers> {
   bool gender = true;
 
-  Swimmers tempSwimmer = Swimmers();
+  SwimmerData tempSwimmer = SwimmerData();
 
   void ToggleGender() {
     setState(() {
       gender = !gender;
     });
 
-//    if (gender) {
-//      tempSwimmer.geslacht = Gender.vrouw;
-//    } else {
-//      tempSwimmer.geslacht = Gender.man;
-//    }
     tempSwimmer.ToggleGender();
-    print(tempSwimmer.geslacht);
   }
 
   Future<void> CheckSaveData() async {
@@ -108,14 +101,14 @@ class _AddSwimmersState extends State<AddSwimmers> {
                             color: gender
                                 ? kactiveGenderColor
                                 : kinactiveGenderColor,
-                            text: 'Man',
+                            displayText: 'Man',
                             onTap: ToggleGender,
                           ),
                           GenderSelecterCard(
                             color: gender
                                 ? kinactiveGenderColor
                                 : kactiveGenderColor,
-                            text: 'Vrouw',
+                            displayText: 'Vrouw',
                             onTap: ToggleGender,
                           ),
                         ],

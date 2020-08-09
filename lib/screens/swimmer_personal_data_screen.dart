@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/data_swimmers.dart';
-import 'package:mozka_2_app/widgets/add_screen/add_screen_button.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
 import 'package:mozka_2_app/constants.dart';
 
-class SwimmerData extends StatelessWidget {
+class SwimmerPersonalDataScreen extends StatelessWidget {
   static const id = 'SwimmerData';
-  final Swimmers swimmer;
+  final SwimmerData swimmerData;
 
-  SwimmerData({this.swimmer});
+  SwimmerPersonalDataScreen({this.swimmerData});
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +25,23 @@ class SwimmerData extends StatelessWidget {
               ),
             ),
             Text(
-              swimmer.voornaam,
+              swimmerData.voornaam,
               style: kstyle,
             ),
             Text(
-              swimmer.achernaam,
+              swimmerData.achernaam,
               style: kstyle,
             ),
             Text(
-              swimmer.geboortejaar.toString(),
+              swimmerData.geboortejaar.toString(),
               style: kstyle,
             ),
             Text(
-              swimmer.geslacht,
+              swimmerData.geslacht,
               style: kstyle,
             ),
             Text(
-              swimmer.email,
+              swimmerData.email,
               style: kstyle,
             ),
             AddScreenButton(

@@ -1,11 +1,11 @@
-class Swimmers {
+class SwimmerData {
   String voornaam;
   String achernaam;
   int geboortejaar;
   String email;
   String geslacht;
 
-  Swimmers({
+  SwimmerData({
     this.voornaam,
     this.achernaam,
     this.geboortejaar,
