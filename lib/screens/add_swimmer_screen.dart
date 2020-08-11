@@ -7,6 +7,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
 import 'package:mozka_2_app/constants.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'package:mozka_2_app/modules/allermessage.dart';
 
 class AddSwimmers extends StatefulWidget {
   static const String id = 'AddSwimmers';
@@ -24,36 +25,17 @@ class _AddSwimmersState extends State<AddSwimmers> {
     setState(() {
       gender = !gender;
     });
-
     tempSwimmer.ToggleGender();
   }
 
-  Future<void> CheckSaveData() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('gegevens niet compleet'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Vologende velden moeten worden ingevuld:\n'),
-                Text('Voornaam, achternaam en geboortejaar'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('oke'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+  bool isDataComplete(SwimmerData swimmerData) {
+    if (swimmerData.voornaam == null ||
+        swimmerData.achernaam == null ||
+        swimmerData.geboortejaar == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -126,10 +108,8 @@ class _AddSwimmersState extends State<AddSwimmers> {
                       AddScreenButton(
                         text: 'Save',
                         onPressed: () {
-                          if (tempSwimmer.voornaam == null ||
-                              tempSwimmer.achernaam == null ||
-                              tempSwimmer.geboortejaar == null) {
-                            CheckSaveData();
+                          if (isDataComplete(tempSwimmer)) {
+                            CheckSaveData(context);
                           } else {
                             fireBaseInterface.AddSwimmer(tempSwimmer);
                             Navigator.pop(context, tempSwimmer);
@@ -156,4 +136,3 @@ class _AddSwimmersState extends State<AddSwimmers> {
     );
   }
 }
-

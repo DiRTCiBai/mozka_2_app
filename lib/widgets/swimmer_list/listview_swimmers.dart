@@ -3,6 +3,7 @@ import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/listtile_swimmer.dart';
 import 'package:mozka_2_app/screens/swimmer_personal_data_screen.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'package:mozka_2_app/modules/allermessage.dart';
 
 class ListviewSwimmer extends StatefulWidget {
   final List<SwimmerData> swimmerDataList;
@@ -28,11 +29,14 @@ class _ListviewSwimmerState extends State<ListviewSwimmer> {
       itemBuilder: (context, index) {
         return ListTileSwimmer(
           swimmerData: swimmerDataList[index],
-          onLongPress: () {
-            setState(() {
-              fireBaseInterface.DeleteSwimmer(swimmerDataList[index]);
-              swimmerDataList.remove(swimmerDataList[index]);
-            });
+          onLongPress: () async {
+            bool delete = await DeleteSwimmerCheck(context);
+            if (delete) {
+              setState(() {
+                fireBaseInterface.DeleteSwimmer(swimmerDataList[index]);
+                swimmerDataList.remove(swimmerDataList[index]);
+              });
+            }
           },
           onTap: () {
             Navigator.push(
