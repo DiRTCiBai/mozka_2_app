@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/list_swimmer_screen.dart';
 import 'screens/add_swimmer_screen.dart';
 import 'screens/swimmer_personal_data_screen.dart';
+import 'screens/edit_swimmer_screen.dart';
 
 void main() {
   runApp(MyApp());

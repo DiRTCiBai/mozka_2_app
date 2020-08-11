@@ -4,6 +4,7 @@ class SwimmerData {
   int geboortejaar;
   String email;
   String geslacht;
+  String ID;
 
   SwimmerData({
     this.voornaam,
@@ -11,6 +12,7 @@ class SwimmerData {
     this.geboortejaar,
     this.email,
     this.geslacht = 'man',
+    this.ID,
   });
 
   void ToggleGender() {
@@ -27,5 +29,6 @@ class SwimmerData {
     print(geboortejaar);
     print(email);
     print(geslacht);
+    print(ID);
   }
 }

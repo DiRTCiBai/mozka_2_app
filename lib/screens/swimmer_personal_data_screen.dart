@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/screens/edit_swimmer_screen.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
 import 'package:mozka_2_app/constants.dart';
 
-class SwimmerPersonalDataScreen extends StatelessWidget {
-  static const id = 'SwimmerData';
+class SwimmerPersonalDataScreen extends StatefulWidget {
+  static const id = 'SwimmerPersonalData';
   final SwimmerData swimmerData;
 
   SwimmerPersonalDataScreen({this.swimmerData});
 
+  @override
+  _SwimmerPersonalDataScreenState createState() =>
+      _SwimmerPersonalDataScreenState();
+}
+
+class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,29 +32,43 @@ class SwimmerPersonalDataScreen extends StatelessWidget {
               ),
             ),
             Text(
-              swimmerData.voornaam,
+              widget.swimmerData.voornaam,
               style: kstyle,
             ),
             Text(
-              swimmerData.achernaam,
+              widget.swimmerData.achernaam,
               style: kstyle,
             ),
             Text(
-              swimmerData.geboortejaar.toString(),
+              widget.swimmerData.geboortejaar.toString(),
               style: kstyle,
             ),
             Text(
-              swimmerData.geslacht,
+              widget.swimmerData.geslacht,
               style: kstyle,
             ),
             Text(
-              swimmerData.email,
+              widget.swimmerData.email,
               style: kstyle,
             ),
             AddScreenButton(
               text: 'Back',
               onPressed: () {
                 Navigator.pop(context);
+              },
+            ),
+            AddScreenButton(
+              text: 'Update',
+              onPressed: () async {
+                var refresh = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => EditSwimmers(
+                              swimmerData: widget.swimmerData,
+                            )));
+                setState(() {
+                  refresh;
+                });
               },
             ),
           ],

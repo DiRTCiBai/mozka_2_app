@@ -9,21 +9,24 @@ import 'package:mozka_2_app/constants.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:mozka_2_app/modules/allermessage.dart';
 
-class AddSwimmers extends StatefulWidget {
+class EditSwimmers extends StatefulWidget {
   static const String id = 'AddSwimmers';
+  SwimmerData swimmerData;
 
+  EditSwimmers({this.swimmerData});
   @override
-  _AddSwimmersState createState() => _AddSwimmersState();
+  _EditSwimmersState createState() => _EditSwimmersState();
 }
 
-class _AddSwimmersState extends State<AddSwimmers> {
+class _EditSwimmersState extends State<EditSwimmers> {
+  SwimmerData swimmer;
   FireBaseInterface fireBaseInterface = FireBaseInterface();
   SwimmerData tempSwimmer = SwimmerData();
 
-  bool isDataComplete() {
-    if (tempSwimmer.voornaam == null ||
-        tempSwimmer.achernaam == null ||
-        tempSwimmer.geboortejaar == null) {
+  bool isDataComplete(SwimmerData swimmerData) {
+    if (swimmerData.voornaam == null ||
+        swimmerData.achernaam == null ||
+        swimmerData.geboortejaar == null) {
       return true;
     } else {
       return false;
@@ -32,6 +35,8 @@ class _AddSwimmersState extends State<AddSwimmers> {
 
   @override
   Widget build(BuildContext context) {
+    tempSwimmer = widget.swimmerData;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -45,25 +50,25 @@ class _AddSwimmersState extends State<AddSwimmers> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     InputFieldText(
-                      hintText: 'voornaam',
+                      hintText: '${widget.swimmerData.voornaam}',
                       onChanged: (value) {
                         tempSwimmer.voornaam = value;
                       },
                     ),
                     InputFieldText(
-                      hintText: 'achternaam',
+                      hintText: '${widget.swimmerData.achernaam}',
                       onChanged: (value) {
                         tempSwimmer.achernaam = value;
                       },
                     ),
                     InputFieldNumbers(
-                      hintText: 'geboortejaar',
+                      hintText: '${widget.swimmerData.geboortejaar}',
                       onChanged: (value) {
                         tempSwimmer.geboortejaar = int.parse(value);
                       },
                     ),
                     InputFieldEmail(
-                      hintText: 'email',
+                      hintText: '${widget.swimmerData.email}',
                       onChanged: (value) {
                         tempSwimmer.email = value;
                       },
@@ -108,10 +113,13 @@ class _AddSwimmersState extends State<AddSwimmers> {
                       AddScreenButton(
                         text: 'Save',
                         onPressed: () {
-                          if (isDataComplete()) {
+                          if (isDataComplete(tempSwimmer)) {
                             CheckSaveData(context);
                           } else {
-                            fireBaseInterface.AddSwimmer(tempSwimmer);
+                            setState(() {
+                              widget.swimmerData.PrintData();
+                              fireBaseInterface.EditSwimmer(tempSwimmer);
+                            });
                             Navigator.pop(context, tempSwimmer);
                           }
                         },

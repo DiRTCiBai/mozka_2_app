@@ -32,8 +32,8 @@ class _ListviewSwimmerState extends State<ListviewSwimmer> {
           onLongPress: () async {
             bool delete = await DeleteSwimmerCheck(context);
             if (delete) {
+              fireBaseInterface.DeleteSwimmer(swimmerDataList[index]);
               setState(() {
-                fireBaseInterface.DeleteSwimmer(swimmerDataList[index]);
                 swimmerDataList.remove(swimmerDataList[index]);
               });
             }

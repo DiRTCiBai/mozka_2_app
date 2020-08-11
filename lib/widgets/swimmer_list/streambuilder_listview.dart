@@ -25,6 +25,7 @@ class StreamBuilderListView extends StatelessWidget {
                 geboortejaar: int.parse(document.data['geboortejaar']),
                 email: document.data['email'],
                 geslacht: document.data['geslacht'],
+                ID: document.data['id'],
               );
 
               swimmerDataList.add(swimmer);
