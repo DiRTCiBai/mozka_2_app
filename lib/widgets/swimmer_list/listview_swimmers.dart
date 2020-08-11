@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/swimmer_list/listtile_swimmer.dart';
 import 'package:mozka_2_app/screens/swimmer_personal_data_screen.dart';
+import 'package:mozka_2_app/modules/firebase_interface.dart';
 
 class ListviewSwimmer extends StatefulWidget {
   final List<SwimmerData> swimmerDataList;
@@ -12,6 +13,7 @@ class ListviewSwimmer extends StatefulWidget {
 }
 
 class _ListviewSwimmerState extends State<ListviewSwimmer> {
+  FireBaseInterface fireBaseInterface = FireBaseInterface();
   List<SwimmerData> swimmerDataList = [];
 
   @override
@@ -26,6 +28,12 @@ class _ListviewSwimmerState extends State<ListviewSwimmer> {
       itemBuilder: (context, index) {
         return ListTileSwimmer(
           swimmerData: swimmerDataList[index],
+          onLongPress: () {
+            setState(() {
+              fireBaseInterface.DeleteSwimmer(swimmerDataList[index]);
+              swimmerDataList.remove(swimmerDataList[index]);
+            });
+          },
           onTap: () {
             Navigator.push(
                 context,

@@ -6,6 +6,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/gender_selecter_button.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
 import 'package:mozka_2_app/constants.dart';
+import 'package:mozka_2_app/modules/firebase_interface.dart';
 
 class AddSwimmers extends StatefulWidget {
   static const String id = 'AddSwimmers';
@@ -16,7 +17,7 @@ class AddSwimmers extends StatefulWidget {
 
 class _AddSwimmersState extends State<AddSwimmers> {
   bool gender = true;
-
+  FireBaseInterface fireBaseInterface = FireBaseInterface();
   SwimmerData tempSwimmer = SwimmerData();
 
   void ToggleGender() {
@@ -130,6 +131,7 @@ class _AddSwimmersState extends State<AddSwimmers> {
                               tempSwimmer.geboortejaar == null) {
                             CheckSaveData();
                           } else {
+                            fireBaseInterface.AddSwimmer(tempSwimmer);
                             Navigator.pop(context, tempSwimmer);
                           }
                         },
@@ -154,3 +156,4 @@ class _AddSwimmersState extends State<AddSwimmers> {
     );
   }
 }
+

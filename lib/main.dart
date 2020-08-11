@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'screens/list_swimmer_screen.dart';
 import 'screens/add_swimmer_screen.dart';
 import 'screens/swimmer_personal_data_screen.dart';
-import 'screens/test_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
         SwimmersList.id: (context) => SwimmersList(),
         AddSwimmers.id: (context) => AddSwimmers(),
         SwimmerPersonalDataScreen.id: (context) => SwimmerPersonalDataScreen(),
-        TestScreen.id: (context) => TestScreen(),
       },
     );
   }

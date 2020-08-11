@@ -5,13 +5,15 @@ import 'package:mozka_2_app/modules/swimmer_data.dart';
 class ListTileSwimmer extends StatelessWidget {
   final SwimmerData swimmerData;
   final Function onTap;
+  final Function onLongPress;
 
-  ListTileSwimmer({this.onTap, this.swimmerData});
+  ListTileSwimmer({this.onTap, this.swimmerData, this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: GestureDetector(
+        onLongPress: onLongPress,
         onTap: onTap,
         child: ListTile(
           leading: CircleAvatar(
