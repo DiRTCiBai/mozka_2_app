@@ -117,7 +117,6 @@ class _EditSwimmersState extends State<EditSwimmers> {
                             CheckSaveData(context);
                           } else {
                             setState(() {
-                              widget.swimmerData.PrintData();
                               fireBaseInterface.EditSwimmer(tempSwimmer);
                             });
                             Navigator.pop(context, tempSwimmer);

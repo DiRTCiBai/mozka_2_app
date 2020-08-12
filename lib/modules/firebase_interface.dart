@@ -29,4 +29,20 @@ class FireBaseInterface {
       'geslacht': swimmerData.geslacht.toString()
     });
   }
+
+  Future<dynamic> GetSwimmerData() async {
+    List<SwimmerData> swimmerList;
+    var printtext = await _db.collection('zwemmers').getDocuments();
+    for (var data in printtext.documents) {
+      SwimmerData swimmerData = SwimmerData(
+        voornaam: data.data['voornaam'],
+        achernaam: data.data['achernaam'],
+        geboortejaar: data.data['geboortejaar'],
+        email: data.data['email'],
+        geslacht: data.data['geslacht'],
+      );
+      swimmerList.add(swimmerData);
+    }
+    return swimmerList;
+  }
 }
