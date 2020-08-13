@@ -45,4 +45,10 @@ class FireBaseInterface {
     }
     return swimmerList;
   }
+
+  Future<dynamic> GetSwimmerDataLength() async {
+    List<SwimmerData> swimmerList;
+    var printtext = await _db.collection('zwemmers').getDocuments();
+    return printtext.documents.length;
+  }
 }

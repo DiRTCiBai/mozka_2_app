@@ -15,6 +15,22 @@ class AanwezighedenScreen extends StatefulWidget {
 
 class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
   int _currentIndex = 1;
+  int swimmerListLength = 0;
+  FireBaseInterface fireBaseInterface = FireBaseInterface();
+
+  @override
+  void initState() {
+    GetListLength();
+    super.initState();
+  }
+
+  Future<void> GetListLength() async {
+    swimmerListLength = await fireBaseInterface.GetSwimmerDataLength();
+
+    setState(() {
+      swimmerListLength;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +78,7 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
                             SizedBox(
                               width: 5,
                             ),
-                            Text('20'),
+                            Text(swimmerListLength.toString()),
                           ],
                         ),
                       ),
