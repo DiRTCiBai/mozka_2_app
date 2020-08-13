@@ -32,7 +32,6 @@ class _ListviewSwimmerState extends State<ListviewSwimmer> {
           swimmerData: swimmerlist[index],
           aanwezig: swimmerlist[index].aanwezig,
           onTap: () {
-            print(swimmerlist[index].voornaam);
             setState(() {
               swimmerlist[index].aanwezig = !swimmerlist[index].aanwezig;
             });

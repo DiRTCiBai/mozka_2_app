@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/screens/add_swimmer_screen.dart';
-import 'package:mozka_2_app/widgets/swimmer_list/streambuilder_listview.dart';
+import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:mozka_2_app/widgets/aanwezigheden/streambuilder_listview.dart';
+import 'package:mozka_2_app/modules/swimmer_data.dart';
 
 class AanwezighedenScreen extends StatefulWidget {
   static const String id = 'aanwezigheden';
@@ -17,7 +16,8 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
   int _currentIndex = 1;
   int swimmerListLength = 0;
   FireBaseInterface fireBaseInterface = FireBaseInterface();
-
+  List<SwimmerData> swimmerDataList = [];
+  List<Aanwezighedendata> aawezighedenList = [];
   @override
   void initState() {
     GetListLength();
@@ -26,7 +26,6 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
 
   Future<void> GetListLength() async {
     swimmerListLength = await fireBaseInterface.GetSwimmerDataLength();
-
     setState(() {
       swimmerListLength;
     });
@@ -40,6 +39,14 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
         onPressed: () {
+          for (var test in swimmerDataList) {
+            if (test.aanwezig) {
+              Aanwezighedendata aanwezighedendata =
+                  Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
+              aawezighedenList.add(aanwezighedendata);
+            }
+          }
+          fireBaseInterface.AddAanwezigheden(aawezighedenList);
           Navigator.pop(context);
         },
       ),
@@ -118,7 +125,9 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
               ),
               child: Container(
                 padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
-                child: StreamBuilderListViewAanwezigheden(),
+                child: StreamBuilderListViewAanwezigheden(
+                  swimmerDataList: swimmerDataList,
+                ),
               ),
             ),
           ],

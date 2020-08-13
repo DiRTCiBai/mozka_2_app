@@ -4,6 +4,9 @@ import 'package:mozka_2_app/widgets/aanwezigheden/listview_swimmers.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 
 class StreamBuilderListViewAanwezigheden extends StatelessWidget {
+  List<SwimmerData> swimmerDataList = [];
+
+  StreamBuilderListViewAanwezigheden({this.swimmerDataList});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -15,8 +18,6 @@ class StreamBuilderListViewAanwezigheden extends StatelessWidget {
             return new Text('Loading...');
           default:
             final swimmersDocuments = snapshot.data.documents;
-
-            List<SwimmerData> swimmerDataList = [];
 
             for (var document in swimmersDocuments) {
               final swimmer = SwimmerData(
