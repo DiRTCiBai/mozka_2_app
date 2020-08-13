@@ -60,6 +60,7 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
               child: Column(
                 children: <Widget>[
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
                         'Aanwezigheden',
@@ -68,9 +69,6 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),
-                      ),
-                      SizedBox(
-                        width: 98,
                       ),
                       Container(
                         padding: EdgeInsets.only(
