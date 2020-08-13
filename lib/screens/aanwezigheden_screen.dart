@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'package:mozka_2_app/screens/start_screen.dart';
 import 'package:mozka_2_app/widgets/aanwezigheden/streambuilder_listview.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 
@@ -39,15 +40,16 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
         onPressed: () {
-          for (var test in swimmerDataList) {
-            if (test.aanwezig) {
-              Aanwezighedendata aanwezighedendata =
-                  Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
-              aawezighedenList.add(aanwezighedendata);
-            }
-          }
-          fireBaseInterface.AddAanwezigheden(aawezighedenList);
-          Navigator.pop(context);
+//          for (var test in swimmerDataList) {
+//            if (test.aanwezig) {
+//              Aanwezighedendata aanwezighedendata =
+//                  Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
+//              aawezighedenList.add(aanwezighedendata);
+//            }
+//          }
+//          fireBaseInterface.AddAanwezigheden(aawezighedenList);
+//          Navigator.pop(context);
+          _settingModalBottomSheet(context);
         },
       ),
       body: SafeArea(
@@ -159,5 +161,90 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
         },
       ),
     );
+  }
+
+  void _settingModalBottomSheet(context) {
+    showModalBottomSheet(
+        backgroundColor: Color(0xFF757575),
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30),
+                topLeft: Radius.circular(30),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'wil je opslaan ?',
+                  style: TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                FlatButton(
+                  child: Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.blue,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    for (var test in swimmerDataList) {
+                      if (test.aanwezig) {
+                        Aanwezighedendata aanwezighedendata = Aanwezighedendata(
+                            id: test.ID, aanwezig: test.aanwezig);
+                        aawezighedenList.add(aanwezighedendata);
+                      }
+                    }
+                    if (aawezighedenList.length != 0) {
+                      fireBaseInterface.AddAanwezigheden(aawezighedenList);
+                      aawezighedenList.clear();
+                    }
+                    Navigator.popUntil(
+                        context, ModalRoute.withName(StartScreen.id));
+                  },
+                ),
+                FlatButton(
+                  child: Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.blue,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    print('save aanweziheid data');
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
