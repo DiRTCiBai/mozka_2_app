@@ -5,6 +5,7 @@ import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:mozka_2_app/screens/start_screen.dart';
 import 'package:mozka_2_app/widgets/aanwezigheden/streambuilder_listview.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/constants.dart';
 
 class AanwezighedenScreen extends StatefulWidget {
   static const String id = 'aanwezigheden';
@@ -40,15 +41,6 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
         onPressed: () {
-//          for (var test in swimmerDataList) {
-//            if (test.aanwezig) {
-//              Aanwezighedendata aanwezighedendata =
-//                  Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
-//              aawezighedenList.add(aanwezighedendata);
-//            }
-//          }
-//          fireBaseInterface.AddAanwezigheden(aawezighedenList);
-//          Navigator.pop(context);
           _settingModalBottomSheet(context);
         },
       ),
@@ -133,33 +125,6 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        fixedColor: Colors.teal,
-        items: [
-          BottomNavigationBarItem(
-            title: Text("Home"),
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            title: Text("Search"),
-            icon: Icon(Icons.search),
-          ),
-          BottomNavigationBarItem(
-            title: Text("Add"),
-            icon: Icon(Icons.add_box),
-          ),
-        ],
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-
-            if (_currentIndex == 0) {
-              Navigator.pop(context);
-            }
-          });
-        },
-      ),
     );
   }
 
@@ -170,13 +135,7 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
         builder: (BuildContext bc) {
           return Container(
             height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
-              ),
-              color: Colors.white,
-            ),
+            decoration: kbottomsheetBoxDecoration,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -187,64 +146,65 @@ class _AanwezighedenScreenState extends State<AanwezighedenScreen> {
                 SizedBox(
                   height: 15,
                 ),
-                FlatButton(
-                  child: Container(
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.blue,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      child: Center(
-                        child: Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ),
+                AanwezighedenButton(
+                  displayText: 'Save',
                   onPressed: () {
-                    for (var test in swimmerDataList) {
-                      if (test.aanwezig) {
-                        Aanwezighedendata aanwezighedendata = Aanwezighedendata(
-                            id: test.ID, aanwezig: test.aanwezig);
-                        aawezighedenList.add(aanwezighedendata);
-                      }
-                    }
-                    if (aawezighedenList.length != 0) {
-                      fireBaseInterface.AddAanwezigheden(aawezighedenList);
-                      aawezighedenList.clear();
-                    }
+                    AddAanwezighedenToAanwezighedenList();
+                    SaveAanwezigheden();
                     Navigator.popUntil(
                         context, ModalRoute.withName(StartScreen.id));
                   },
                 ),
-                FlatButton(
-                  child: Container(
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.blue,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      child: Center(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    print('save aanweziheid data');
-                    Navigator.pop(context);
-                  },
-                ),
+                AanwezighedenButton(
+                    displayText: 'Cancel',
+                    onPressed: () => Navigator.pop(context)),
               ],
             ),
           );
         });
+  }
+
+  void AddAanwezighedenToAanwezighedenList() {
+    for (var test in swimmerDataList) {
+      if (test.aanwezig) {
+        Aanwezighedendata aanwezighedendata =
+            Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
+        aawezighedenList.add(aanwezighedendata);
+      }
+    }
+  }
+
+  void SaveAanwezigheden() {
+    if (aawezighedenList.length != 0) {
+      fireBaseInterface.AddAanwezigheden(aawezighedenList);
+      aawezighedenList.clear();
+    }
+  }
+}
+
+class AanwezighedenButton extends StatelessWidget {
+  final String displayText;
+  final Function onPressed;
+
+  AanwezighedenButton({@required this.displayText, @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: Container(
+        width: 150,
+        decoration: kaanwezighedenButtonBoxDecoration,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          child: Center(
+            child: Text(
+              displayText,
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+        ),
+      ),
+      onPressed: onPressed,
+    );
   }
 }
