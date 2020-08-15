@@ -9,7 +9,7 @@ class FireBaseInterface {
     DocumentReference documentReference = _db.collection('zwemmers').document();
     documentReference.setData({
       'voornaam': swimmerData.voornaam,
-      'achternaam': swimmerData.achernaam,
+      'achternaam': swimmerData.achternaam,
       'geboortejaar': swimmerData.geboortejaar.toString(),
       'email': swimmerData.email,
       'geslacht': swimmerData.geslacht.toString(),
@@ -24,7 +24,7 @@ class FireBaseInterface {
   void EditSwimmer(SwimmerData swimmerData) {
     _db.collection('zwemmers').document(swimmerData.ID).updateData({
       'voornaam': swimmerData.voornaam,
-      'achternaam': swimmerData.achernaam,
+      'achternaam': swimmerData.achternaam,
       'geboortejaar': swimmerData.geboortejaar.toString(),
       'email': swimmerData.email,
       'geslacht': swimmerData.geslacht.toString()
@@ -37,7 +37,7 @@ class FireBaseInterface {
     for (var data in printtext.documents) {
       SwimmerData swimmerData = SwimmerData(
         voornaam: data.data['voornaam'],
-        achernaam: data.data['achernaam'],
+        achternaam: data.data['achernaam'],
         geboortejaar: data.data['geboortejaar'],
         email: data.data['email'],
         geslacht: data.data['geslacht'],

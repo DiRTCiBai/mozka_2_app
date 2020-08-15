@@ -21,7 +21,7 @@ class StreamBuilderListView extends StatelessWidget {
             for (var document in swimmersDocuments) {
               final swimmer = SwimmerData(
                 voornaam: document.data['voornaam'],
-                achernaam: document.data['achternaam'],
+                achternaam: document.data['achternaam'],
                 geboortejaar: int.parse(document.data['geboortejaar']),
                 email: document.data['email'],
                 geslacht: document.data['geslacht'],

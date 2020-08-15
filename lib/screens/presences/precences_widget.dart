@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/constants.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/widgets/aanwezigheden/streambuilder_listview.dart';
+import 'package:provider/provider.dart';
 
 class AanwezighedenButton extends StatelessWidget {
   final String displayText;
@@ -31,9 +31,6 @@ class AanwezighedenButton extends StatelessWidget {
 }
 
 class ScrollList extends StatelessWidget {
-  List<SwimmerData> swimmerDataList = [];
-
-  ScrollList(this.swimmerDataList);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,9 +38,7 @@ class ScrollList extends StatelessWidget {
       decoration: kstreamBuilderBoxDecoration,
       child: Container(
         padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
-        child: StreamBuilderListViewAanwezigheden(
-          swimmerDataList: swimmerDataList,
-        ),
+        child: StreamListView(),
       ),
     );
   }
@@ -56,6 +51,7 @@ class TopSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<SwimmerData> swimlist = Provider.of<List<SwimmerData>>(context);
     return Container(
       padding: EdgeInsets.only(right: 20, left: 20),
       child: Column(
@@ -83,7 +79,7 @@ class TopSheet extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    Text(listLength.toString()),
+                    Text((swimlist != null) ? swimlist.length.toString() : '0'),
                   ],
                 ),
               ),
@@ -103,6 +99,61 @@ class TopSheet extends StatelessWidget {
             height: 30,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class StreamListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<SwimmerData> swimlist = Provider.of<List<SwimmerData>>(context);
+    return (swimlist != null)
+        ? ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTileSwimmer(
+                swimmerData: (swimlist[index]),
+                aanwezig: false,
+                onTap: () {
+                  print('oke');
+                },
+              );
+              //return Text('${swimlist[index].voornaam}');
+            },
+            itemCount: swimlist.length,
+          )
+        : Text('loading');
+  }
+}
+
+class ListTileSwimmer extends StatelessWidget {
+  final SwimmerData swimmerData;
+  final Function onTap;
+  final bool aanwezig;
+
+  ListTileSwimmer({this.onTap, this.swimmerData, this.aanwezig});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: aanwezig ? Colors.lightGreenAccent : Colors.white,
+      child: GestureDetector(
+        onTap: onTap,
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor:
+                swimmerData.geslacht == 'man' ? kmanColor : kfemakeColor,
+            child: Text(
+              '${swimmerData.voornaam[0].toUpperCase()}${swimmerData.achternaam[0].toUpperCase()}',
+              style: TextStyle(color: kcircleAvatarTextColor),
+            ),
+          ),
+          title: Text(
+            '${swimmerData.voornaam} ${swimmerData.achternaam}',
+            style: TextStyle(fontSize: 25.0),
+          ),
+          trailing: Icon(Icons.more_vert),
+        ),
       ),
     );
   }

@@ -4,8 +4,6 @@ import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/screens/presences/precences_function.dart';
-import 'package:provider/provider.dart';
-import 'package:mozka_2_app/main.dart';
 
 class PrecencesScreen extends StatefulWidget {
   static const String id = 'aanwezigheden';
@@ -29,8 +27,6 @@ class _PrecencesScreenState extends State<PrecencesScreen> {
         child: Icon(Icons.check),
         onPressed: () {
           precencesFunctions.SettingModalBottomSheet(context, swimmerDataList);
-//          Provider.of<TestData>(context, listen: false)
-//              .ChangeText('ja dit werkt');
         },
       ),
       body: SafeArea(
@@ -41,7 +37,8 @@ class _PrecencesScreenState extends State<PrecencesScreen> {
             TopSheet(
               listLength: swimmerDataList.length,
             ),
-            ScrollList(swimmerDataList),
+            //ScrollList(swimmerDataList),
+            Expanded(child: ScrollList()),
           ],
         ),
       ),

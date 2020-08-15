@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/constants.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/screens/start_screen.dart';
 import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';

@@ -5,7 +5,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/gender_selecter_button.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
-import 'package:mozka_2_app/constants.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:mozka_2_app/modules/allermessage.dart';
 
@@ -22,7 +22,7 @@ class _AddSwimmersState extends State<AddSwimmers> {
 
   bool isDataComplete() {
     if (tempSwimmer.voornaam == null ||
-        tempSwimmer.achernaam == null ||
+        tempSwimmer.achternaam == null ||
         tempSwimmer.geboortejaar == null) {
       return true;
     } else {
@@ -53,7 +53,7 @@ class _AddSwimmersState extends State<AddSwimmers> {
                     InputFieldText(
                       hintText: 'achternaam',
                       onChanged: (value) {
-                        tempSwimmer.achernaam = value;
+                        tempSwimmer.achternaam = value;
                       },
                     ),
                     InputFieldNumbers(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/screens/edit_swimmer_screen.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
-import 'package:mozka_2_app/constants.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 
 class SwimmerPersonalDataScreen extends StatefulWidget {
   static const id = 'SwimmerPersonalData';
@@ -36,7 +36,7 @@ class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
               style: kstyle,
             ),
             Text(
-              widget.swimmerData.achernaam,
+              widget.swimmerData.achternaam,
               style: kstyle,
             ),
             Text(

@@ -1,6 +1,6 @@
 class SwimmerData {
   String voornaam;
-  String achernaam;
+  String achternaam;
   int geboortejaar;
   String email;
   String geslacht;
@@ -9,7 +9,7 @@ class SwimmerData {
 
   SwimmerData({
     this.voornaam,
-    this.achernaam,
+    this.achternaam,
     this.geboortejaar,
     this.email,
     this.geslacht = 'man',
@@ -26,7 +26,7 @@ class SwimmerData {
 
   void PrintData() {
     print(voornaam);
-    print(achernaam);
+    print(achternaam);
     print(geboortejaar);
     print(email);
     print(geslacht);
