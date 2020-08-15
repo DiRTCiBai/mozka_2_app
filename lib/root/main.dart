@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
-import '../screens/list_swimmer_screen.dart';
+import '../screens/addlist/list_swimmer_screen.dart';
 import '../screens/add_swimmer_screen.dart';
 import '../screens/swimmer_personal_data_screen.dart';
-import '../screens/presences/aanwezigheden_screen.dart';
+import '../screens/presences/precences_screen.dart';
 import '../screens/start_screen.dart';
 import 'package:provider/provider.dart';
 import '../test_test/testdata.dart';

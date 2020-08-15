@@ -48,7 +48,9 @@ class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
               style: kstyle,
             ),
             Text(
-              widget.swimmerData.email,
+              widget.swimmerData.email != null
+                  ? widget.swimmerData.email
+                  : 'leeg',
               style: kstyle,
             ),
             AddScreenButton(

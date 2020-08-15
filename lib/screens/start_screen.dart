@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/screens/list_swimmer_screen.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/presences/aanwezigheden_screen.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/addlist/list_swimmer_screen.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/presences/precences_screen.dart';
 
 class StartScreen extends StatefulWidget {
   static const String id = 'StartScreen';
