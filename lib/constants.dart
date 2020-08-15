@@ -29,3 +29,23 @@ const kaanwezighedenButtonBoxDecoration = BoxDecoration(
       BorderRadius.all(Radius.circular(30)), //BorderRadius.circular(30),
   color: Colors.blue,
 );
+
+const kstreamBuilderBoxDecoration = BoxDecoration(
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(20.0),
+    topRight: Radius.circular(20.0),
+  ),
+  color: Colors.white,
+);
+
+const ktextFieldBoxDecoration = BoxDecoration(
+  color: Color(0xFFDFDFDF),
+  borderRadius: BorderRadius.all(
+    Radius.circular(45.0),
+  ),
+);
+
+const ksearchTextfieldDecoration = InputDecoration(
+    border: InputBorder.none,
+    icon: Icon(Icons.search),
+    hintText: 'zoek zwemmer');

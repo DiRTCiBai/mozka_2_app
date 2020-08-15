@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/screens/list_swimmer_screen.dart';
-import 'package:mozka_2_app/screens/aanwezigheden_screen.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/presences/aanwezigheden_screen.dart';
 
 class StartScreen extends StatefulWidget {
   static const String id = 'StartScreen';
@@ -61,7 +61,7 @@ class _StartScreenState extends State<StartScreen> {
                   icon: Icons.check_box,
                   color: Colors.greenAccent,
                   onTap: () {
-                    Navigator.pushNamed(context, AanwezighedenScreen.id);
+                    Navigator.pushNamed(context, PrecencesScreen.id);
                   },
                 ),
               ],
@@ -74,7 +74,7 @@ class _StartScreenState extends State<StartScreen> {
                   icon: Icons.close,
                   color: Colors.cyanAccent,
                   onTap: () {
-                    Navigator.pushNamed(context, AanwezighedenScreen.id);
+                    Navigator.pushNamed(context, PrecencesScreen.id);
                   },
                 ),
                 CardButton(
@@ -82,7 +82,7 @@ class _StartScreenState extends State<StartScreen> {
                   icon: Icons.close,
                   color: Colors.limeAccent,
                   onTap: () {
-                    Navigator.pushNamed(context, AanwezighedenScreen.id);
+                    Navigator.pushNamed(context, PrecencesScreen.id);
                   },
                 ),
               ],
