@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/screens/start_screen.dart';
 import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'package:provider/provider.dart';
+import 'package:mozka_2_app/modules/precences_database.dart';
 
 class PrecencesFunctions {
   FireBaseInterface fireBaseInterface = FireBaseInterface();
-  List<Aanwezighedendata> precencesList = [];
 
-  void SettingModalBottomSheet(context, List<SwimmerData> swimmerDataList) {
+  void SettingModalBottomSheet(context) {
     showModalBottomSheet(
         backgroundColor: Color(0xFF757575),
         context: context,
@@ -31,8 +32,8 @@ class PrecencesFunctions {
                 AanwezighedenButton(
                   displayText: 'Save',
                   onPressed: () {
-                    AddAanwezighedenToAanwezighedenList(swimmerDataList);
-                    SaveAanwezigheden();
+                    AddToPrecencesList(context);
+                    SaveAanwezigheden(context);
                     Navigator.popUntil(
                         context, ModalRoute.withName(StartScreen.id));
                   },
@@ -46,20 +47,26 @@ class PrecencesFunctions {
         });
   }
 
-  void AddAanwezighedenToAanwezighedenList(List<SwimmerData> swimmerDataList) {
-//    for (var test in swimmerDataList) {
-//      if (test.aanwezig) {
-//        Aanwezighedendata aanwezighedendata =
-//            Aanwezighedendata(id: test.ID, aanwezig: test.aanwezig);
-//        precencesList.add(aanwezighedendata);
-//      }
-//    }
+  void AddToPrecencesList(BuildContext context) {
+    List<SwimmerData> swimlist =
+        Provider.of<List<SwimmerData>>(context, listen: false);
+
+    for (var swimmer in swimlist) {
+      if (swimmer.aanwezig) {
+        PrecencesData precencesData = PrecencesData(id: swimmer.ID);
+        Provider.of<PrecencesDatabase>(context, listen: false)
+            .AddToList(precencesData);
+        swimmer.aanwezig = false;
+      }
+    }
   }
 
-  void SaveAanwezigheden() {
-    if (precencesList.length != 0) {
-      fireBaseInterface.AddAanwezigheden(precencesList);
-      precencesList.clear();
+  void SaveAanwezigheden(BuildContext context) {
+    if (Provider.of<PrecencesDatabase>(context, listen: false).GetLength() !=
+        0) {
+      fireBaseInterface.AddAanwezigheden(
+          Provider.of<PrecencesDatabase>(context, listen: false).GetList());
+      Provider.of<PrecencesDatabase>(context, listen: false).ClearList();
     }
   }
 }

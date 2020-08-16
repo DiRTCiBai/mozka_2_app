@@ -1,6 +1,5 @@
-class Aanwezighedendata {
+class PrecencesData {
   String id;
-  bool aanwezig;
 
-  Aanwezighedendata({this.aanwezig, this.id});
+  PrecencesData({this.id});
 }

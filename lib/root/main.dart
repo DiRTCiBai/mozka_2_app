@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/modules/precences_database.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
 import '../screens/addlist/list_swimmer_screen.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
 //        StreamProvider<List<TestData>>.value(value: TestDatabase().testlist),
         StreamProvider<List<SwimmerData>>.value(
             value: SwimmerDataBase().swimerlist),
+        ChangeNotifierProvider(
+          create: (context) => PrecencesDatabase(),
+        ),
       ],
       child: MaterialApp(
         initialRoute: StartScreen.id,

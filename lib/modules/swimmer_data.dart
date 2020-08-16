@@ -5,6 +5,7 @@ class SwimmerData {
   String email;
   String geslacht;
   String ID;
+  bool aanwezig = false;
 
   SwimmerData({
     this.voornaam,

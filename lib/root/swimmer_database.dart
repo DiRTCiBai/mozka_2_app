@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 
 class SwimmerDataBase {
   final Firestore _firestore = Firestore.instance;
@@ -17,6 +18,17 @@ class SwimmerDataBase {
                   email: documentSnapshot.data['email'],
                   geslacht: documentSnapshot.data['geslacht'],
                   ID: documentSnapshot.documentID,
+                ))
+            .toList());
+  }
+
+  Stream<List<PrecencesData>> get precenceslist {
+    return _firestore
+        .collection('aanwezigheden')
+        .snapshots()
+        .map((QuerySnapshot querySnapshot) => querySnapshot.documents
+            .map((DocumentSnapshot documentSnapshot) => PrecencesData(
+                  id: documentSnapshot.data['id'],
                 ))
             .toList());
   }

@@ -14,7 +14,7 @@ class SwimmersList extends StatefulWidget {
 
 class _SwimmersListState extends State<SwimmersList> {
   FireBaseInterface fireBaseInterface = FireBaseInterface();
-  List<Aanwezighedendata> aawezighedenList = [];
+  List<PrecencesData> aawezighedenList = [];
 
   @override
   Widget build(BuildContext context) {

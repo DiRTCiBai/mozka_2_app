@@ -45,10 +45,6 @@ class ScrollList extends StatelessWidget {
 }
 
 class TopSheet extends StatelessWidget {
-  final int listLength;
-
-  TopSheet({this.listLength});
-
   @override
   Widget build(BuildContext context) {
     List<SwimmerData> swimlist = Provider.of<List<SwimmerData>>(context);
@@ -104,7 +100,13 @@ class TopSheet extends StatelessWidget {
   }
 }
 
-class StreamListView extends StatelessWidget {
+class StreamListView extends StatefulWidget {
+  @override
+  _StreamListViewState createState() => _StreamListViewState();
+}
+
+class _StreamListViewState extends State<StreamListView> {
+  bool aanwezig = false;
   @override
   Widget build(BuildContext context) {
     List<SwimmerData> swimlist = Provider.of<List<SwimmerData>>(context);
@@ -113,12 +115,14 @@ class StreamListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTileSwimmer(
                 swimmerData: (swimlist[index]),
-                aanwezig: false,
+                aanwezig: swimlist[index].aanwezig,
                 onTap: () {
-                  print('oke');
+                  setState(() {
+                    swimlist[index].aanwezig = !swimlist[index].aanwezig;
+                    print(aanwezig);
+                  });
                 },
               );
-              //return Text('${swimlist[index].voornaam}');
             },
             itemCount: swimlist.length,
           )

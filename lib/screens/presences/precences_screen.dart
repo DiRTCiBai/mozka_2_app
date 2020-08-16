@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/firebase_interface.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/screens/presences/precences_function.dart';
 
@@ -14,8 +12,6 @@ class PrecencesScreen extends StatefulWidget {
 
 class _PrecencesScreenState extends State<PrecencesScreen> {
   int swimmerListLength = 0;
-  FireBaseInterface fireBaseInterface = FireBaseInterface();
-  List<SwimmerData> swimmerDataList = [];
   PrecencesFunctions precencesFunctions = PrecencesFunctions();
 
   @override
@@ -26,7 +22,7 @@ class _PrecencesScreenState extends State<PrecencesScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
         onPressed: () {
-          precencesFunctions.SettingModalBottomSheet(context, swimmerDataList);
+          precencesFunctions.SettingModalBottomSheet(context);
         },
       ),
       body: SafeArea(
@@ -34,9 +30,7 @@ class _PrecencesScreenState extends State<PrecencesScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TopSheet(
-              listLength: swimmerDataList.length,
-            ),
+            TopSheet(),
             //ScrollList(swimmerDataList),
             Expanded(child: ScrollList()),
           ],

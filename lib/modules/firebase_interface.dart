@@ -53,7 +53,7 @@ class FireBaseInterface {
     return printtext.documents.length;
   }
 
-  void AddAanwezigheden(List<Aanwezighedendata> aawezighedenList) {
+  void AddAanwezigheden(List<PrecencesData> aawezighedenList) {
     var map = Aanwezighedenlijst(aawezighedenList);
 
     DocumentReference documentReference =
@@ -62,7 +62,7 @@ class FireBaseInterface {
   }
 
   Map<String, dynamic> Aanwezighedenlijst(
-      List<Aanwezighedendata> aawezighedenList) {
+      List<PrecencesData> aawezighedenList) {
     Map<String, dynamic> test = Map();
     for (int i = 0; i < aawezighedenList.length; i++) {
       test.putIfAbsent('$i', () => aawezighedenList[i].id);
