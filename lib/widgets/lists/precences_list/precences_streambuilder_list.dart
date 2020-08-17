@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/widgets/lists/precences_list/precences_listview_builder.dart';
 
-class ScrollList extends StatelessWidget {
+class PrecencesScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

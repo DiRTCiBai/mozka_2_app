@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/precences_database.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
-import '../screens/addlist/addlist_screen.dart';
 import '../screens/add_swimmer_screen.dart';
 import '../screens/swimmer_personal_data_screen.dart';
-import '../screens/presences/precences_screen.dart';
 import '../screens/start_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:mozka_2_app/screens/swimmer_list/swimmer_list.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +16,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MultiProvider(
       providers: [
 //        StreamProvider<List<TestData>>.value(value: TestDatabase().testlist),
@@ -26,14 +28,13 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: StartScreen.id,
+        initialRoute: SpeedDialList.id,
         routes: {
-          SwimmersList.id: (context) => SwimmersList(),
           AddSwimmers.id: (context) => AddSwimmers(),
           SwimmerPersonalDataScreen.id: (context) =>
               SwimmerPersonalDataScreen(),
-          PrecencesScreen.id: (context) => PrecencesScreen(),
           StartScreen.id: (context) => StartScreen(),
+          SpeedDialList.id: (context) => SpeedDialList(),
         },
       ),
     );

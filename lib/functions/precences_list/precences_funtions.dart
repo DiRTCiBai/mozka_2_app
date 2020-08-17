@@ -34,8 +34,7 @@ class PrecencesFunctions {
                   onPressed: () {
                     AddToPrecencesList(context);
                     SaveAanwezigheden(context);
-                    Navigator.popUntil(
-                        context, ModalRoute.withName(StartScreen.id));
+                    Navigator.pop(context);
                   },
                 ),
                 AanwezighedenButton(

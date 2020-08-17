@@ -22,7 +22,6 @@ class _StreamListViewState extends State<StreamListView> {
                 onTap: () {
                   setState(() {
                     swimlist[index].aanwezig = !swimlist[index].aanwezig;
-                    print(aanwezig);
                   });
                 },
               );

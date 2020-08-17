@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/addlist/addlist_screen.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/presences/precences_screen.dart';
 
 class StartScreen extends StatefulWidget {
   static const String id = 'StartScreen';
@@ -52,17 +50,13 @@ class _StartScreenState extends State<StartScreen> {
                   buttonText: 'Zwemmer lijst',
                   icon: Icons.list,
                   color: Colors.purple,
-                  onTap: () {
-                    Navigator.pushNamed(context, SwimmersList.id);
-                  },
+                  onTap: () {},
                 ),
                 CardButton(
                   buttonText: 'Aanwezigheden',
                   icon: Icons.check_box,
                   color: Colors.greenAccent,
-                  onTap: () {
-                    Navigator.pushNamed(context, PrecencesScreen.id);
-                  },
+                  onTap: () {},
                 ),
               ],
             ),
@@ -73,17 +67,13 @@ class _StartScreenState extends State<StartScreen> {
                   buttonText: 'nog te doen',
                   icon: Icons.close,
                   color: Colors.cyanAccent,
-                  onTap: () {
-                    Navigator.pushNamed(context, PrecencesScreen.id);
-                  },
+                  onTap: () {},
                 ),
                 CardButton(
                   buttonText: 'nog te doen',
                   icon: Icons.close,
                   color: Colors.limeAccent,
-                  onTap: () {
-                    Navigator.pushNamed(context, PrecencesScreen.id);
-                  },
+                  onTap: () {},
                 ),
               ],
             ),
