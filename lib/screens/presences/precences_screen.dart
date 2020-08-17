@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/screens/presences/precences_widget.dart';
-import 'package:mozka_2_app/screens/presences/precences_function.dart';
+import 'package:mozka_2_app/widgets/lists/precences_list/precences_streambuilder_list.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/lists/topsheet.dart';
+import 'package:mozka_2_app/functions/precences_list/precences_funtions.dart';
 
 class PrecencesScreen extends StatefulWidget {
   static const String id = 'aanwezigheden';
@@ -30,7 +31,7 @@ class _PrecencesScreenState extends State<PrecencesScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TopSheet(),
+            TopSheet(title: 'Aanwezigheden'),
             //ScrollList(swimmerDataList),
             Expanded(child: ScrollList()),
           ],

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
 import 'package:mozka_2_app/screens/start_screen.dart';
-import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/modules/precences_database.dart';
+import 'package:mozka_2_app/widgets/lists/precences_button.dart';
 
 class PrecencesFunctions {
   FireBaseInterface fireBaseInterface = FireBaseInterface();

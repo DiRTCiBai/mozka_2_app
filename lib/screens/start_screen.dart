@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/addlist/list_swimmer_screen.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/addlist/addlist_screen.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/screens/presences/precences_screen.dart';
 
 class StartScreen extends StatefulWidget {

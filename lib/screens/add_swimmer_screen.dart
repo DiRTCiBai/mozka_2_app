@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/inputfield_email.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/inputfield_text.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/gender_selecter_button.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
@@ -33,12 +32,19 @@ class _AddSwimmersState extends State<AddSwimmers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Toevoegen'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Expanded(
-              flex: 4,
+              flex: 10,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -100,34 +106,16 @@ class _AddSwimmersState extends State<AddSwimmers> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    AddButton(
-                      displayText: 'Save',
-                      onPressed: () {
-                        if (isDataComplete()) {
-                          CheckSaveData(context);
-                        } else {
-                          fireBaseInterface.AddSwimmer(tempSwimmer);
-                          Navigator.pop(context, tempSwimmer);
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    AddButton(
-                      displayText: 'Cancel',
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
+              child: AddButton(
+                displayText: 'Save',
+                onPressed: () {
+                  if (isDataComplete()) {
+                    CheckSaveData(context);
+                  } else {
+                    fireBaseInterface.AddSwimmer(tempSwimmer);
+                    Navigator.pop(context, tempSwimmer);
+                  }
+                },
               ),
             ),
           ],
@@ -146,17 +134,11 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      child: Container(
-        width: 150,
-        decoration: kaanwezighedenButtonBoxDecoration,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
-          child: Center(
-            child: Text(
-              displayText,
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
+      color: Colors.blue,
+      child: Center(
+        child: Text(
+          displayText,
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
       onPressed: onPressed,

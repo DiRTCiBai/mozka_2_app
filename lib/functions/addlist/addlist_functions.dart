@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
-import 'package:mozka_2_app/screens/presences/precences_widget.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'package:mozka_2_app/widgets/lists/precences_button.dart';
 
 class AddListFunctions {
   FireBaseInterface fireBaseInterface = FireBaseInterface();

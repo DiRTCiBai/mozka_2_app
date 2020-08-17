@@ -3,7 +3,8 @@ import 'package:mozka_2_app/screens/add_swimmer_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'package:mozka_2_app/modules/firebase_interface.dart';
-import 'package:mozka_2_app/screens/addlist/addlist_widgets.dart';
+import 'package:mozka_2_app/widgets/lists/addlist_list/addlist_streambuilder_list.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/lists/topsheet.dart';
 
 class SwimmersList extends StatefulWidget {
   static const String id = 'SwimmersList';
@@ -32,7 +33,9 @@ class _SwimmersListState extends State<SwimmersList> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TopSheet(),
+            TopSheet(
+              title: 'Zwemmer lijst',
+            ),
             //ScrollList(swimmerDataList),
             Expanded(child: ScrollList()),
           ],
