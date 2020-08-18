@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/screens/edit_swimmer_screen.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
+import 'package:mozka_2_app/root/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SwimmerPersonalDataScreen extends StatefulWidget {
   static const id = 'SwimmerPersonalData';
@@ -20,38 +21,48 @@ class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: <Widget>[
-            CircleAvatar(
-              radius: 50.0,
-              child: Icon(
-                Icons.account_circle,
-                size: 80.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: CircleAvatar(
+                radius: 50.0,
+                child: Text(
+                  '${widget.swimmerData.voornaam[0].toUpperCase()}${widget.swimmerData.achternaam[0].toUpperCase()}',
+                  style: TextStyle(fontSize: 45, color: kcircleAvatarTextColor),
+                ),
               ),
             ),
-            Text(
-              widget.swimmerData.voornaam,
-              style: kstyle,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: BasicInfoCard(
+                swimmerData: widget.swimmerData,
+              ),
             ),
-            Text(
-              widget.swimmerData.achternaam,
-              style: kstyle,
+            Padding(
+              padding: const EdgeInsets.only(left: 18, right: 18, top: 10),
+              child: Text(
+                'Groep Info',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-            Text(
-              widget.swimmerData.geboortejaar.toString(),
-              style: kstyle,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: GroupInfoCard(),
             ),
-            Text(
-              widget.swimmerData.geslacht,
-              style: kstyle,
+            Padding(
+              padding: const EdgeInsets.only(left: 18, right: 18, top: 10),
+              child: Text(
+                'Aanwezigheden Info',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-            Text(
-              widget.swimmerData.email != null
-                  ? widget.swimmerData.email
-                  : 'leeg',
-              style: kstyle,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: PrecencesInfoCard(),
+            ),
+            SizedBox(
+              height: 1000,
             ),
             AddScreenButton(
               text: 'Back',
@@ -73,6 +84,117 @@ class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
                 });
               },
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BasicInfoText extends StatelessWidget {
+  final String text;
+  final IconData icon;
+
+  BasicInfoText({this.icon, this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            icon,
+            color: Colors.black45,
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Text(
+            text,
+            style: kstyle,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BasicInfoCard extends StatelessWidget {
+  final SwimmerData swimmerData;
+
+  BasicInfoCard({this.swimmerData});
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                '${swimmerData.voornaam.replaceFirst(swimmerData.voornaam[0], swimmerData.voornaam[0].toUpperCase())} ${swimmerData.achternaam.replaceFirst(swimmerData.achternaam[0], swimmerData.achternaam[0].toUpperCase())}',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            BasicInfoText(
+              text: swimmerData.geboortejaar.toString(),
+              icon: Icons.cake,
+            ),
+            BasicInfoText(
+              text: swimmerData.geslacht,
+              icon: swimmerData.geslacht == 'man'
+                  ? FontAwesomeIcons.mars
+                  : FontAwesomeIcons.venus,
+            ),
+            BasicInfoText(
+              text: swimmerData.email != null ? swimmerData.email : 'leeg',
+              icon: Icons.email,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GroupInfoCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Groep'),
+            Text('begin datum groep'),
+            Text('Groep'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PrecencesInfoCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('aanweigheden totaal'),
+            Text('aanwezighden week'),
+            Text('aanwezigheden maan'),
           ],
         ),
       ),

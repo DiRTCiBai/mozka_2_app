@@ -7,11 +7,11 @@ import 'package:mozka_2_app/screens/start_screen.dart';
 class PrecencesFunctions {
   final BuildContext context;
 
-  PrecencesFunctions({this.context});
+  PrecencesFunctions({@required this.context});
 
   void SettingModalBottomSheet() {
     showModalBottomSheet(
-      backgroundColor: Color(0xFF757575),
+      backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext bc) {
         return WarningBottomSheet(

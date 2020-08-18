@@ -7,11 +7,11 @@ class AddListFunctions {
   FireBaseInterface fireBaseInterface = FireBaseInterface();
   final BuildContext context;
 
-  AddListFunctions({this.context});
+  AddListFunctions({@required this.context});
 
   void SettingModalBottomSheet(SwimmerData swimmerData) {
     showModalBottomSheet(
-      backgroundColor: Color(0xFF757575),
+      backgroundColor: Colors.transparent, //Color(0xFF757575),
       context: context,
       builder: (BuildContext bc) {
         return WarningBottomSheet(

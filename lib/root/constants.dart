@@ -14,7 +14,7 @@ const kbuttonColor = Colors.white;
 const kshadowColor = Color(0xFFb3bbc9);
 const ktextColor = Colors.black;
 
-const kstyle = TextStyle(fontSize: 30.0);
+const kstyle = TextStyle(fontSize: 20.0);
 
 const kbottomsheetBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.only(
