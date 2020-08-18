@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
+import 'package:mozka_2_app/root/constants.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:provider/provider.dart';
 
@@ -22,23 +22,29 @@ class TopSheet extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 30.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.blue,
                 ),
               ),
               Container(
                 padding: EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.white,
+                  color: Colors.blue,
                 ),
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.group),
+                    Icon(
+                      Icons.group,
+                      color: Colors.white,
+                    ),
                     SizedBox(
                       width: 5,
                     ),
-                    Text((swimlist != null) ? swimlist.length.toString() : '0'),
+                    Text(
+                      (swimlist != null) ? swimlist.length.toString() : '0',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ],
                 ),
               ),

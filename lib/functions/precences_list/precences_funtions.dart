@@ -1,71 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
+import 'functions/add_to_precenceslist.dart';
+import 'package:mozka_2_app/functions/precences_list/functions/save_precences.dart';
+import 'package:mozka_2_app/widgets/warning_bottomsheet/warning_sheet.dart';
 import 'package:mozka_2_app/screens/start_screen.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/modules/firebase_interface.dart';
-import 'package:provider/provider.dart';
-import 'package:mozka_2_app/modules/precences_database.dart';
-import 'package:mozka_2_app/widgets/lists/precences_button.dart';
 
 class PrecencesFunctions {
-  FireBaseInterface fireBaseInterface = FireBaseInterface();
+  final BuildContext context;
 
-  void SettingModalBottomSheet(context) {
+  PrecencesFunctions({this.context});
+
+  void SettingModalBottomSheet() {
     showModalBottomSheet(
-        backgroundColor: Color(0xFF757575),
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-            height: 200,
-            decoration: kbottomsheetBoxDecoration,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'wil je opslaan ?',
-                  style: TextStyle(fontSize: 30),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                AanwezighedenButton(
-                  displayText: 'Save',
-                  onPressed: () {
-                    AddToPrecencesList(context);
-                    SaveAanwezigheden(context);
-                    Navigator.pop(context);
-                  },
-                ),
-                AanwezighedenButton(
-                    displayText: 'Cancel',
-                    onPressed: () => Navigator.pop(context)),
-              ],
-            ),
-          );
-        });
+      backgroundColor: Color(0xFF757575),
+      context: context,
+      builder: (BuildContext bc) {
+        return WarningBottomSheet(
+          button1text: 'Save',
+          button2text: 'Cancel',
+          title: 'Wil je opslaan',
+          button1: () async {
+            await Save();
+          },
+          button2: () {
+            Cancel();
+          },
+        );
+      },
+    );
   }
 
-  void AddToPrecencesList(BuildContext context) {
-    List<SwimmerData> swimlist =
-        Provider.of<List<SwimmerData>>(context, listen: false);
-
-    for (var swimmer in swimlist) {
-      if (swimmer.aanwezig) {
-        PrecencesData precencesData = PrecencesData(id: swimmer.ID);
-        Provider.of<PrecencesDatabase>(context, listen: false)
-            .AddToList(precencesData);
-        swimmer.aanwezig = false;
-      }
-    }
+  Future<Function> Save() async {
+    AddToPrecencesList();
+    SaveAanwezigheden();
+    Navigator.popUntil(context, ModalRoute.withName(StartScreen.id));
   }
 
-  void SaveAanwezigheden(BuildContext context) {
-    if (Provider.of<PrecencesDatabase>(context, listen: false).GetLength() !=
-        0) {
-      fireBaseInterface.AddAanwezigheden(
-          Provider.of<PrecencesDatabase>(context, listen: false).GetList());
-      Provider.of<PrecencesDatabase>(context, listen: false).ClearList();
-    }
+  Function Cancel() {
+    Navigator.pop(context);
+  }
+
+  void AddToPrecencesList() {
+    PrecencesListAddToPrecencesList(context);
+  }
+
+  void SaveAanwezigheden() {
+    PrecencesListSavePrecences(context);
   }
 }

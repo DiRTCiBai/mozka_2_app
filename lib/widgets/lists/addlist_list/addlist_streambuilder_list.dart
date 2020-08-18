@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
+import 'package:mozka_2_app/root/constants.dart';
 import 'package:mozka_2_app/widgets/lists/addlist_list/addlist_listview_builder.dart';
 
 class AddScrollList extends StatelessWidget {

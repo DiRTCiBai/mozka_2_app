@@ -6,7 +6,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/widgets/toevoeg_scherm_widgets/gender_selecter_button.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/inputfield_numbers.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/root/constants.dart';
-import 'package:mozka_2_app/modules/firebase_interface.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/firebase/firebase_interface.dart';
 import 'package:mozka_2_app/modules/allermessage.dart';
 
 class EditSwimmers extends StatefulWidget {

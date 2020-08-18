@@ -8,6 +8,7 @@ import '../screens/start_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/screens/swimmer_list/swimmer_list.dart';
 import 'package:flutter/services.dart';
+import 'package:mozka_2_app/screens/test/testscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,13 +29,15 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: SpeedDialList.id,
+        debugShowCheckedModeBanner: false,
+        initialRoute: StartScreen.id,
         routes: {
           AddSwimmers.id: (context) => AddSwimmers(),
           SwimmerPersonalDataScreen.id: (context) =>
               SwimmerPersonalDataScreen(),
           StartScreen.id: (context) => StartScreen(),
           SpeedDialList.id: (context) => SpeedDialList(),
+          Test.id: (context) => Test(),
         },
       ),
     );

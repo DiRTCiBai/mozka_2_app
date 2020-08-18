@@ -35,7 +35,7 @@ const kstreamBuilderBoxDecoration = BoxDecoration(
     topLeft: Radius.circular(20.0),
     topRight: Radius.circular(20.0),
   ),
-  color: Colors.white,
+  color: Colors.blue,
 );
 
 const ktextFieldBoxDecoration = BoxDecoration(

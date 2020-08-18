@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/screens/swimmer_list/swimmer_list.dart';
 
 class StartScreen extends StatefulWidget {
   static const String id = 'StartScreen';
@@ -47,13 +48,15 @@ class _StartScreenState extends State<StartScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CardButton(
-                  buttonText: 'Zwemmer lijst',
+                  buttonText: 'lijst',
                   icon: Icons.list,
                   color: Colors.purple,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, SpeedDialList.id);
+                  },
                 ),
                 CardButton(
-                  buttonText: 'Aanwezigheden',
+                  buttonText: 'nog te doen',
                   icon: Icons.check_box,
                   color: Colors.greenAccent,
                   onTap: () {},

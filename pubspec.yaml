@@ -33,6 +33,7 @@ dependencies:
   cloud_firestore: ^0.13.7
   provider: ^4.3.2
   flutter_speed_dial: ^1.2.5
+  curved_navigation_bar: ^0.3.3
 
 dev_dependencies:
   flutter_test:
