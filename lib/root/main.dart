@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               SwimmerPersonalDataScreen(),
           StartScreen.id: (context) => StartScreen(),
           SpeedDialList.id: (context) => SpeedDialList(),
-          Test.id: (context) => Test(),
+          TestDonutPie.id: (context) => TestDonutPie(),
         },
       ),
     );

@@ -15,7 +15,7 @@ void PrecencesListSavePrecences(BuildContext context) async {
     if (await TestIfDocumentExist()) {
       fireBaseInterface.DeletePrecences(_GetDate());
     }
-    fireBaseInterface.AddPrecences(precencesList, _GetDate());
+    fireBaseInterface.AddPrecences(context, _GetDate());
     Provider.of<PrecencesDatabase>(context, listen: false).ClearList();
   }
 }

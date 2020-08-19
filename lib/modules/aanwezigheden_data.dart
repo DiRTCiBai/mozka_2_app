@@ -1,5 +1,5 @@
 class PrecencesData {
-  String id;
+  String date;
 
-  PrecencesData({this.id});
+  PrecencesData({this.date});
 }

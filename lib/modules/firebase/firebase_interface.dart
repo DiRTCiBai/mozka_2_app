@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mozka_2_app/modules/swimmer_data.dart';
 import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/firebase/functions/add_swimmers.dart';
@@ -8,6 +9,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/firebase/functi
 import 'package:mozka_2_app/modules/firebase/functions/add_precences.dart';
 import 'package:mozka_2_app/modules/firebase/functions/test_document_exist.dart';
 import 'package:mozka_2_app/modules/firebase/functions/delete_precences.dart';
+import 'package:mozka_2_app/modules/firebase/functions/get_swimmer_precences.dart';
 
 class FireBaseInterface {
   Firestore _db = Firestore.instance;
@@ -28,8 +30,8 @@ class FireBaseInterface {
     return FirebaseInterfaceGetSwimmerData(_db);
   }
 
-  void AddPrecences(List<PrecencesData> aanwezighedenList, String DocumentID) {
-    FirebaseInterfaceAddPrecences(aanwezighedenList, _db, DocumentID);
+  void AddPrecences(BuildContext context, String DocumentID) {
+    FirebaseInterfaceAddPrecences(context, _db, DocumentID);
   }
 
   Future<bool> TestIfDocumentExist(String documentID) async {
@@ -38,5 +40,9 @@ class FireBaseInterface {
 
   void DeletePrecences(String documentID) {
     FirebaseInterfaceDeletePrecences(documentID, _db);
+  }
+
+  Future<dynamic> GetSwimmerPrecences(String DocumentID) async {
+    return await FirebaseInterfaceGetSwimmerPrecences(DocumentID, _db);
   }
 }

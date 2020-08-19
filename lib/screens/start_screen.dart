@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/screens/swimmer_list/swimmer_list.dart';
+import 'package:mozka_2_app/screens/test/testscreen.dart';
 
 class StartScreen extends StatefulWidget {
   static const String id = 'StartScreen';
@@ -70,7 +71,9 @@ class _StartScreenState extends State<StartScreen> {
                   buttonText: 'nog te doen',
                   icon: Icons.close,
                   color: Colors.cyanAccent,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, TestDonutPie.id);
+                  },
                 ),
                 CardButton(
                   buttonText: 'nog te doen',

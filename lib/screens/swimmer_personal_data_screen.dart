@@ -4,6 +4,7 @@ import 'package:mozka_2_app/screens/edit_swimmer_screen.dart';
 import 'package:mozka_2_app/widgets/toevoeg_scherm_widgets/add_screen_button.dart';
 import 'package:mozka_2_app/root/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mozka_2_app/modules/firebase/firebase_interface.dart';
 
 class SwimmerPersonalDataScreen extends StatefulWidget {
   static const id = 'SwimmerPersonalData';
@@ -17,6 +18,14 @@ class SwimmerPersonalDataScreen extends StatefulWidget {
 }
 
 class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
+  FireBaseInterface fireBaseInterface = FireBaseInterface();
+
+  Future<dynamic> initaanlijst() async {
+    List<String> aanwezighedenList =
+        await fireBaseInterface.GetSwimmerPrecences(widget.swimmerData.ID);
+    return aanwezighedenList;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +68,7 @@ class _SwimmerPersonalDataScreenState extends State<SwimmerPersonalDataScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: PrecencesInfoCard(),
+              child: PrecencesInfoCard(initaanlijst),
             ),
             SizedBox(
               height: 1000,
@@ -184,20 +193,29 @@ class GroupInfoCard extends StatelessWidget {
 }
 
 class PrecencesInfoCard extends StatelessWidget {
+  final List<String> lijst;
+
+  PrecencesInfoCard(this.lijst);
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('aanweigheden totaal'),
-            Text('aanwezighden week'),
-            Text('aanwezigheden maan'),
-          ],
-        ),
+        child: lijst == null ? Text('loading') : aanlijst(lijst),
       ),
     );
   }
+}
+
+Column aanlijst(List<String> lijst) {
+  List<Text> messageWidgets = [];
+  for (var message in lijst) {
+    final messageText = message;
+    final messageWidget = Text('$messageText');
+    messageWidgets.add(messageWidget);
+  }
+  return Column(
+    children: messageWidgets,
+  );
 }
