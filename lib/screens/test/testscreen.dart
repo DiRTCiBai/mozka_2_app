@@ -44,8 +44,7 @@ class TestDonutPie extends StatelessWidget {
                 FlatButton(
                   child: Text('druk mij'),
                   onPressed: () {
-                    fireBaseInterface.GetSwimmerPrecences(
-                        '4a0S9ZcIatIHjBpA6I0R');
+
                   },
                 ),
                 Text('sdkljfdlkjfs'),

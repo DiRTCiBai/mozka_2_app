@@ -28,7 +28,7 @@ class SwimmerDataBase {
         .snapshots()
         .map((QuerySnapshot querySnapshot) => querySnapshot.documents
             .map((DocumentSnapshot documentSnapshot) => PrecencesData(
-                  id: documentSnapshot.data['id'],
+                  date: documentSnapshot.data['id'],
                 ))
             .toList());
   }

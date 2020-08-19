@@ -42,7 +42,7 @@ class FireBaseInterface {
     FirebaseInterfaceDeletePrecences(documentID, _db);
   }
 
-  Future<dynamic> GetSwimmerPrecences(String DocumentID) async {
-    return await FirebaseInterfaceGetSwimmerPrecences(DocumentID, _db);
+  Stream GetSwimmerPrecences(BuildContext context,String DocumentID)  {
+    return FirebaseInterfaceGetSwimmerPrecences(context, DocumentID, _db);
   }
 }
