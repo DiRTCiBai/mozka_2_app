@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
+import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/derest/aanwezigheden_data.dart';
 
 class SwimmerDataBase {
   final Firestore _firestore = Firestore.instance;

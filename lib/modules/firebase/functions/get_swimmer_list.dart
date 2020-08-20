@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 
 Future<dynamic> FirebaseInterfaceGetSwimmerData(Firestore _db) async {
   List<SwimmerData> swimmerList;

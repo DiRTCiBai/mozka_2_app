@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/root/constants.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:provider/provider.dart';
 
 class TopSheet extends StatelessWidget {

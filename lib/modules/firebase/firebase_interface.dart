@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
-import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
+import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/firebase/functions/add_swimmers.dart';
 import 'package:mozka_2_app/modules/firebase/functions/delete_swimmer.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/firebase/functions/edit_swimmer.dart';
@@ -10,6 +9,8 @@ import 'package:mozka_2_app/modules/firebase/functions/add_precences.dart';
 import 'package:mozka_2_app/modules/firebase/functions/test_document_exist.dart';
 import 'package:mozka_2_app/modules/firebase/functions/delete_precences.dart';
 import 'package:mozka_2_app/modules/firebase/functions/get_swimmer_precences.dart';
+import 'package:mozka_2_app/modules/firebase/functions/get_precences_length.dart';
+import 'package:mozka_2_app/modules/firebase/functions/get_total_precences_length.dart';
 
 class FireBaseInterface {
   Firestore _db = Firestore.instance;
@@ -42,7 +43,18 @@ class FireBaseInterface {
     FirebaseInterfaceDeletePrecences(documentID, _db);
   }
 
-  Stream GetSwimmerPrecences(BuildContext context,String DocumentID)  {
+  //DocumentID = de zwemmer zijn id
+  Stream GetSwimmerPrecences(BuildContext context, String DocumentID) {
     return FirebaseInterfaceGetSwimmerPrecences(context, DocumentID, _db);
+  }
+
+  //DocumentID = de zwemmer zijn id
+  Future<int> GetPrecencesLength(String documentID) {
+    return FirebaseInterfaceGetPrecencesLength(documentID, _db);
+  }
+
+  //DocumentID = de zwemmer zijn id
+  Future<int> GetTotalPrecencesLength(String documentID) {
+    return FirebaseInterfaceGetTotalPrecencesLength(documentID, _db);
   }
 }

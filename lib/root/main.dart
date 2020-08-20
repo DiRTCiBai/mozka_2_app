@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/precences_database.dart';
-import 'package:mozka_2_app/modules/swimmer_data.dart';
+import 'package:mozka_2_app/modules/derest/precences_database.dart';
+import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
-import '../screens/add_swimmer_screen.dart';
-import '../screens/swimmer_personal_data_screen.dart';
-import '../screens/start_screen.dart';
+import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
+import '../screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
+import '../screens/start_screen/main/main_start_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:mozka_2_app/screens/swimmer_list/swimmer_list.dart';
 import 'package:flutter/services.dart';
 import 'package:mozka_2_app/screens/test/testscreen.dart';
+import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_precences_screen/main/main_list_of_precences_screen.dart';
+import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_swimmers_screen/main/main_list_of_swimmers_screen.dart';
+import 'package:mozka_2_app/screens/test/testscreen.dart';
+import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabview_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,14 +33,18 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: StartScreen.id,
+        initialRoute: TabViewScreen.id,
         routes: {
-          AddSwimmers.id: (context) => AddSwimmers(),
           SwimmerPersonalDataScreen.id: (context) =>
               SwimmerPersonalDataScreen(),
           StartScreen.id: (context) => StartScreen(),
-          SpeedDialList.id: (context) => SpeedDialList(),
           TestDonutPie.id: (context) => TestDonutPie(),
+          MainListOfPrecencesScreen.id: (context) =>
+              MainListOfPrecencesScreen(),
+          MainListOfSwimmersScreen.id: (context) => MainListOfSwimmersScreen(),
+          MainAddSwimmerScreen.id: (context) => MainAddSwimmerScreen(),
+          TestDonutPie.id: (context) => TestDonutPie(),
+          TabViewScreen.id: (context) => TabViewScreen(),
         },
       ),
     );

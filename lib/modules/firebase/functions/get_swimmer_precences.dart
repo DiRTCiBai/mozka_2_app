@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/precences_database.dart';
-import 'package:mozka_2_app/modules/aanwezigheden_data.dart';
 
 Stream FirebaseInterfaceGetSwimmerPrecences(
     BuildContext context, String documentID, Firestore _db) {
