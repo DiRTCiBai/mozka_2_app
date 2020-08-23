@@ -9,10 +9,10 @@ void FirebaseInterfaceAddPrecences(
       Provider.of<List<SwimmerData>>(context, listen: false);
   for (var len in swimlist) {
     _db
-        .collection('aanwezigheden')
-        .document('F')
-        .collection(len.ID)
-        .document(DocumentID) //DocumentID
-        .setData({'aanwezig': len.aanwezig});
+        .collection('2020')
+        .document(len.ID)
+        .collection('1')
+        .document('1') //DocumentID
+        .setData({'aanwezig': len.aanwezig, 'groep': len.groep});
   }
 }

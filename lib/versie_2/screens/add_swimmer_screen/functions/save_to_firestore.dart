@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
+import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 
-void FirebaseInterfaceAddSwimmer(SwimmerData swimmerData, Firestore _db) {
+void SaveSwimmerDataToFirestore(SwimmerData swimmerData) {
+  Firestore _db = Firestore.instance;
+
   DocumentReference documentReference = _db.collection('zwemmers').document();
   documentReference.setData({
     'voornaam': swimmerData.voornaam,

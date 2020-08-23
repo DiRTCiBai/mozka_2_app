@@ -1,14 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mozka_2_app/modules/firebase/firebase_interface.dart';
 import 'dart:async';
 
-Stream<ChartData> timedCounter() {
-  StreamController<ChartData> controller = new StreamController<ChartData>();
+FireBaseInterface fireBaseInterface = FireBaseInterface();
 
-  var test = ChartData(100, 25);
+Stream<ChartData> timedCounter() async* {
+  var total =
+      await fireBaseInterface.GetTotalPrecencesLength('4a0S9ZcIatIHjBpA6I0R');
+  var precences =
+      await fireBaseInterface.GetPrecencesLength('4a0S9ZcIatIHjBpA6I0R');
 
-  controller.add(test); // Ask stream to send counter values as event.
-
-  return controller.stream;
+  yield ChartData(total, precences);
+//  for (int i = 0; i < 11; i++) {
+//    await Future.delayed(const Duration(seconds: 1));
+//    yield i;
+//  }
 }
 
 class ChartData {

@@ -11,6 +11,10 @@ import 'package:mozka_2_app/modules/firebase/functions/delete_precences.dart';
 import 'package:mozka_2_app/modules/firebase/functions/get_swimmer_precences.dart';
 import 'package:mozka_2_app/modules/firebase/functions/get_precences_length.dart';
 import 'package:mozka_2_app/modules/firebase/functions/get_total_precences_length.dart';
+import 'package:mozka_2_app/screens/personal_swimmer_data/widgets/precences_info_card.dart';
+import 'package:mozka_2_app/modules/chartdata/properties.dart';
+import 'package:mozka_2_app/modules/firebase/functions/get_precences_chart_data.dart';
+import 'package:mozka_2_app/screens/personal_swimmer_data/functions/chartdata.dart';
 
 class FireBaseInterface {
   Firestore _db = Firestore.instance;
@@ -56,5 +60,10 @@ class FireBaseInterface {
   //DocumentID = de zwemmer zijn id
   Future<int> GetTotalPrecencesLength(String documentID) {
     return FirebaseInterfaceGetTotalPrecencesLength(documentID, _db);
+  }
+
+  Future<ChartData> GetPrecencesChartData(
+      ChartDataProperties chartDataProperties) {
+    return FirebaseInterfaceGetPrecencesChartData(chartDataProperties, _db);
   }
 }

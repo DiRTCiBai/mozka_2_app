@@ -18,8 +18,11 @@ class AddScrollList extends StatelessWidget {
                 height: 60,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, MainAddSwimmerScreen.id);
+                    _navigateAndDisplaySelection(context);
                   },
+//                  onTap: () {
+//                    Navigator.pushNamed(context, MainAddSwimmerScreen.id);
+//                  },
                   child: Card(
                     color: Colors.blue,
                     child: Center(
@@ -36,5 +39,18 @@ class AddScrollList extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _navigateAndDisplaySelection(BuildContext context) async {
+    final result = await Navigator.pushNamed(context, MainAddSwimmerScreen.id);
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    if (result != null) {
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+            content: Text("Saveing Data"), backgroundColor: Colors.green));
+    }
   }
 }

@@ -20,6 +20,7 @@ class StreamListView extends StatelessWidget {
                 onLongPress: () async {
                   addListFunctions.SettingModalBottomSheet(swimlist[index]);
                 },
+                //               onTap: _navigateAndDisplaySelection(context, swimlist[index]),
                 onTap: () {
                   Navigator.push(
                       context,

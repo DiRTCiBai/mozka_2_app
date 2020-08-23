@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_precences_screen/main/main_list_of_precences_screen.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_swimmers_screen/main/main_list_of_swimmers_screen.dart';
+import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabview_screen.dart';
 import 'package:mozka_2_app/screens/test/testscreen.dart';
 
 class StartScreen extends StatefulWidget {
@@ -53,7 +54,9 @@ class _StartScreenState extends State<StartScreen> {
                   buttonText: 'lijst',
                   icon: Icons.list,
                   color: Colors.purple,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, TabViewScreen.id);
+                  },
                 ),
                 CardButton(
                   buttonText: 'MainListOfPrecencesScreen',

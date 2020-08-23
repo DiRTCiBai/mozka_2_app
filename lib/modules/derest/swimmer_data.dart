@@ -5,6 +5,7 @@ class SwimmerData {
   String email;
   String geslacht;
   String ID;
+  String groep;
   bool aanwezig = false;
 
   SwimmerData({
@@ -14,6 +15,7 @@ class SwimmerData {
     this.email,
     this.geslacht = 'man',
     this.ID,
+    this.groep,
   });
 
   void ToggleGender() {

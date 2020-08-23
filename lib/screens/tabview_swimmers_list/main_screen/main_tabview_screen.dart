@@ -11,6 +11,10 @@ class TabViewScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Zwemmers'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context),
+          ),
           bottom: TabBar(
             tabs: <Widget>[
               Tab(
