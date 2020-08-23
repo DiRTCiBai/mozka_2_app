@@ -7,7 +7,10 @@ class AddSwimmerScreenMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('toevoegen'),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context)),
+        title: Text('Toevoegen'),
       ),
       body: Container(
         child: CustomForm(),

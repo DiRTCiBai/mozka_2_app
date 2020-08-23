@@ -104,15 +104,16 @@ class _CustomFormState extends State<CustomForm> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     FlatButton(
                       child: Text('man'),
                       color: gender ? Colors.blue : Colors.white,
                       onPressed: () {
+                        //zet gender false en zet geslacht op man
                         setState(() {
                           gender = !gender;
                         });
-
                         swimmerData.geslacht = 'man';
                       },
                     ),
@@ -120,10 +121,10 @@ class _CustomFormState extends State<CustomForm> {
                       child: Text('vrouw'),
                       color: gender ? Colors.white : Colors.blue,
                       onPressed: () {
+                        //zet gender true en zet geslacht op vrouw
                         setState(() {
                           gender = !gender;
                         });
-
                         swimmerData.geslacht = 'vrouw';
                       },
                     ),
@@ -135,7 +136,8 @@ class _CustomFormState extends State<CustomForm> {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         this._formKey.currentState.save();
-                        swimmerData.PrintSwimmerData();
+                        //als alle forms zijn ingevuld sla data op in swimmerdata object
+                        //sla het object op in firestore
                         SaveSwimmerDataToFirestore(swimmerData);
                       }
                     },

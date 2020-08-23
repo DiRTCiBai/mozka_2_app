@@ -13,6 +13,8 @@ import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_swimmers_scree
 import 'package:mozka_2_app/screens/test/testscreen.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabview_screen.dart';
 import 'versie_2/screens/add_swimmer_screen/main/add_swimmer_screen_main.dart';
+import 'versie_2/screens/start/start_screen.dart';
+import 'versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AddSwimmerScreenMain.id,
+        initialRoute: StartScreenV2.id,
         routes: {
           SwimmerPersonalDataScreen.id: (context) =>
               SwimmerPersonalDataScreen(),
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
           TestDonutPie.id: (context) => TestDonutPie(),
           TabViewScreen.id: (context) => TabViewScreen(),
           AddSwimmerScreenMain.id: (context) => AddSwimmerScreenMain(),
+          StartScreenV2.id: (context) => StartScreenV2(),
+          ListOfSwimmersScreenMain.id: (context) => ListOfSwimmersScreenMain(),
         },
       ),
     );
