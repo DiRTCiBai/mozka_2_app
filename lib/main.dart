@@ -18,6 +18,7 @@ import 'versie_2/screens/start/start_screen.dart';
 import 'versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 import 'versie_2/screens/precences_screen/main/precences_screen_main.dart';
 import 'versie_2/modules/swimmer_data.dart';
+import 'versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,6 +58,8 @@ class MyApp extends StatelessWidget {
           StartScreenV2.id: (context) => StartScreenV2(),
           ListOfSwimmersScreenMain.id: (context) => ListOfSwimmersScreenMain(),
           PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
+          PersonalSwimmerDataSCreenMain.id: (context) =>
+              PersonalSwimmerDataSCreenMain(),
         },
       ),
     );

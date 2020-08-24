@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/widgets/precences_list_tile.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/time.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/versie_2/modules/time.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/save_precences.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/save_precences.dart';

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
-import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/time.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/versie_2/modules/time.dart';
 
 void SavePrecencesToFirestore(List<SwimmerData2> swimmerlist) {
   String jaar = Time().GetYear();

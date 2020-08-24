@@ -16,6 +16,7 @@ Stream<List<SwimmerData2>> GetSwimmerData() {
                 email: documentSnapshot.data['email'],
                 geslacht: documentSnapshot.data['geslacht'],
                 id: documentSnapshot.documentID,
+                groep: documentSnapshot.data['groep'],
               ))
           .toList());
 }
