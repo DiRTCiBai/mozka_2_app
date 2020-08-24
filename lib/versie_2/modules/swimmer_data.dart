@@ -1,4 +1,4 @@
-class SwimmerData {
+class SwimmerData2 {
   String voornaam;
   String achternaam;
   String geboortejaar;
@@ -6,8 +6,9 @@ class SwimmerData {
   String geslacht;
   String id;
   String groep;
+  bool aanwezig = false;
 
-  SwimmerData(
+  SwimmerData2(
       {this.groep,
       this.email,
       this.geboortejaar,

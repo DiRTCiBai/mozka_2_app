@@ -8,7 +8,7 @@ class CustomForm extends StatefulWidget {
 }
 
 class _CustomFormState extends State<CustomForm> {
-  SwimmerData swimmerData = SwimmerData(geslacht: 'man');
+  SwimmerData2 swimmerData = SwimmerData2(geslacht: 'man');
 
   bool gender = true;
 

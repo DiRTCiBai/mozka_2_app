@@ -3,6 +3,7 @@ import 'package:mozka_2_app/modules/derest/precences_database.dart';
 import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
+import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
 import 'screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
 import 'screens/start_screen/main/main_start_screen.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabvi
 import 'versie_2/screens/add_swimmer_screen/main/add_swimmer_screen_main.dart';
 import 'versie_2/screens/start/start_screen.dart';
 import 'versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
+import 'versie_2/screens/precences_screen/main/precences_screen_main.dart';
+import 'versie_2/modules/swimmer_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +33,8 @@ class MyApp extends StatelessWidget {
 //        StreamProvider<List<TestData>>.value(value: TestDatabase().testlist),
         StreamProvider<List<SwimmerData>>.value(
             value: SwimmerDataBase().swimerlist),
+        StreamProvider<List<SwimmerData2>>.value(
+            value: SwimmerListDatabase().swimerDatabase),
         ChangeNotifierProvider(
           create: (context) => PrecencesDatabase(),
         ),
@@ -51,6 +56,7 @@ class MyApp extends StatelessWidget {
           AddSwimmerScreenMain.id: (context) => AddSwimmerScreenMain(),
           StartScreenV2.id: (context) => StartScreenV2(),
           ListOfSwimmersScreenMain.id: (context) => ListOfSwimmersScreenMain(),
+          PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
         },
       ),
     );
