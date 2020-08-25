@@ -6,14 +6,17 @@ class ListTileSwimmer extends StatelessWidget {
   final SwimmerData2 swimmerData;
   final Function onTap;
   final Function onLongPress;
+  final Function onDoubleTap;
 
-  ListTileSwimmer({this.onTap, this.swimmerData, this.onLongPress});
+  ListTileSwimmer(
+      {this.onTap, this.swimmerData, this.onLongPress, this.onDoubleTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: GestureDetector(
         onLongPress: onLongPress,
+        onDoubleTap: onDoubleTap,
         onTap: onTap,
         child: ListTile(
           leading: CircleAvatar(

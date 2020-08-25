@@ -4,6 +4,7 @@ import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
+import 'package:mozka_2_app/versie_2/screens/comments_screen/main/comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/edit_swimmer_data_screen/main/edit_swimmer_data_screen_main.dart';
 import 'screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
 import 'screens/start_screen/main/main_start_screen.dart';
@@ -61,8 +62,7 @@ class MyApp extends StatelessWidget {
           PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
           PersonalSwimmerDataSCreenMain.id: (context) =>
               PersonalSwimmerDataSCreenMain(),
-          EditSwimmerDataScreenMain.id: (context) =>
-              EditSwimmerDataScreenMain(),
+          CommentsScreenMain.id: (context) => CommentsScreenMain(),
         },
       ),
     );

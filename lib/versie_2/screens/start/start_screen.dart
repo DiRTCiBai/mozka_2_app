@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/screens/add_swimmer_screen/main/add_swimmer_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/comments_screen/main/comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
 
@@ -32,6 +33,11 @@ class StartScreenV2 extends StatelessWidget {
             child: Text('Aanwezigheden'),
             onPressed: () =>
                 Navigator.pushNamed(context, PrecencesScreenMain.id),
+          ),
+          FlatButton(
+            child: Text('Opmerking'),
+            onPressed: () =>
+                Navigator.pushNamed(context, CommentsScreenMain.id),
           ),
         ],
       ),
