@@ -1,4 +1,9 @@
 class Time {
+  String GetDate() {
+    var now = new DateTime.now();
+    return '${now.day.toString()}-${now.month.toString()}-${now.year.toString()}';
+  }
+
   String GetYear() {
     var now = new DateTime.now();
     return now.year.toString();

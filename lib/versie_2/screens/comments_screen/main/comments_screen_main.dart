@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
+import 'package:mozka_2_app/versie_2/modules/time.dart';
 
 class CommentsScreenMain extends StatefulWidget {
   static const id = 'CommentsScreenMain';
@@ -54,9 +55,11 @@ class _CommentsScreenMainState extends State<CommentsScreenMain> {
                   print(comment);
                   Firestore _db = Firestore.instance;
 
-                  _db
-                      .collection('opmerkingen')
-                      .add({'opmerking': comment, 'id': widget.swimmerData.id});
+                  _db.collection('opmerkingen').add({
+                    'opmerking': comment,
+                    'id': widget.swimmerData.id,
+                    'datum': Time().GetDate()
+                  });
 
                   this._formKey.currentState.dispose();
                 }

@@ -7,6 +7,7 @@ import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functi
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functions/future_chardata.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functions/future_chartdata_year.dart';
+import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/get_comments.dart';
 
 class PersonalSwimmerDataSCreenMain extends StatelessWidget {
   static const String id = 'PersonalSwimmerDataSCreenMain';
@@ -83,6 +84,9 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
 //              }
 //            },
 //          ),
+          ),
+          GetComments(
+            swimmerData: swimmerData,
           ),
         ],
       ),
