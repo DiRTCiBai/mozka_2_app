@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/screens/add_swimmer_screen/functions/save_to_firestore.dart';
@@ -16,15 +17,14 @@ class _CustomFormState extends State<CustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Form(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        Form(
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ListTile(
                   title: TextFormField(
@@ -97,58 +97,108 @@ class _CustomFormState extends State<CustomForm> {
                     onSaved: (value) => swimmerData.groep = value,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'Please enter a, b, c, d, e, f';
                       }
                       return null;
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text('man'),
-                      color: gender ? Colors.blue : Colors.white,
-                      onPressed: () {
-                        //zet gender false en zet geslacht op man
-                        setState(() {
-                          gender = !gender;
-                        });
-                        swimmerData.geslacht = 'man';
-                      },
-                    ),
-                    FlatButton(
-                      child: Text('vrouw'),
-                      color: gender ? Colors.white : Colors.blue,
-                      onPressed: () {
-                        //zet gender true en zet geslacht op vrouw
-                        setState(() {
-                          gender = !gender;
-                        });
-                        swimmerData.geslacht = 'vrouw';
-                      },
-                    ),
-                  ],
-                ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        this._formKey.currentState.save();
-                        //als alle forms zijn ingevuld sla data op in swimmerdata object
-                        //sla het object op in firestore
-                        SaveSwimmerDataToFirestore(swimmerData);
-                      }
-                    },
-                    child: Text('Submit'),
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            //zet gender false en zet geslacht op man
+                            setState(() {
+                              gender = !gender;
+                            });
+                            swimmerData.geslacht = 'man';
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: gender ? Colors.blue : Colors.white,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'man',
+                                style: TextStyle(
+                                  color: gender ? Colors.white : Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
+                            child: Center(
+                              child: Text(
+                                'vrouw',
+                                style: TextStyle(
+                                  color: gender ? Colors.black : Colors.white,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: gender ? Colors.white : Colors.blue,
+                            ),
+                          ),
+                          onTap: () {
+                            //zet gender true en zet geslacht op vrouw
+                            setState(() {
+                              gender = !gender;
+                            });
+                            swimmerData.geslacht = 'vrouw';
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(top: 175, bottom: 10),
+          child: FlatButton(
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                this._formKey.currentState.save();
+                //als alle forms zijn ingevuld sla data op in swimmerdata object
+                //sla het object op in firestore
+                SaveSwimmerDataToFirestore(swimmerData);
+                Navigator.pop(context);
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blue,
+              ),
+              child: Center(
+                child: Text(
+                  'Opslaan',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -152,6 +152,7 @@ class _CustomFormState extends State<CustomForm> {
                         //als alle forms zijn ingevuld sla data op in swimmerdata object
                         //sla het object op in firestore
                         SaveEditSwimmerDataToFirestore(widget.swimmerData);
+                        Navigator.pop(context);
                       }
                     },
                     child: Text('Save'),

@@ -31,7 +31,7 @@ class ListTileSwimmer extends StatelessWidget {
             '${swimmerData.voornaam} ${swimmerData.achternaam}',
             style: TextStyle(fontSize: 25.0),
           ),
-          trailing: Icon(Icons.more_vert),
+          trailing: Text(swimmerData.groep.toUpperCase()),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/versie_2/modules/time.d
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/save_precences.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/save_precences.dart';
+import 'package:mozka_2_app/versie_2/screens/precences_screen/widgets/save_button.dart';
 
 class PrecencesScreenMain extends StatefulWidget {
   static const String id = 'PrecencesScreenMain';
@@ -44,12 +45,7 @@ class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
                 },
                 itemCount: swimmerlist.length),
           ),
-          FlatButton(
-            child: Text('save'),
-            onPressed: () {
-              SavePrecencesToFirestore(swimmerlist);
-            },
-          ),
+          PrecencesSaveButton(swimmerlist: swimmerlist),
         ],
       ),
     );

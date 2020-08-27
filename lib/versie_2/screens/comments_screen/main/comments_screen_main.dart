@@ -62,6 +62,7 @@ class _CommentsScreenMainState extends State<CommentsScreenMain> {
                   });
 
                   this._formKey.currentState.dispose();
+                  Navigator.pop(context);
                 }
               },
               child: Text('Save'),

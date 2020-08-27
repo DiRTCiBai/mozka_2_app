@@ -8,28 +8,26 @@ class GetComments extends StatelessWidget {
   GetComments({this.swimmerData});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: StreamBuilder(
-          stream: Comments(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<CommentData>> snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(snapshot.data[index].comment),
-                      trailing: Text(snapshot.data[index].date),
-                    ),
-                  );
-                },
-                itemCount: snapshot.data.length,
-              );
-            } else {
-              return Text('loading');
-            }
-          }),
-    );
+    return StreamBuilder(
+        stream: Comments(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<CommentData>> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    title: Text(snapshot.data[index].comment),
+                    trailing: Text(snapshot.data[index].date),
+                  ),
+                );
+              },
+              itemCount: snapshot.data.length,
+            );
+          } else {
+            return Text('loading');
+          }
+        });
   }
 
   Stream<List<CommentData>> Comments() {
