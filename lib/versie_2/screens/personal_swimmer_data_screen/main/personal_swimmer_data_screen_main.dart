@@ -8,10 +8,10 @@ import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functi
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functions/future_chardata.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functions/future_chartdata_year.dart';
-import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/get_comments.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/group_info_card.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/card_titles.dart';
 import 'package:mozka_2_app/root/constants.dart';
+import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 
 class PersonalSwimmerDataSCreenMain extends StatelessWidget {
   static const String id = 'PersonalSwimmerDataSCreenMain';
@@ -69,14 +69,29 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
             title: 'Opmerkingen',
           ),
           FutureBuilder(
-              future: Aanwezigheden(),
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data);
-                } else {
-                  return Text('niet goed');
-                }
-              }),
+            future: Aanwezigheden(),
+            builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
+              if (snapshot.hasData) {
+                return TotalPrecencesChart(
+                  total: snapshot.data.total,
+                  aanwezig: snapshot.data.precences,
+                );
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListOfCommentsMain(
+                            swimmerData: swimmerData,
+                          )));
+            },
+            child: Text('Opmerkingen'),
+          ),
 
 //              if (snapshot.hasData) {),
 
@@ -123,20 +138,13 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
 //            },
 //          ),
 
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: GetComments(
-                swimmerData: swimmerData,
-              ),
-            ),
-          ),
+//
         ],
       ),
     );
   }
 
-  Future<String> Aanwezigheden() async {
+  Future<ChartData> Aanwezigheden() async {
     String jaar = Time().GetYear() + 'test';
     Firestore _db = Firestore.instance;
     int numberOfPrecences = 0;
@@ -152,6 +160,7 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
       }
     }
 
-    return '${numberOfPrecences.toString()} / ${data.documents.length}';
+    return ChartData(data.documents.length, numberOfPrecences);
+    // '${numberOfPrecences.toString()} / ${data.documents.length}';
   }
 }

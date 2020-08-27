@@ -4,17 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 
-class CommentsScreenMain extends StatefulWidget {
+class AddCommentsScreenMain extends StatefulWidget {
   static const id = 'CommentsScreenMain';
   SwimmerData2 swimmerData;
 
-  CommentsScreenMain({this.swimmerData});
+  AddCommentsScreenMain({this.swimmerData});
 
   @override
-  _CommentsScreenMainState createState() => _CommentsScreenMainState();
+  _AddCommentsScreenMainState createState() => _AddCommentsScreenMainState();
 }
 
-class _CommentsScreenMainState extends State<CommentsScreenMain> {
+class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   String comment;

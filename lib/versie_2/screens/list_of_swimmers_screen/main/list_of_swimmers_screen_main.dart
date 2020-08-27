@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/versie_2/screens/comments_screen/main/comments_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/widgets/add_swimmers_list_tile.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/swimmer_list_stream.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
@@ -44,7 +44,7 @@ class ListOfSwimmersScreenMain extends StatelessWidget {
                             onDoubleTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CommentsScreenMain(
+                                builder: (context) => AddCommentsScreenMain(
                                   swimmerData: snapshot.data[index],
                                 ),
                               ),

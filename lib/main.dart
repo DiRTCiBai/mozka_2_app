@@ -4,7 +4,7 @@ import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
-import 'package:mozka_2_app/versie_2/screens/comments_screen/main/comments_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/edit_swimmer_data_screen/main/edit_swimmer_data_screen_main.dart';
 import 'screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
 import 'screens/start_screen/main/main_start_screen.dart';
@@ -21,6 +21,7 @@ import 'versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_ma
 import 'versie_2/screens/precences_screen/main/precences_screen_main.dart';
 import 'versie_2/modules/swimmer_data.dart';
 import 'versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
+import 'versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 
 void main() {
   runApp(MyApp());
@@ -62,7 +63,8 @@ class MyApp extends StatelessWidget {
           PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
           PersonalSwimmerDataSCreenMain.id: (context) =>
               PersonalSwimmerDataSCreenMain(),
-          CommentsScreenMain.id: (context) => CommentsScreenMain(),
+          AddCommentsScreenMain.id: (context) => AddCommentsScreenMain(),
+          ListOfCommentsMain.id: (context) => ListOfCommentsMain(),
         },
       ),
     );
