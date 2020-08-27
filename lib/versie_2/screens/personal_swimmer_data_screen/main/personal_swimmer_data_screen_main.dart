@@ -66,15 +66,20 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
             swimmerData: swimmerData,
           ),
           CardTitles(
-            title: 'Opmerkingen',
+            title: 'Aanwezigheden',
           ),
           FutureBuilder(
             future: Aanwezigheden(),
             builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
               if (snapshot.hasData) {
-                return TotalPrecencesChart(
-                  total: snapshot.data.total,
-                  aanwezig: snapshot.data.precences,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Card(
+                    child: TotalPrecencesChart(
+                      total: snapshot.data.total,
+                      aanwezig: snapshot.data.precences,
+                    ),
+                  ),
                 );
               } else {
                 return CircularProgressIndicator();
@@ -146,21 +151,20 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
 
   Future<ChartData> Aanwezigheden() async {
     String jaar = Time().GetYear() + 'test';
-    Firestore _db = Firestore.instance;
+    FirebaseFirestore _db = FirebaseFirestore.instance;
     int numberOfPrecences = 0;
 
-    var data = await _db
-        .collection(jaar)
-        .where('id', isEqualTo: swimmerData.id)
-        .getDocuments();
+    var data =
+        await _db.collection(jaar).where('id', isEqualTo: swimmerData.id).get();
 
-    for (var x in data.documents) {
-      if (x.data['aanwezig'] == true && x.data['groep'] == swimmerData.groep) {
+    for (var x in data.docs) {
+      if (x.data()['aanwezig'] == true &&
+          x.data()['groep'] == swimmerData.groep) {
         numberOfPrecences++;
       }
     }
 
-    return ChartData(data.documents.length, numberOfPrecences);
+    return ChartData(data.docs.length, numberOfPrecences);
     // '${numberOfPrecences.toString()} / ${data.documents.length}';
   }
 }

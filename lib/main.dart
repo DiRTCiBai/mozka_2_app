@@ -22,51 +22,88 @@ import 'versie_2/screens/precences_screen/main/precences_screen_main.dart';
 import 'versie_2/modules/swimmer_data.dart';
 import 'versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 import 'versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    return MultiProvider(
-      providers: [
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text('doet het niet'),
+              ),
+            ),
+          );
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MultiProvider(
+            providers: [
 //        StreamProvider<List<TestData>>.value(value: TestDatabase().testlist),
-        StreamProvider<List<SwimmerData>>.value(
-            value: SwimmerDataBase().swimerlist),
-        StreamProvider<List<SwimmerData2>>.value(
-            value: SwimmerListDatabase().swimerDatabase),
-        ChangeNotifierProvider(
-          create: (context) => PrecencesDatabase(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: StartScreenV2.id,
-        routes: {
-          SwimmerPersonalDataScreen.id: (context) =>
-              SwimmerPersonalDataScreen(),
-          StartScreen.id: (context) => StartScreen(),
-          TestDonutPie.id: (context) => TestDonutPie(),
-          MainListOfPrecencesScreen.id: (context) =>
-              MainListOfPrecencesScreen(),
-          MainListOfSwimmersScreen.id: (context) => MainListOfSwimmersScreen(),
-          MainAddSwimmerScreen.id: (context) => MainAddSwimmerScreen(),
-          TestDonutPie.id: (context) => TestDonutPie(),
-          TabViewScreen.id: (context) => TabViewScreen(),
-          AddSwimmerScreenMain.id: (context) => AddSwimmerScreenMain(),
-          StartScreenV2.id: (context) => StartScreenV2(),
-          ListOfSwimmersScreenMain.id: (context) => ListOfSwimmersScreenMain(),
-          PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
-          PersonalSwimmerDataSCreenMain.id: (context) =>
-              PersonalSwimmerDataSCreenMain(),
-          AddCommentsScreenMain.id: (context) => AddCommentsScreenMain(),
-          ListOfCommentsMain.id: (context) => ListOfCommentsMain(),
-        },
-      ),
+              StreamProvider<List<SwimmerData>>.value(
+                  value: SwimmerDataBase().swimerlist),
+              StreamProvider<List<SwimmerData2>>.value(
+                  value: SwimmerListDatabase().swimerDatabase),
+              ChangeNotifierProvider(
+                create: (context) => PrecencesDatabase(),
+              ),
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              initialRoute: StartScreenV2.id,
+              routes: {
+                SwimmerPersonalDataScreen.id: (context) =>
+                    SwimmerPersonalDataScreen(),
+                StartScreen.id: (context) => StartScreen(),
+                TestDonutPie.id: (context) => TestDonutPie(),
+                MainListOfPrecencesScreen.id: (context) =>
+                    MainListOfPrecencesScreen(),
+                MainListOfSwimmersScreen.id: (context) =>
+                    MainListOfSwimmersScreen(),
+                MainAddSwimmerScreen.id: (context) => MainAddSwimmerScreen(),
+                TestDonutPie.id: (context) => TestDonutPie(),
+                TabViewScreen.id: (context) => TabViewScreen(),
+                AddSwimmerScreenMain.id: (context) => AddSwimmerScreenMain(),
+                StartScreenV2.id: (context) => StartScreenV2(),
+                ListOfSwimmersScreenMain.id: (context) =>
+                    ListOfSwimmersScreenMain(),
+                PrecencesScreenMain.id: (context) => PrecencesScreenMain(),
+                PersonalSwimmerDataSCreenMain.id: (context) =>
+                    PersonalSwimmerDataSCreenMain(),
+                AddCommentsScreenMain.id: (context) => AddCommentsScreenMain(),
+                ListOfCommentsMain.id: (context) => ListOfCommentsMain(),
+              },
+            ),
+          );
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
     );
   }
 }

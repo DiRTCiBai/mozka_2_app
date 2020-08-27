@@ -20,11 +20,6 @@ class StartScreenV2 extends StatelessWidget {
             width: double.infinity,
           ),
           FlatButton(
-            child: Text('Toevoegen'),
-            onPressed: () =>
-                Navigator.pushNamed(context, AddSwimmerScreenMain.id),
-          ),
-          FlatButton(
             child: Text('Zwemmers'),
             onPressed: () =>
                 Navigator.pushNamed(context, ListOfSwimmersScreenMain.id),
@@ -33,11 +28,6 @@ class StartScreenV2 extends StatelessWidget {
             child: Text('Aanwezigheden'),
             onPressed: () =>
                 Navigator.pushNamed(context, PrecencesScreenMain.id),
-          ),
-          FlatButton(
-            child: Text('Opmerking'),
-            onPressed: () =>
-                Navigator.pushNamed(context, AddCommentsScreenMain.id),
           ),
         ],
       ),

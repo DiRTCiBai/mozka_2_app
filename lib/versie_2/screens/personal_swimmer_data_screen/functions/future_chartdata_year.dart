@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<ChartData> GetPrecencesChartDataMonth(
     {String year, SwimmerData2 swimmerData, String month}) async {
-  Firestore _db = Firestore.instance;
+  FirebaseFirestore _db = FirebaseFirestore.instance;
   int numberOfdays = 0;
   int total = 0;
 
@@ -13,11 +13,11 @@ Future<ChartData> GetPrecencesChartDataMonth(
   for (int i = 1; i < 13; i++) {
     var exist = await _db
         .collection(year)
-        .document(swimmerData.id)
+        .doc(swimmerData.id)
         .collection(i.toString())
-        .getDocuments();
-    for (var x in exist.documents) {
-      if (x.data['maand'] == i.toString()) {
+        .get();
+    for (var x in exist.docs) {
+      if (x.data()['maand'] == i.toString()) {
         precencesYearList.add(i);
         break;
       }
@@ -30,26 +30,26 @@ Future<ChartData> GetPrecencesChartDataMonth(
   for (var maand in precencesYearList) {
     var lenMonth = await _db
         .collection(year)
-        .document(swimmerData.id)
+        .doc(swimmerData.id)
         .collection(maand.toString())
-        .getDocuments();
+        .get();
 
     //print(lenMonth.documents.length);
 
     for (var data in lenMonth.documents) {
       var database = await _db
           .collection(year)
-          .document(swimmerData.id)
-          .collection(data.data['maand'])
-          .document(data.data['dag'])
+          .doc(swimmerData.id)
+          .collection(data.data()['maand'])
+          .doc(data.data()['dag'])
           .get();
 
-      if (database.data['groep'] == swimmerData.groep) {
+      if (database.data()['groep'] == swimmerData.groep) {
         total++;
       }
 
-      if (database.data['aanwezig'] &&
-          database.data['groep'] == swimmerData.groep) {
+      if (database.data()['aanwezig'] &&
+          database.data()['groep'] == swimmerData.groep) {
         numberOfdays++;
       }
 

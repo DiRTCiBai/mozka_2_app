@@ -9,24 +9,24 @@ Future<ChartData> FirebaseInterfaceGetPrecencesChartData(
 
   var len = await _db
       .collection(chartDataProperties.jaar)
-      .document(chartDataProperties.documentID)
+      .doc(chartDataProperties.documentID)
       .collection(chartDataProperties.maand)
-      .getDocuments();
+      .get();
 
-  for (var x in len.documents) {
+  for (var x in len.docs) {
     var database = await _db
         .collection(chartDataProperties.jaar)
-        .document(chartDataProperties.documentID)
+        .doc(chartDataProperties.documentID)
         .collection(chartDataProperties.maand)
-        .document(x.data['dag'])
+        .doc(x.data()['dag'])
         .get();
 
-    if (database.data['groep'] == chartDataProperties.groep) {
+    if (database.data()['groep'] == chartDataProperties.groep) {
       total++;
     }
 
-    if (database.data['aanwezig'] &&
-        database.data['groep'] == chartDataProperties.groep) {
+    if (database.data()['aanwezig'] &&
+        database.data()['groep'] == chartDataProperties.groep) {
 //        print('${database.data['dag']} ${database.data['maand']}');
       numberOfdays++;
     }

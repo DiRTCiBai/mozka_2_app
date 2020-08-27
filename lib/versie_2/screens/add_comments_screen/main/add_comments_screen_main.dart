@@ -18,6 +18,9 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   String comment;
+  String titel;
+  String detailOpmerking = 'algemeen';
+  List<bool> isSelected = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,21 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
+                  labelText: 'titel',
+                ),
+                onSaved: (value) => titel = value,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
                   labelText: 'Opmerking',
                 ),
                 maxLines: 5,
@@ -48,6 +66,28 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                 },
               ),
             ),
+            ToggleButtons(
+              children: <Widget>[
+                Text('benen'),
+                Text('armen'),
+                Text('hoofd'),
+                Text('keerpunt'),
+              ],
+              onPressed: (int index) {
+                setState(() {
+                  for (int buttonIndex = 0;
+                      buttonIndex < isSelected.length;
+                      buttonIndex++) {
+                    if (buttonIndex == index) {
+                      isSelected[buttonIndex] = !isSelected[buttonIndex];
+                    } else {
+                      isSelected[buttonIndex] = false;
+                    }
+                  }
+                });
+              },
+              isSelected: isSelected,
+            ),
             FlatButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
@@ -55,10 +95,24 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                   print(comment);
                   Firestore _db = Firestore.instance;
 
+                  if (isSelected[0] == true) {
+                    detailOpmerking = 'benen';
+                  } else if (isSelected[1] == true) {
+                    detailOpmerking = 'armen';
+                  } else if (isSelected[2] == true) {
+                    detailOpmerking = 'hoofd';
+                  } else if (isSelected[3] == true) {
+                    detailOpmerking = 'keerpunt';
+                  } else {
+                    detailOpmerking = 'algemeen';
+                  }
+
                   _db.collection('opmerkingen').add({
+                    'titel': titel,
                     'opmerking': comment,
                     'id': widget.swimmerData.id,
-                    'datum': Time().GetDate()
+                    'datum': Time().GetDate(),
+                    'detail': detailOpmerking,
                   });
 
                   this._formKey.currentState.dispose();

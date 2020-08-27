@@ -3,21 +3,21 @@ import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/modules/derest/aanwezigheden_data.dart';
 
 class SwimmerDataBase {
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<List<SwimmerData>> get swimerlist {
     return _firestore
         .collection('zwemmers')
         .snapshots()
-        .map((QuerySnapshot querySnapshot) => querySnapshot.documents
+        .map((QuerySnapshot querySnapshot) => querySnapshot.docs
             .map((DocumentSnapshot documentSnapshot) => SwimmerData(
-                  voornaam: documentSnapshot.data['voornaam'],
-                  achternaam: documentSnapshot.data['achternaam'],
+                  voornaam: documentSnapshot.data()['voornaam'],
+                  achternaam: documentSnapshot.data()['achternaam'],
                   geboortejaar:
-                      int.parse(documentSnapshot.data['geboortejaar']),
-                  email: documentSnapshot.data['email'],
-                  geslacht: documentSnapshot.data['geslacht'],
-                  ID: documentSnapshot.documentID,
+                      int.parse(documentSnapshot.data()['geboortejaar']),
+                  email: documentSnapshot.data()['email'],
+                  geslacht: documentSnapshot.data()['geslacht'],
+                  ID: documentSnapshot.id,
                 ))
             .toList());
   }
@@ -26,9 +26,9 @@ class SwimmerDataBase {
     return _firestore
         .collection('aanwezigheden')
         .snapshots()
-        .map((QuerySnapshot querySnapshot) => querySnapshot.documents
+        .map((QuerySnapshot querySnapshot) => querySnapshot.docs
             .map((DocumentSnapshot documentSnapshot) => PrecencesData(
-                  date: documentSnapshot.data['id'],
+                  date: documentSnapshot.data()['id'],
                 ))
             .toList());
   }

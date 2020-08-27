@@ -4,34 +4,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<ChartData> GetPrecencesChartData(
     {String year, SwimmerData2 swimmerData, String month}) async {
-  Firestore _db = Firestore.instance;
+  FirebaseFirestore _db = FirebaseFirestore.instance;
   int numberOfdays = 0;
   int total = 0;
 
-  var len = await _db
-      .collection(year)
-      .document(swimmerData.id)
-      .collection(month)
-      .getDocuments();
+  var len =
+      await _db.collection(year).doc(swimmerData.id).collection(month).get();
 
   print(len.documents.length);
 
-  for (var data in len.documents) {
+  for (var data in len.docs) {
     var database = await _db
         .collection(year)
-        .document(swimmerData.id)
-        .collection(data.data['maand'])
-        .document(data.data['dag'])
+        .doc(swimmerData.id)
+        .collection(data.data()['maand'])
+        .doc(data.data()['dag'])
         .get();
 
-    print(database.data['aanwezig']);
+    print(database.data()['aanwezig']);
 
-    if (database.data['groep'] == swimmerData.groep) {
+    if (database.data()['groep'] == swimmerData.groep) {
       total++;
     }
 
-    if (database.data['aanwezig'] &&
-        database.data['groep'] == swimmerData.groep) {
+    if (database.data()['aanwezig'] &&
+        database.data()['groep'] == swimmerData.groep) {
       numberOfdays++;
     }
   }

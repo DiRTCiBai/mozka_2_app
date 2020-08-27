@@ -16,9 +16,16 @@ class GetComments extends StatelessWidget {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
-                  child: ListTile(
-                    title: Text(snapshot.data[index].comment),
-                    trailing: Text(snapshot.data[index].date),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(snapshot.data[index].titel),
+                        trailing: Text(snapshot.data[index].date),
+                        subtitle: Text(snapshot.data[index].detail),
+                      ),
+                      ListTile(title: Text(snapshot.data[index].comment)),
+                    ],
                   ),
                 );
               },
@@ -31,17 +38,19 @@ class GetComments extends StatelessWidget {
   }
 
   Stream<List<CommentData>> Comments() {
-    Firestore _db = Firestore.instance;
+    FirebaseFirestore _db = FirebaseFirestore.instance;
 
     var commets = _db
         .collection('opmerkingen')
         .where('id', isEqualTo: swimmerData.id)
         .snapshots()
-        .map((QuerySnapshot querySnapshot) => querySnapshot.documents
+        .map((QuerySnapshot querySnapshot) => querySnapshot.docs
             .map(
               (DocumentSnapshot documentSnapshot) => CommentData(
-                comment: documentSnapshot.data['opmerking'],
-                date: documentSnapshot.data['datum'],
+                comment: documentSnapshot.data()['opmerking'],
+                date: documentSnapshot.data()['datum'],
+                titel: documentSnapshot.data()['titel'],
+                detail: documentSnapshot.data()['detail'],
               ),
             )
             .toList());
@@ -51,7 +60,9 @@ class GetComments extends StatelessWidget {
 }
 
 class CommentData {
+  String titel;
   String comment;
   String date;
-  CommentData({this.comment, this.date});
+  String detail;
+  CommentData({this.comment, this.date, this.titel, this.detail});
 }
