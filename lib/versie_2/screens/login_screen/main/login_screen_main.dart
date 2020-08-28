@@ -28,13 +28,14 @@ class LoginScreenMain extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(bottom: 30),
-//            child: Image(
-//              image: AssetImage('images/mozka.icon.jpg'),
-//            ),
-            child: Text(
-              'Mozka',
-              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
+            child: Image(
+              width: 300,
+              image: AssetImage('images/MozkaLogo.png'),
             ),
+//            child: Text(
+//              'Mozka',
+//              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
+//            ),
           ),
           Container(
             padding: EdgeInsets.only(bottom: 10),

@@ -20,14 +20,12 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
   String comment;
   String titel;
   String detailOpmerking = 'algemeen';
-  List<bool> isSelected = [false, false, false, false];
 
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     GetCurrentUser();
   }
@@ -53,98 +51,185 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
             onPressed: () => Navigator.pop(context)),
         title: Text('Toevoegen'),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'titel',
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 10, top: 20, right: 10, left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    DetailButton(
+                      onTap: () {
+                        setState(() {
+                          detailOpmerking = 'benen';
+                        });
+                      },
+                      selected: detailOpmerking == 'benen' ? true : false,
+                      text: 'Benen',
+                    ),
+                    DetailButton(
+                      text: 'Armen',
+                      onTap: () {
+                        setState(() {
+                          detailOpmerking = 'Armen';
+                        });
+                      },
+                      selected: detailOpmerking == 'Armen' ? true : false,
+                    ),
+                    DetailButton(
+                      text: 'Hoofd',
+                      onTap: () {
+                        setState(() {
+                          detailOpmerking = 'Hoofd';
+                        });
+                      },
+                      selected: detailOpmerking == 'Hoofd' ? true : false,
+                    ),
+                    DetailButton(
+                      text: 'Keerpunt',
+                      onTap: () {
+                        setState(() {
+                          detailOpmerking = 'Keerpunt';
+                        });
+                      },
+                      selected: detailOpmerking == 'Keerpunt' ? true : false,
+                    ),
+                    DetailButton(
+                      text: 'Algemeen',
+                      onTap: () {
+                        setState(() {
+                          detailOpmerking = 'Algemeen';
+                        });
+                      },
+                      selected: detailOpmerking == 'Algemeen' ? true : false,
+                    ),
+                  ],
                 ),
-                onSaved: (value) => titel = value,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Opmerking',
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                child: Container(
+                  width: 375,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'titel',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onSaved: (value) => titel = value,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-                maxLines: 5,
-                onSaved: (value) => comment = value,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
               ),
-            ),
-            ToggleButtons(
-              children: <Widget>[
-                Text('benen'),
-                Text('armen'),
-                Text('hoofd'),
-                Text('keerpunt'),
-              ],
-              onPressed: (int index) {
-                setState(() {
-                  for (int buttonIndex = 0;
-                      buttonIndex < isSelected.length;
-                      buttonIndex++) {
-                    if (buttonIndex == index) {
-                      isSelected[buttonIndex] = !isSelected[buttonIndex];
-                    } else {
-                      isSelected[buttonIndex] = false;
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 375,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Opmerking',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    maxLines: 15,
+                    onSaved: (value) => comment = value,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 180),
+                child: GestureDetector(
+                  onTap: () {
+                    if (_formKey.currentState.validate()) {
+                      this._formKey.currentState.save();
+                      print(comment);
+                      FirebaseFirestore _db = FirebaseFirestore.instance;
+
+                      _db.collection('opmerkingen').add({
+                        'titel': titel,
+                        'opmerking': comment,
+                        'id': widget.swimmerData.id,
+                        'datum': Time().GetDate(),
+                        'detail': detailOpmerking,
+                        'trainer': loggedInUser.email,
+                      });
+
+                      this._formKey.currentState.dispose();
+                      Navigator.pop(context);
                     }
-                  }
-                });
-              },
-              isSelected: isSelected,
+                  },
+                  child: Container(
+                    width: 350,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                      color: Colors.blue,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                          child: Text(
+                        'Save',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DetailButton extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  final bool selected;
+
+  DetailButton(
+      {@required this.text, @required this.onTap, @required this.selected});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(25),
+          ),
+          color: selected ? Colors.blue : Colors.grey[200],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                  fontSize: 15, color: selected ? Colors.white : Colors.black),
             ),
-            FlatButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  this._formKey.currentState.save();
-                  print(comment);
-                  FirebaseFirestore _db = FirebaseFirestore.instance;
-
-                  if (isSelected[0] == true) {
-                    detailOpmerking = 'benen';
-                  } else if (isSelected[1] == true) {
-                    detailOpmerking = 'armen';
-                  } else if (isSelected[2] == true) {
-                    detailOpmerking = 'hoofd';
-                  } else if (isSelected[3] == true) {
-                    detailOpmerking = 'keerpunt';
-                  } else {
-                    detailOpmerking = 'algemeen';
-                  }
-
-                  _db.collection('opmerkingen').add({
-                    'titel': titel,
-                    'opmerking': comment,
-                    'id': widget.swimmerData.id,
-                    'datum': Time().GetDate(),
-                    'detail': detailOpmerking,
-                    'trainer': loggedInUser.email,
-                  });
-
-                  this._formKey.currentState.dispose();
-                  Navigator.pop(context);
-                }
-              },
-              child: Text('Save'),
-            ),
-          ],
+          ),
         ),
       ),
     );

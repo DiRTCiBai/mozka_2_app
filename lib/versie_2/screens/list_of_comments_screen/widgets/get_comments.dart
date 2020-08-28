@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
@@ -14,10 +15,11 @@ class GetComments extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<CommentData>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
+              reverse: true,
               itemBuilder: (context, index) {
                 return Card(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       ListTile(
                         title: Text(snapshot.data[index].titel),

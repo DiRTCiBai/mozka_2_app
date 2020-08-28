@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/start/start_screen.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/training_screen/main/training_screen_main.dart';
 
 class HomeScreenMain extends StatefulWidget {
   static const String id = 'HomeScreenMain';
@@ -26,7 +31,7 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
         _selectedIndex = 0;
       }
       if (index == 2) {
-        Navigator.pushNamed(context, PrecencesScreenMain.id);
+        Navigator.pushNamed(context, TrainingScreenMain.id);
         _selectedIndex = 0;
       }
     });
@@ -47,15 +52,44 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            _auth.signOut();
-            Navigator.popUntil(context, ModalRoute.withName(StartScreenV2.id));
-          },
-        ),
-        title: Text('Home'),
+//      appBar: AppBar(
+//        leading: IconButton(
+//          icon: Icon(Icons.arrow_back),
+//          onPressed: () {
+//            _auth.signOut();
+//            Navigator.popUntil(context, ModalRoute.withName(StartScreenV2.id));
+//          },
+//        ),
+//        title: Text('Home'),
+//      ),
+      floatingActionButton: SpeedDial(
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayOpacity: 0.5,
+        animatedIcon: AnimatedIcons.menu_close,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.check),
+            backgroundColor: Colors.red,
+            label: 'Aanwezigheden',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => Navigator.pushNamed(context, PrecencesScreenMain.id),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.message),
+            backgroundColor: Colors.green,
+            label: 'Opmerking',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => Navigator.pushNamed(context, AddCommentsScreenMain.id),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.check_box),
+            backgroundColor: Colors.deepPurpleAccent,
+            label: 'Evalueer',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {},
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -63,82 +97,87 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
           SizedBox(
             width: double.infinity,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
-            child: GestureDetector(
-              child: Container(
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  color: Colors.blueAccent,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      'Zwemmers',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () =>
-                  Navigator.pushNamed(context, ListOfSwimmersScreenMain.id),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-            child: GestureDetector(
-              child: Container(
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  color: Colors.lightBlue,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      'Aanwezigheden',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => Navigator.pushNamed(context, PrecencesScreenMain.id),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-            child: GestureDetector(
-              onTap: () {
-                _auth.signOut();
-                Navigator.popUntil(
-                    context, ModalRoute.withName(StartScreenV2.id));
-              },
-              child: Container(
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  color: Colors.lightBlueAccent,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      'Af melden',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+//          Padding(
+//            padding: const EdgeInsets.only(top: 10, bottom: 10),
+//            child: GestureDetector(
+//              child: Container(
+//                width: 350,
+//                decoration: BoxDecoration(
+//                  borderRadius: BorderRadius.all(
+//                    Radius.circular(30),
+//                  ),
+//                  color: Colors.blueAccent,
+//                ),
+//                child: Padding(
+//                  padding: const EdgeInsets.all(10.0),
+//                  child: Center(
+//                    child: Text(
+//                      'Zwemmers',
+//                      style: TextStyle(color: Colors.white, fontSize: 20),
+//                    ),
+//                  ),
+//                ),
+//              ),
+//              onTap: () =>
+//                  Navigator.pushNamed(context, ListOfSwimmersScreenMain.id),
+//            ),
+//          ),
+//          Padding(
+//            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+//            child: GestureDetector(
+//              child: Container(
+//                width: 350,
+//                decoration: BoxDecoration(
+//                  borderRadius: BorderRadius.all(
+//                    Radius.circular(30),
+//                  ),
+//                  color: Colors.lightBlue,
+//                ),
+//                child: Padding(
+//                  padding: const EdgeInsets.all(10.0),
+//                  child: Center(
+//                    child: Text(
+//                      'Aanwezigheden',
+//                      style: TextStyle(color: Colors.white, fontSize: 20),
+//                    ),
+//                  ),
+//                ),
+//              ),
+//              onTap: () => Navigator.pushNamed(context, PrecencesScreenMain.id),
+//            ),
+//          ),
+//          Padding(
+//            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+//            child: GestureDetector(
+//              onTap: () {
+//                _auth.signOut();
+//                Navigator.popUntil(
+//                    context, ModalRoute.withName(StartScreenV2.id));
+//              },
+//              child: Container(
+//                width: 350,
+//                decoration: BoxDecoration(
+//                  borderRadius: BorderRadius.all(
+//                    Radius.circular(30),
+//                  ),
+//                  color: Colors.lightBlueAccent,
+//                ),
+//                child: Padding(
+//                  padding: const EdgeInsets.all(10.0),
+//                  child: Center(
+//                    child: Text(
+//                      'Af melden',
+//                      style: TextStyle(color: Colors.white, fontSize: 20),
+//                    ),
+//                  ),
+//                ),
+//              ),
+//            ),
+//          ),
+
+          Image(
+            width: 300,
+            image: AssetImage('images/MozkaLogo.png'),
           ),
         ],
       ),
@@ -153,8 +192,8 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
             title: Text('Zwemmers'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            title: Text('Aanwezigheden'),
+            icon: Icon(Icons.timer),
+            title: Text('Training'),
           ),
         ],
         currentIndex: _selectedIndex,

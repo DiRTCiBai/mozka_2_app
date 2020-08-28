@@ -26,6 +26,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'versie_2/screens/registration_screen/main/registration_screen_main.dart';
 import 'versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'versie_2/screens/login_screen/main/login_screen_main.dart';
+import 'versie_2/screens/training_screen/main/training_screen_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -97,6 +98,7 @@ class MyApp extends StatelessWidget {
                     RegistrationScreenMain(),
                 HomeScreenMain.id: (context) => HomeScreenMain(),
                 LoginScreenMain.id: (context) => LoginScreenMain(),
+                TrainingScreenMain.id: (context) => TrainingScreenMain(),
               },
             ),
           );

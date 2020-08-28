@@ -9,9 +9,6 @@ class StartScreenV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Start'),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -20,13 +17,14 @@ class StartScreenV2 extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(bottom: 30),
-//            child: Image(
-//              image: AssetImage('images/mozka.icon.jpg'),
-//            ),
-            child: Text(
-              'Mozka',
-              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
+            child: Image(
+              width: 300,
+              image: AssetImage('images/MozkaLogo.png'),
             ),
+//            child: Text(
+//              'Mozka',
+//              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
+//            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),

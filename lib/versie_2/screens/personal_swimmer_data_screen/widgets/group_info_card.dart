@@ -29,7 +29,7 @@ class GroupInfoCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, top: 5),
-                child: Text('Groep'),
+                child: Text('aantal dagen'),
               ),
             ],
           ),

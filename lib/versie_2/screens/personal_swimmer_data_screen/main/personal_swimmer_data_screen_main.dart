@@ -46,10 +46,50 @@ class _PersonalSwimmerDataSCreenMainState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Opmerkingen'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ListOfCommentsMain(
+                              swimmerData: widget.swimmerData,
+                            )));
+              },
+            ),
+            ListTile(
+              title: Text('Aanwezigheden'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Vooruitgang'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context)),
+//        leading: IconButton(
+//            icon: Icon(Icons.arrow_back),
+//            onPressed: () => Navigator.pop(context)),
         title: Text('Persoonlijke gegevens'),
         actions: <Widget>[
           IconButton(
@@ -110,17 +150,6 @@ class _PersonalSwimmerDataSCreenMainState
                 return CircularProgressIndicator();
               }
             },
-          ),
-          FlatButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ListOfCommentsMain(
-                            swimmerData: widget.swimmerData,
-                          )));
-            },
-            child: Text('Opmerkingen'),
           ),
 
 //              if (snapshot.hasData) {),
