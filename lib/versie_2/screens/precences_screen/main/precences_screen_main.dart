@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/widgets/precences_list_tile.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +18,22 @@ class PrecencesScreenMain extends StatefulWidget {
 }
 
 class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 0) {
+      Navigator.popUntil(context, ModalRoute.withName(HomeScreenMain.id));
+    }
+    if (index == 1) {
+      Navigator.popUntil(context, ModalRoute.withName(HomeScreenMain.id));
+      Navigator.pushNamed(context, ListOfSwimmersScreenMain.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context);
@@ -47,6 +65,25 @@ class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
           ),
           PrecencesSaveButton(swimmerlist: swimmerlist),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            title: Text('Zwemmers'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+            title: Text('Aanwezigheden'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
       ),
     );
   }

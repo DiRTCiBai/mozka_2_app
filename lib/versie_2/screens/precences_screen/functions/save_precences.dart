@@ -7,7 +7,7 @@ void SavePrecencesToFirestore(List<SwimmerData2> swimmerlist) {
   String maand = Time().GetMonth();
   String dag = Time().GetDay();
   var now = new DateTime.now();
-  Firestore _db = Firestore.instance;
+  FirebaseFirestore _db = FirebaseFirestore.instance;
 
   for (int i = 0; i < swimmerlist.length; i++) {
 //    _db
@@ -21,7 +21,7 @@ void SavePrecencesToFirestore(List<SwimmerData2> swimmerlist) {
 ////      'aanwezig': swimmerlist[i].aanwezig,
 ////      'groep': swimmerlist[i].groep,
 ////    });
-    _db.collection(jaar).document(swimmerlist[i].id + '$dag - $maand').setData(
+    _db.collection(jaar).doc(swimmerlist[i].id + '$dag - $maand').set(
       {
         'timestamp': now.toString(),
         'groep': swimmerlist[i].groep,

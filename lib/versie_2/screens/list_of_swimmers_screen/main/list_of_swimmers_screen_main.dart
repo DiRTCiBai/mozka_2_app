@@ -5,9 +5,33 @@ import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/s
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/delete_swimmer.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/widgets/list_add_button.dart';
+import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
 
-class ListOfSwimmersScreenMain extends StatelessWidget {
+class ListOfSwimmersScreenMain extends StatefulWidget {
   static const String id = 'ListOfSwimmersScreenMain';
+
+  @override
+  _ListOfSwimmersScreenMainState createState() =>
+      _ListOfSwimmersScreenMainState();
+}
+
+class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
+  int _selectedIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 0) {
+      Navigator.popUntil(context, ModalRoute.withName(HomeScreenMain.id));
+    }
+    if (index == 2) {
+      Navigator.popUntil(context, ModalRoute.withName(HomeScreenMain.id));
+      Navigator.pushNamed(context, PrecencesScreenMain.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +84,25 @@ class ListOfSwimmersScreenMain extends StatelessWidget {
           ),
           ListAddButton(),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            title: Text('Zwemmers'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+            title: Text('Aanwezigheden'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
       ),
     );
   }
