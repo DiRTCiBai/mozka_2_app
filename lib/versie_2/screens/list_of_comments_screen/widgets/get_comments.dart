@@ -21,7 +21,12 @@ class GetComments extends StatelessWidget {
                     children: <Widget>[
                       ListTile(
                         title: Text(snapshot.data[index].titel),
-                        trailing: Text(snapshot.data[index].date),
+                        trailing: Column(
+                          children: <Widget>[
+                            Text(snapshot.data[index].date),
+                            Text(snapshot.data[index].trainer),
+                          ],
+                        ),
                         subtitle: Text(snapshot.data[index].detail),
                       ),
                       ListTile(title: Text(snapshot.data[index].comment)),
@@ -51,6 +56,7 @@ class GetComments extends StatelessWidget {
                 date: documentSnapshot.data()['datum'],
                 titel: documentSnapshot.data()['titel'],
                 detail: documentSnapshot.data()['detail'],
+                trainer: documentSnapshot.data()['trainer'],
               ),
             )
             .toList());
@@ -64,5 +70,6 @@ class CommentData {
   String comment;
   String date;
   String detail;
-  CommentData({this.comment, this.date, this.titel, this.detail});
+  String trainer;
+  CommentData({this.comment, this.date, this.titel, this.detail, this.trainer});
 }

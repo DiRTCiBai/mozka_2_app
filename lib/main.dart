@@ -23,6 +23,9 @@ import 'versie_2/modules/swimmer_data.dart';
 import 'versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 import 'versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'versie_2/screens/registration_screen/main/registration_screen_main.dart';
+import 'versie_2/screens/home_screen/main/home_screen_main.dart';
+import 'versie_2/screens/login_screen/main/login_screen_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,6 +93,10 @@ class MyApp extends StatelessWidget {
                     PersonalSwimmerDataSCreenMain(),
                 AddCommentsScreenMain.id: (context) => AddCommentsScreenMain(),
                 ListOfCommentsMain.id: (context) => ListOfCommentsMain(),
+                RegistrationScreenMain.id: (context) =>
+                    RegistrationScreenMain(),
+                HomeScreenMain.id: (context) => HomeScreenMain(),
+                LoginScreenMain.id: (context) => LoginScreenMain(),
               },
             ),
           );

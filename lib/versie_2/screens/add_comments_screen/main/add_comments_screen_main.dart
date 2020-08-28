@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddCommentsScreenMain extends StatefulWidget {
   static const id = 'CommentsScreenMain';
@@ -21,6 +21,28 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
   String titel;
   String detailOpmerking = 'algemeen';
   List<bool> isSelected = [false, false, false, false];
+
+  final _auth = FirebaseAuth.instance;
+  User loggedInUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetCurrentUser();
+  }
+
+  void GetCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +115,7 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                 if (_formKey.currentState.validate()) {
                   this._formKey.currentState.save();
                   print(comment);
-                  Firestore _db = Firestore.instance;
+                  FirebaseFirestore _db = FirebaseFirestore.instance;
 
                   if (isSelected[0] == true) {
                     detailOpmerking = 'benen';
@@ -113,6 +135,7 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                     'id': widget.swimmerData.id,
                     'datum': Time().GetDate(),
                     'detail': detailOpmerking,
+                    'trainer': loggedInUser.email,
                   });
 
                   this._formKey.currentState.dispose();

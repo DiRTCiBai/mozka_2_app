@@ -68,24 +68,24 @@ class PersonalSwimmerDataSCreenMain extends StatelessWidget {
           CardTitles(
             title: 'Aanwezigheden',
           ),
-          FutureBuilder(
-            future: Aanwezigheden(),
-            builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
-              if (snapshot.hasData) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Card(
-                    child: TotalPrecencesChart(
-                      total: snapshot.data.total,
-                      aanwezig: snapshot.data.precences,
-                    ),
-                  ),
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
+//          FutureBuilder(
+//            future: Aanwezigheden(),
+//            builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
+//              if (snapshot.hasData) {
+//                return Padding(
+//                  padding: const EdgeInsets.symmetric(horizontal: 10),
+//                  child: Card(
+//                    child: TotalPrecencesChart(
+//                      total: snapshot.data.total,
+//                      aanwezig: snapshot.data.precences,
+//                    ),
+//                  ),
+//                );
+//              } else {
+//                return CircularProgressIndicator();
+//              }
+//            },
+//          ),
           FlatButton(
             onPressed: () {
               Navigator.push(
