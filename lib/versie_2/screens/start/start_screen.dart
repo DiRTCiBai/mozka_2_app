@@ -14,16 +14,68 @@ class StartScreenV2 extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FlatButton(
-            child: Text('Registreer'),
-            onPressed: () =>
-                Navigator.pushNamed(context, RegistrationScreenMain.id),
+          SizedBox(
+            width: double.infinity,
           ),
-          FlatButton(
-            child: Text('Login'),
-            onPressed: () => Navigator.pushNamed(context, LoginScreenMain.id),
+          Container(
+            padding: EdgeInsets.only(bottom: 30),
+//            child: Image(
+//              image: AssetImage('images/mozka.icon.jpg'),
+//            ),
+            child: Text(
+              'Mozka',
+              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: GestureDetector(
+              child: Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                  color: Colors.blue,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'Registreer',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () =>
+                  Navigator.pushNamed(context, RegistrationScreenMain.id),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: GestureDetector(
+              child: Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                  color: Colors.lightBlueAccent,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () => Navigator.pushNamed(context, LoginScreenMain.id),
+            ),
           ),
         ],
       ),

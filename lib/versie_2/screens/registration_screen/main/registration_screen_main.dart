@@ -20,37 +20,87 @@ class RegistrationScreenMain extends StatelessWidget {
         title: Text('Registreer'),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              hintText: 'email',
-            ),
-            onChanged: (value) {
-              email = value;
-            },
+          SizedBox(
+            width: double.infinity,
           ),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'wachtwoord',
+          Container(
+            padding: EdgeInsets.only(bottom: 30),
+//            child: Image(
+//              image: AssetImage('images/mozka.icon.jpg'),
+//            ),
+            child: Text(
+              'Mozka',
+              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
             ),
-            onChanged: (value) {
-              password = value;
-            },
           ),
-          FlatButton(
-            child: Text('registreer'),
-            onPressed: () async {
-              try {
-                final user = await _auth.createUserWithEmailAndPassword(
-                    email: email, password: password);
-                if (user != null) {
-                  Navigator.pushNamed(context, HomeScreenMain.id);
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            width: 350,
+            child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                hintText: 'test@email.com',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onChanged: (value) {
+                email = value;
+              },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            width: 350,
+            child: TextField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                hintText: 'wachtwoord',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onChanged: (value) {
+                password = value;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: GestureDetector(
+              child: Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                  color: Colors.blue,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'Registreer',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () async {
+                try {
+                  final user = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  if (user != null) {
+                    Navigator.pushNamed(context, HomeScreenMain.id);
+                  }
+                } catch (e) {
+                  print(e);
                 }
-              } catch (e) {
-                print(e);
-              }
-            },
+              },
+            ),
           ),
         ],
       ),

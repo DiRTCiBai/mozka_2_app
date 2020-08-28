@@ -28,6 +28,9 @@ class LoginScreenMain extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(bottom: 30),
+//            child: Image(
+//              image: AssetImage('images/mozka.icon.jpg'),
+//            ),
             child: Text(
               'Mozka',
               style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
@@ -39,6 +42,7 @@ class LoginScreenMain extends StatelessWidget {
             child: TextField(
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
               decoration: InputDecoration(
                 hintText: 'test@email.com',
                 border: OutlineInputBorder(
@@ -55,6 +59,7 @@ class LoginScreenMain extends StatelessWidget {
             width: 350,
             child: TextField(
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -68,32 +73,37 @@ class LoginScreenMain extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 50),
-            child: Container(
-              width: 350,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30),
+            child: GestureDetector(
+              child: Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                  color: Colors.blue,
                 ),
-                color: Colors.blue,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                ),
               ),
-              child: FlatButton(
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                onPressed: () async {
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
+              onTap: () async {
+                try {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
 
-                    if (user != null) {
-                      Navigator.pushNamed(context, HomeScreenMain.id);
-                    }
-                  } catch (e) {
-                    print(e);
+                  if (user != null) {
+                    Navigator.pushNamed(context, HomeScreenMain.id);
                   }
-                },
-              ),
+                } catch (e) {
+                  print(e);
+                }
+              },
             ),
           ),
         ],
