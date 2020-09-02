@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/widgets/get_comments.dart';
 import 'package:mozka_2_app/versie_2/screens/start/start_screen.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/training_screen/main/training_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/search_bar_test/search_bar_test.dart';
 
 class HomeScreenMain extends StatefulWidget {
   static const String id = 'HomeScreenMain';
@@ -178,6 +180,13 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
           Image(
             width: 300,
             image: AssetImage('images/MozkaLogo.png'),
+          ),
+
+          GestureDetector(
+            child: Text('Searchbar'),
+            onTap: () {
+              Navigator.pushNamed(context, SearchBarTest.id);
+            },
           ),
         ],
       ),

@@ -7,6 +7,8 @@ import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/d
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/widgets/list_add_button.dart';
 import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/main/precences_screen_main.dart';
+import 'package:provider/provider.dart';
+import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 
 class ListOfSwimmersScreenMain extends StatefulWidget {
   static const String id = 'ListOfSwimmersScreenMain';
@@ -34,12 +36,27 @@ class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
 
   @override
   Widget build(BuildContext context) {
+    List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context)),
         title: Text('lijst'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchData(
+                  list: swimmerlist,
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -96,14 +113,82 @@ class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
             title: Text('Zwemmers'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            title: Text('Aanwezigheden'),
+            icon: Icon(Icons.timer),
+            title: Text('Training'),
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
+    );
+  }
+}
+
+class SearchData extends SearchDelegate<SwimmerData2> {
+  final List<SwimmerData2> list;
+  final recentlist = ['sam', 'maarten'];
+
+  SearchData({this.list});
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.account_circle),
+      title: Text(query),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context)
+        .where((p) => p.voornaam.startsWith(query))
+        .toList();
+    final newlist =
+//    query.isEmpty
+//        ? recentlist
+//        :
+        list.where((p) => p.voornaam.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PersonalSwimmerDataSCreenMain(
+                  swimmerData: swimmerlist[index],
+                ),
+              ),
+            );
+          },
+          title: Text(swimmerlist[index].voornaam),
+        );
+      },
+      itemCount: swimmerlist.length,
     );
   }
 }

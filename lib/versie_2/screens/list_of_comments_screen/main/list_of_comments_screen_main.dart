@@ -58,8 +58,8 @@ class _ListOfCommentsMainState extends State<ListOfCommentsMain> {
             title: Text('Zwemmers'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            title: Text('Aanwezigheden'),
+            icon: Icon(Icons.timer),
+            title: Text('Training'),
           ),
         ],
         currentIndex: _selectedIndex,
