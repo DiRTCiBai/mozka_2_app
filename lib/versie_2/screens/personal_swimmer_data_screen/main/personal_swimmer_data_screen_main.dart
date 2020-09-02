@@ -137,15 +137,19 @@ class _PersonalSwimmerDataSCreenMainState
             future: Aanwezigheden(),
             builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
               if (snapshot.hasData) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Card(
-                    child: TotalPrecencesChart(
-                      total: snapshot.data.total,
-                      aanwezig: snapshot.data.precences,
+                if (snapshot.data.total != 0) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Card(
+                      child: TotalPrecencesChart(
+                        total: snapshot.data.total,
+                        aanwezig: snapshot.data.precences,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  return Center(child: Text('heeft nog geen data'));
+                }
               } else {
                 return CircularProgressIndicator();
               }
