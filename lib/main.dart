@@ -28,6 +28,7 @@ import 'versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'versie_2/screens/login_screen/main/login_screen_main.dart';
 import 'versie_2/screens/training_screen/main/training_screen_main.dart';
 import 'versie_2/screens/search_bar_test/search_bar_test.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comment2_screen_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -101,6 +102,8 @@ class MyApp extends StatelessWidget {
                 LoginScreenMain.id: (context) => LoginScreenMain(),
                 TrainingScreenMain.id: (context) => TrainingScreenMain(),
                 SearchBarTest.id: (context) => SearchBarTest(),
+                AddCommentsScreenMain2.id: (context) =>
+                    AddCommentsScreenMain2(),
               },
             ),
           );

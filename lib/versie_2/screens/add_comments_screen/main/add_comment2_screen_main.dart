@@ -6,17 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/root/constants.dart';
 
-class AddCommentsScreenMain extends StatefulWidget {
-  static const id = 'CommentsScreenMain';
+class AddCommentsScreenMain2 extends StatefulWidget {
+  static const id = 'AddCommentsScreenMain2';
   SwimmerData2 swimmerData;
 
-  AddCommentsScreenMain({this.swimmerData});
+  AddCommentsScreenMain2({this.swimmerData});
 
   @override
-  _AddCommentsScreenMainState createState() => _AddCommentsScreenMainState();
+  _AddCommentsScreenMain2State createState() => _AddCommentsScreenMain2State();
 }
 
-class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
+class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   String comment;
@@ -25,6 +25,8 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
 
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
+  String swimmerID;
+  String swimmerName;
 
   @override
   void initState() {
@@ -47,13 +49,32 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
   @override
   Widget build(BuildContext context) {
     List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context);
+    SearchData searchData = SearchData(list: swimmerlist, swimmerID: swimmerID);
+
+    void GetName() async {
+      var swimmer = await showSearch(context: context, delegate: searchData);
+      setState(() {
+        swimmerID = swimmer.id;
+        swimmerName = swimmer.voornaam;
+      });
+
+      print(await swimmer.voornaam);
+    }
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context)),
-        title: Text('Opmerking'),
+        title: Text('Toevoegen'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              GetName();
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -118,9 +139,18 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
                 child: Container(
                   width: 375,
+                  child: Text(swimmerName == null
+                      ? 'nog niks geselecteerd'
+                      : swimmerName),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                child: Container(
+                  width: 375,
                   child: TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'titel',
+                      labelText: 'Titel',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -158,25 +188,29 @@ class _AddCommentsScreenMainState extends State<AddCommentsScreenMain> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 180),
+                padding: const EdgeInsets.only(top: 80),
                 child: GestureDetector(
                   onTap: () {
                     if (_formKey.currentState.validate()) {
-                      this._formKey.currentState.save();
-                      print(comment);
-                      FirebaseFirestore _db = FirebaseFirestore.instance;
+                      if (swimmerID != null) {
+                        this._formKey.currentState.save();
+                        print(comment);
+                        FirebaseFirestore _db = FirebaseFirestore.instance;
 
-                      _db.collection('opmerkingen').add({
-                        'titel': titel,
-                        'opmerking': comment,
-                        'id': widget.swimmerData.id,
-                        'datum': Time().GetDate(),
-                        'detail': detailOpmerking,
-                        'trainer': loggedInUser.email,
-                      });
+                        _db.collection('opmerkingen').add({
+                          'titel': titel,
+                          'opmerking': comment,
+                          'id': swimmerID,
+                          'datum': Time().GetDate(),
+                          'detail': detailOpmerking,
+                          'trainer': loggedInUser.email,
+                        });
 
-                      this._formKey.currentState.dispose();
-                      Navigator.pop(context);
+                        this._formKey.currentState.dispose();
+                        Navigator.pop(context);
+                      } else {
+                        print('kies zwemmer');
+                      }
                     }
                   },
                   child: Container(
@@ -236,6 +270,77 @@ class DetailButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SearchData extends SearchDelegate<SwimmerData2> {
+  final List<SwimmerData2> list;
+  String swimmerID;
+
+  SearchData({this.list, this.swimmerID});
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.account_circle),
+      title: Text(query),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context)
+        .where((p) => p.voornaam.startsWith(query))
+        .toList();
+    final newlist =
+//    query.isEmpty
+//        ? recentlist
+//        :
+        list.where((p) => p.voornaam.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            swimmerID = swimmerlist[index].id;
+            Navigator.pop(context, swimmerlist[index]);
+          },
+          leading: CircleAvatar(
+            backgroundColor:
+                swimmerlist[index].geslacht == 'man' ? kmanColor : kfemakeColor,
+            child: Text(
+              '${swimmerlist[index].voornaam[0].toUpperCase()}${swimmerlist[index].achternaam[0].toUpperCase()}',
+              style: TextStyle(color: kcircleAvatarTextColor),
+            ),
+          ),
+          title: Text(
+              '${swimmerlist[index].voornaam} ${swimmerlist[index].achternaam}'),
+        );
+      },
+      itemCount: swimmerlist.length,
     );
   }
 }
