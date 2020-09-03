@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/versie_2/screens/training_screen/main/training_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/main/training_screen_main.dart';
 import 'package:mozka_2_app/versie_2/constants/constants.dart';
 import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
 

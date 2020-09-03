@@ -26,9 +26,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'versie_2/screens/registration_screen/main/registration_screen_main.dart';
 import 'versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'versie_2/screens/login_screen/main/login_screen_main.dart';
-import 'versie_2/screens/training_screen/main/training_screen_main.dart';
+import 'versie_2/screens/training_home_screen/main/training_screen_main.dart';
 import 'versie_2/screens/search_bar_test/search_bar_test.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comment2_screen_main.dart';
+import 'versie_2/screens/add_training_screen/add_training_screen_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
                 SearchBarTest.id: (context) => SearchBarTest(),
                 AddCommentsScreenMain2.id: (context) =>
                     AddCommentsScreenMain2(),
+                AddTrainingScreenMain.id: (context) => AddTrainingScreenMain(),
               },
             ),
           );

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/versie_2/screens/add_training_screen/add_training_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
 
@@ -31,7 +33,17 @@ class _TrainingScreenMainState extends State<TrainingScreenMain> {
         title: Text('Home'),
       ),
       body: Center(
-        child: Text('komt binnen kort'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, AddTrainingScreenMain.id);
+              },
+              child: Text('maak training'),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

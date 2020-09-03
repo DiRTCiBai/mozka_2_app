@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
-import 'package:mozka_2_app/versie_2/screens/training_screen/main/training_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/main/training_screen_main.dart';
 import 'package:mozka_2_app/versie_2/constants/constants.dart';
 
 class CustomBottomNavigatorBar extends StatefulWidget {

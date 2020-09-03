@@ -5,6 +5,8 @@ import 'package:mozka_2_app/versie_2/modules/time.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/root/constants.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/functions/search_data_comments.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/widgets/detail_button.dart';
 
 class AddCommentsScreenMain2 extends StatefulWidget {
   static const id = 'AddCommentsScreenMain2';
@@ -17,14 +19,14 @@ class AddCommentsScreenMain2 extends StatefulWidget {
 }
 
 class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
-  String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+  User loggedInUser;
+
   String comment;
   String titel;
   String detailOpmerking = 'algemeen';
 
-  final _auth = FirebaseAuth.instance;
-  User loggedInUser;
   String swimmerID;
   String swimmerName;
 
@@ -49,7 +51,8 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   @override
   Widget build(BuildContext context) {
     List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context);
-    SearchData searchData = SearchData(list: swimmerlist, swimmerID: swimmerID);
+    SearchSwimmerListComments searchData =
+        SearchSwimmerListComments(list: swimmerlist);
 
     void GetName() async {
       var swimmer = await showSearch(context: context, delegate: searchData);
@@ -57,8 +60,6 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
         swimmerID = swimmer.id;
         swimmerName = swimmer.voornaam;
       });
-
-      print(await swimmer.voornaam);
     }
 
     return Scaffold(
@@ -144,48 +145,15 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
                       : swimmerName),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 20),
-                child: Container(
-                  width: 375,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Titel',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onSaved: (value) => titel = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+              CustomFormField(
+                onSaved: (value) => titel = value,
+                hintText: 'Titel',
+                maxLines: 1,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: 375,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Opmerking',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    maxLines: 15,
-                    onSaved: (value) => comment = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+              CustomFormField(
+                onSaved: (value) => comment = value,
+                hintText: 'Opmerking',
+                maxLines: 15,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 80),
@@ -213,23 +181,7 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
                       }
                     }
                   },
-                  child: Container(
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
-                      color: Colors.blue,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Center(
-                          child: Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )),
-                    ),
-                  ),
+                  child: CustomSaveButton(),
                 ),
               ),
             ],
@@ -240,107 +192,59 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   }
 }
 
-class DetailButton extends StatelessWidget {
-  final String text;
-  final Function onTap;
-  final bool selected;
-
-  DetailButton(
-      {@required this.text, @required this.onTap, @required this.selected});
-
+class CustomSaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(25),
-          ),
-          color: selected ? Colors.blue : Colors.grey[200],
+    return Container(
+      width: 350,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
+        color: Colors.blue,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
             child: Text(
-              text,
-              style: TextStyle(
-                  fontSize: 15, color: selected ? Colors.white : Colors.black),
-            ),
-          ),
-        ),
+          'Save',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        )),
       ),
     );
   }
 }
 
-class SearchData extends SearchDelegate<SwimmerData2> {
-  final List<SwimmerData2> list;
-  String swimmerID;
+class CustomFormField extends StatelessWidget {
+  final Function onSaved;
+  final String hintText;
+  final int maxLines;
 
-  SearchData({this.list, this.swimmerID});
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      )
-    ];
-  }
+  CustomFormField({this.onSaved, this.hintText, this.maxLines});
 
   @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return ListTile(
-      leading: Icon(Icons.account_circle),
-      title: Text(query),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context)
-        .where((p) => p.voornaam.startsWith(query))
-        .toList();
-    final newlist =
-//    query.isEmpty
-//        ? recentlist
-//        :
-        list.where((p) => p.voornaam.startsWith(query)).toList();
-
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            swimmerID = swimmerlist[index].id;
-            Navigator.pop(context, swimmerlist[index]);
-          },
-          leading: CircleAvatar(
-            backgroundColor:
-                swimmerlist[index].geslacht == 'man' ? kmanColor : kfemakeColor,
-            child: Text(
-              '${swimmerlist[index].voornaam[0].toUpperCase()}${swimmerlist[index].achternaam[0].toUpperCase()}',
-              style: TextStyle(color: kcircleAvatarTextColor),
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 375,
+        child: TextFormField(
+          decoration: InputDecoration(
+            hintText: hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          title: Text(
-              '${swimmerlist[index].voornaam} ${swimmerlist[index].achternaam}'),
-        );
-      },
-      itemCount: swimmerlist.length,
+          maxLines: maxLines,
+          onSaved: onSaved,
+          validator: (value) {
+            if (value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+        ),
+      ),
     );
   }
 }
