@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
-import 'package:provider/provider.dart';
-import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 import 'package:mozka_2_app/root/constants.dart';
+import 'package:provider/provider.dart';
 
-class SearchSwimmerList extends SearchDelegate<SwimmerData2> {
+class SearchPrecencesList extends SearchDelegate<SwimmerData2> {
   final List<SwimmerData2> list;
 
-  SearchSwimmerList({this.list});
+  SearchPrecencesList({this.list});
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -44,24 +43,15 @@ class SearchSwimmerList extends SearchDelegate<SwimmerData2> {
     List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context)
         .where((p) => p.voornaam.startsWith(query))
         .toList();
-    final newlist =
-//    query.isEmpty
-//        ? recentlist
-//        :
-        list.where((p) => p.voornaam.startsWith(query)).toList();
+    final newlist = list.where((p) => p.voornaam.startsWith(query)).toList();
 
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PersonalSwimmerDataSCreenMain(
-                  swimmerData: swimmerlist[index],
-                ),
-              ),
-            );
+            //showResults(context);
+            print(swimmerlist[index]);
+            swimmerlist[index].aanwezig = !swimmerlist[index].aanwezig;
           },
           leading: CircleAvatar(
             backgroundColor:

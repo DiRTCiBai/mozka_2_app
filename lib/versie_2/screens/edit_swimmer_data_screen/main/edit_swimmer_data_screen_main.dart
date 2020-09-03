@@ -11,11 +11,12 @@ class EditSwimmerDataScreenMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context)),
-        title: Text('Toevoegen'),
+        title: Text('Aanpassen'),
       ),
       body: Container(
         child: CustomForm(

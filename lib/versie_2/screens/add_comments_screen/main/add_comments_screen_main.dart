@@ -4,6 +4,7 @@ import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:mozka_2_app/root/constants.dart';
 
 class AddCommentsScreenMain extends StatefulWidget {
   static const id = 'CommentsScreenMain';
@@ -304,7 +305,16 @@ class SearchData extends SearchDelegate<SwimmerData2> {
           onTap: () {
             Navigator.pop(context);
           },
-          title: Text(swimmerlist[index].voornaam),
+          leading: CircleAvatar(
+            backgroundColor:
+                swimmerlist[index].geslacht == 'man' ? kmanColor : kfemakeColor,
+            child: Text(
+              '${swimmerlist[index].voornaam[0].toUpperCase()}${swimmerlist[index].achternaam[0].toUpperCase()}',
+              style: TextStyle(color: kcircleAvatarTextColor),
+            ),
+          ),
+          title: Text(
+              '${swimmerlist[index].voornaam} ${swimmerlist[index].achternaam}'),
         );
       },
       itemCount: swimmerlist.length,

@@ -11,6 +11,7 @@ class CustomForm extends StatefulWidget {
 }
 
 class _CustomFormState extends State<CustomForm> {
+  SwimmerData2 swimmerData;
   bool gender;
 
   @override
@@ -18,30 +19,30 @@ class _CustomFormState extends State<CustomForm> {
     // TODO: implement initState
     super.initState();
     gender = widget.swimmerData.geslacht == 'man' ? true : false;
+    swimmerData = SwimmerData2(geslacht: 'man', id: widget.swimmerData.id);
   }
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Form(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        Form(
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ListTile(
                   title: TextFormField(
+                    initialValue: widget.swimmerData.voornaam,
                     decoration: InputDecoration(
                       labelText: 'Voornaam',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: widget.swimmerData.voornaam,
-                    onSaved: (value) => widget.swimmerData.voornaam = value,
+                    onSaved: (value) => swimmerData.voornaam = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -52,12 +53,12 @@ class _CustomFormState extends State<CustomForm> {
                 ),
                 ListTile(
                   title: TextFormField(
+                    initialValue: widget.swimmerData.achternaam,
                     decoration: InputDecoration(
                       labelText: 'Achternaam',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: widget.swimmerData.achternaam,
-                    onSaved: (value) => widget.swimmerData.achternaam = value,
+                    onSaved: (value) => swimmerData.achternaam = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -68,13 +69,13 @@ class _CustomFormState extends State<CustomForm> {
                 ),
                 ListTile(
                   title: TextFormField(
+                    initialValue: widget.swimmerData.geboortejaar,
                     decoration: InputDecoration(
                       labelText: 'Geboortejaar',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: widget.swimmerData.geboortejaar,
                     keyboardType: TextInputType.number,
-                    onSaved: (value) => widget.swimmerData.geboortejaar = value,
+                    onSaved: (value) => swimmerData.geboortejaar = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -85,13 +86,13 @@ class _CustomFormState extends State<CustomForm> {
                 ),
                 ListTile(
                   title: TextFormField(
+                    initialValue: widget.swimmerData.email,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: widget.swimmerData.email,
                     keyboardType: TextInputType.emailAddress,
-                    onSaved: (value) => widget.swimmerData.email = value,
+                    onSaved: (value) => swimmerData.email = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -102,67 +103,116 @@ class _CustomFormState extends State<CustomForm> {
                 ),
                 ListTile(
                   title: TextFormField(
+                    initialValue: widget.swimmerData.groep,
                     decoration: InputDecoration(
                       labelText: 'Groep',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: widget.swimmerData.groep,
-                    onSaved: (value) => widget.swimmerData.groep = value,
+                    onSaved: (value) => swimmerData.groep = value,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'Please enter a, b, c, d, e, f';
                       }
                       return null;
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text('man'),
-                      color: gender ? Colors.blue : Colors.white,
-                      onPressed: () {
-                        //zet gender false en zet geslacht op man
-                        setState(() {
-                          gender = !gender;
-                        });
-                        widget.swimmerData.geslacht = 'man';
-                      },
-                    ),
-                    FlatButton(
-                      child: Text('vrouw'),
-                      color: gender ? Colors.white : Colors.blue,
-                      onPressed: () {
-                        //zet gender true en zet geslacht op vrouw
-                        setState(() {
-                          gender = !gender;
-                        });
-                        widget.swimmerData.geslacht = 'vrouw';
-                      },
-                    ),
-                  ],
-                ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        this._formKey.currentState.save();
-                        //als alle forms zijn ingevuld sla data op in swimmerdata object
-                        //sla het object op in firestore
-                        SaveEditSwimmerDataToFirestore(widget.swimmerData);
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text('Save'),
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            //zet gender false en zet geslacht op man
+                            setState(() {
+                              gender = !gender;
+                            });
+                            swimmerData.geslacht = 'man';
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: gender ? Colors.blue : Colors.white,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'man',
+                                style: TextStyle(
+                                  color: gender ? Colors.white : Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
+                            child: Center(
+                              child: Text(
+                                'vrouw',
+                                style: TextStyle(
+                                  color: gender ? Colors.black : Colors.white,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: gender ? Colors.white : Colors.blue,
+                            ),
+                          ),
+                          onTap: () {
+                            //zet gender true en zet geslacht op vrouw
+                            setState(() {
+                              gender = !gender;
+                            });
+                            swimmerData.geslacht = 'vrouw';
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(top: 175, bottom: 10),
+          child: FlatButton(
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                this._formKey.currentState.save();
+                //als alle forms zijn ingevuld sla data op in swimmerdata object
+                //sla het object op in firestore
+                SaveEditSwimmerDataToFirestore(swimmerData);
+                Navigator.pop(context);
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blue,
+              ),
+              child: Center(
+                child: Text(
+                  'Opslaan',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -10,38 +10,42 @@ class GetComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: Comments(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<CommentData>> snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              reverse: true,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(snapshot.data[index].titel),
-                        trailing: Column(
-                          children: <Widget>[
-                            Text(snapshot.data[index].date),
-                            Text(snapshot.data[index].trainer),
-                          ],
-                        ),
-                        subtitle: Text(snapshot.data[index].detail),
-                      ),
-                      ListTile(title: Text(snapshot.data[index].comment)),
-                    ],
-                  ),
-                );
-              },
-              itemCount: snapshot.data.length,
+      stream: Comments(),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<CommentData>> snapshot) {
+        if (snapshot.hasData) {
+          final opmerkingen = snapshot.data.reversed;
+          List<CustomOpmerking> listOpmerkingen = [];
+
+          for (var opmerking in opmerkingen) {
+            final title = opmerking.titel;
+            final trainer = opmerking.trainer;
+            final datum = opmerking.date;
+            final comment = opmerking.comment;
+            final detail = opmerking.detail;
+
+            final tempOpmerkingwidget = CustomOpmerking(
+              title: title,
+              trainer: trainer,
+              datum: datum,
+              opmerking: comment,
+              detail: detail,
             );
-          } else {
-            return Text('loading');
+
+            listOpmerkingen.add(tempOpmerkingwidget);
           }
-        });
+
+          return Expanded(
+            child: ListView(
+              reverse: false,
+              children: listOpmerkingen,
+            ),
+          );
+        } else {
+          return Text('loading');
+        }
+      },
+    );
   }
 
   Stream<List<CommentData>> Comments() {
@@ -64,6 +68,44 @@ class GetComments extends StatelessWidget {
             .toList());
 
     return commets;
+  }
+}
+
+class CustomOpmerking extends StatelessWidget {
+  final String title;
+  final String trainer;
+  final String datum;
+  final String opmerking;
+  final String detail;
+
+  CustomOpmerking(
+      {this.trainer, this.title, this.datum, this.opmerking, this.detail});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          ListTile(
+            title: Text(
+              title,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            trailing: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(trainer),
+                Text(datum),
+              ],
+            ),
+            subtitle: Text(detail),
+          ),
+          Divider(),
+          ListTile(title: Text(opmerking)),
+        ],
+      ),
+    );
   }
 }
 
