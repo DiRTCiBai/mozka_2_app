@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
+import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/widgets/custom_opmerking.dart';
+import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/functions/stream.dart';
 
 class GetComments extends StatelessWidget {
   SwimmerData2 swimmerData;
 
   GetComments({this.swimmerData});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Comments(),
+      stream: Comments(swimmerData),
       builder:
           (BuildContext context, AsyncSnapshot<List<CommentData>> snapshot) {
         if (snapshot.hasData) {
@@ -47,73 +49,4 @@ class GetComments extends StatelessWidget {
       },
     );
   }
-
-  Stream<List<CommentData>> Comments() {
-    FirebaseFirestore _db = FirebaseFirestore.instance;
-
-    var commets = _db
-        .collection('opmerkingen')
-        .where('id', isEqualTo: swimmerData.id)
-        .snapshots()
-        .map((QuerySnapshot querySnapshot) => querySnapshot.docs
-            .map(
-              (DocumentSnapshot documentSnapshot) => CommentData(
-                comment: documentSnapshot.data()['opmerking'],
-                date: documentSnapshot.data()['datum'],
-                titel: documentSnapshot.data()['titel'],
-                detail: documentSnapshot.data()['detail'],
-                trainer: documentSnapshot.data()['trainer'],
-              ),
-            )
-            .toList());
-
-    return commets;
-  }
-}
-
-class CustomOpmerking extends StatelessWidget {
-  final String title;
-  final String trainer;
-  final String datum;
-  final String opmerking;
-  final String detail;
-
-  CustomOpmerking(
-      {this.trainer, this.title, this.datum, this.opmerking, this.detail});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          ListTile(
-            title: Text(
-              title,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-            trailing: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(trainer),
-                Text(datum),
-              ],
-            ),
-            subtitle: Text(detail),
-          ),
-          Divider(),
-          ListTile(title: Text(opmerking)),
-        ],
-      ),
-    );
-  }
-}
-
-class CommentData {
-  String titel;
-  String comment;
-  String date;
-  String detail;
-  String trainer;
-  CommentData({this.comment, this.date, this.titel, this.detail, this.trainer});
 }

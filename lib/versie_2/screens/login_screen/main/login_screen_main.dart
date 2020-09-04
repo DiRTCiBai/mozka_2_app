@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mozka_2_app/versie_2/screens/home_screen/main/home_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/login_screen/widgets/custom_signin_button.dart';
+import 'package:mozka_2_app/versie_2/screens/login_screen/widgets/custom_emailfield.dart';
+import 'package:mozka_2_app/versie_2/screens/login_screen/widgets/custom_passwordfield.dart';
 
-class LoginScreenMain extends StatelessWidget {
+class LoginScreenMain extends StatefulWidget {
   static const String id = 'LoginScreenMain';
 
-  final _auth = FirebaseAuth.instance;
+  @override
+  _LoginScreenMainState createState() => _LoginScreenMainState();
+}
+
+class _LoginScreenMainState extends State<LoginScreenMain> {
   String email;
+
   String password;
 
   @override
@@ -32,80 +38,24 @@ class LoginScreenMain extends StatelessWidget {
               width: 300,
               image: AssetImage('images/MozkaLogo.png'),
             ),
-//            child: Text(
-//              'Mozka',
-//              style: TextStyle(fontSize: 60, fontWeight: FontWeight.w500),
-//            ),
           ),
-          Container(
-            padding: EdgeInsets.only(bottom: 10),
-            width: 350,
-            child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
-              decoration: InputDecoration(
-                hintText: 'test@email.com',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              onChanged: (value) {
+          CustomEmailField(
+            onChanged: (value) {
+              setState(() {
                 email = value;
-              },
-            ),
+              });
+            },
           ),
-          Container(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            width: 350,
-            child: TextField(
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                hintText: 'wachtwoord',
-              ),
-              onChanged: (value) {
+          CustomPasswordField(
+            onChanged: (value) {
+              setState(() {
                 password = value;
-              },
-            ),
+              });
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: GestureDetector(
-              child: Container(
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  color: Colors.blue,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () async {
-                try {
-                  final user = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-
-                  if (user != null) {
-                    Navigator.pushNamed(context, HomeScreenMain.id);
-                  }
-                } catch (e) {
-                  print(e);
-                }
-              },
-            ),
+          CustomSignInButton(
+            email: email,
+            password: password,
           ),
         ],
       ),

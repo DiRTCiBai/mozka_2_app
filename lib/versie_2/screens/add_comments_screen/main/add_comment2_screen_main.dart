@@ -4,9 +4,11 @@ import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:mozka_2_app/root/constants.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/functions/search_data_comments.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/widgets/detail_button.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/functions/get_current_user.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/widgets/custom_save_button.dart';
+import 'package:mozka_2_app/versie_2/screens/add_comments_screen/widgets/custom_formfield.dart';
 
 class AddCommentsScreenMain2 extends StatefulWidget {
   static const id = 'AddCommentsScreenMain2';
@@ -20,7 +22,6 @@ class AddCommentsScreenMain2 extends StatefulWidget {
 
 class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   final _formKey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
   User loggedInUser;
 
   String comment;
@@ -33,19 +34,11 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   @override
   void initState() {
     super.initState();
-    GetCurrentUser();
+    GetUser();
   }
 
-  void GetCurrentUser() async {
-    try {
-      final user = await _auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
+  void GetUser() async {
+    loggedInUser = await GetCurrentUser();
   }
 
   @override
@@ -56,10 +49,9 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
 
     void GetName() async {
       var swimmer = await showSearch(context: context, delegate: searchData);
-      setState(() {
-        swimmerID = swimmer.id;
-        swimmerName = swimmer.voornaam;
-      });
+      swimmerID = swimmer.id;
+
+      setState(() => swimmerName = swimmer.voornaam);
     }
 
     return Scaffold(
@@ -186,63 +178,6 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomSaveButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 350,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(30),
-        ),
-        color: Colors.blue,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-            child: Text(
-          'Save',
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        )),
-      ),
-    );
-  }
-}
-
-class CustomFormField extends StatelessWidget {
-  final Function onSaved;
-  final String hintText;
-  final int maxLines;
-
-  CustomFormField({this.onSaved, this.hintText, this.maxLines});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 375,
-        child: TextFormField(
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          maxLines: maxLines,
-          onSaved: onSaved,
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
         ),
       ),
     );

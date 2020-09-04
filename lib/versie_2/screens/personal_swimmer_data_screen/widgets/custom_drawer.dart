@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 import 'package:mozka_2_app/root/constants.dart';
+import 'package:mozka_2_app/versie_2/screens/personal_precences_detail/main.dart';
 
 class CustomDrawer extends StatelessWidget {
   final SwimmerData2 swimmerData;
@@ -72,8 +73,12 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 17),
             ),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PersonalPrecencesDetail(
+                            swimmerData: swimmerData,
+                          )));
             },
           ),
           ListTile(
