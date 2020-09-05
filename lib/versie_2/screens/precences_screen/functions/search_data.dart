@@ -47,22 +47,29 @@ class SearchPrecencesList extends SearchDelegate<SwimmerData2> {
 
     return ListView.builder(
       itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            //showResults(context);
-            print(swimmerlist[index]);
-            swimmerlist[index].aanwezig = !swimmerlist[index].aanwezig;
-          },
-          leading: CircleAvatar(
-            backgroundColor:
-                swimmerlist[index].geslacht == 'man' ? kmanColor : kfemakeColor,
-            child: Text(
-              '${swimmerlist[index].voornaam[0].toUpperCase()}${swimmerlist[index].achternaam[0].toUpperCase()}',
-              style: TextStyle(color: kcircleAvatarTextColor),
+        return Container(
+          color: swimmerlist[index].aanwezig
+              ? Colors.lightGreenAccent
+              : Colors.white,
+          child: ListTile(
+            onTap: () {
+              //showResults(context);
+              Navigator.pop(context, swimmerlist[index]);
+//            print(swimmerlist[index]);
+//            swimmerlist[index].aanwezig = !swimmerlist[index].aanwezig;
+            },
+            leading: CircleAvatar(
+              backgroundColor: swimmerlist[index].geslacht == 'man'
+                  ? kmanColor
+                  : kfemakeColor,
+              child: Text(
+                '${swimmerlist[index].voornaam[0].toUpperCase()}${swimmerlist[index].achternaam[0].toUpperCase()}',
+                style: TextStyle(color: kcircleAvatarTextColor),
+              ),
             ),
+            title: Text(
+                '${swimmerlist[index].voornaam} ${swimmerlist[index].achternaam}'),
           ),
-          title: Text(
-              '${swimmerlist[index].voornaam} ${swimmerlist[index].achternaam}'),
         );
       },
       itemCount: swimmerlist.length,

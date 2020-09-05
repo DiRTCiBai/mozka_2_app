@@ -11,7 +11,14 @@ List<SpeedDialChild> GetList(BuildContext context) {
       backgroundColor: Colors.red,
       label: 'Aanwezigheden',
       labelStyle: TextStyle(fontSize: 18.0),
-      onTap: () => Navigator.pushNamed(context, PrecencesScreenMain.id),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PrecencesScreenMain(
+            context: context,
+          ),
+        ),
+      ),
     ),
     SpeedDialChild(
       child: Icon(Icons.message),

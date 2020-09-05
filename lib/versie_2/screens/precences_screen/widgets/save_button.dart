@@ -4,8 +4,10 @@ import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 
 class PrecencesSaveButton extends StatelessWidget {
   List<SwimmerData2> swimmerlist;
+  final Color color;
+  final String groep;
 
-  PrecencesSaveButton({this.swimmerlist});
+  PrecencesSaveButton({this.swimmerlist, this.color, this.groep});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,14 +15,14 @@ class PrecencesSaveButton extends StatelessWidget {
       child: FlatButton(
         onPressed: () {
           print('doet iets');
-          SavePrecencesToFirestore(swimmerlist);
+          SavePrecencesToFirestore(swimmerlist, groep);
           Navigator.pop(context);
         },
         child: Container(
           padding: EdgeInsets.only(top: 5, bottom: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.blue,
+            color: color,
           ),
           child: Center(
               child: Text(

@@ -13,10 +13,12 @@ class FilterlButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.all(7),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(25),
-          ),
+          shape: BoxShape.circle,
+//          borderRadius: BorderRadius.all(
+//            Radius.circular(100),
+//          ),
           color: selected ? Colors.blue : Colors.grey[200],
         ),
         child: Padding(
@@ -25,7 +27,7 @@ class FilterlButton extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 15, color: selected ? Colors.white : Colors.black),
+                  fontSize: 20, color: selected ? Colors.white : Colors.black),
             ),
           ),
         ),

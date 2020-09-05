@@ -14,16 +14,16 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        leading: IconButton(
-//          icon: Icon(Icons.arrow_back),
-//          onPressed: () {
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
 //            _auth.signOut();
 //            Navigator.popUntil(context, ModalRoute.withName(StartScreenV2.id));
-//          },
-//        ),
-//        title: Text('Home'),
-//      ),
+          },
+        ),
+        title: Text('Home'),
+      ),
       floatingActionButton: SpeedDial(
         closeManually: false,
         curve: Curves.bounceIn,

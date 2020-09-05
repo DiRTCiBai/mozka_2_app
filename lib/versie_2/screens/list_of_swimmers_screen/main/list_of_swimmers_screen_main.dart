@@ -17,6 +17,7 @@ class ListOfSwimmersScreenMain extends StatefulWidget {
 
 class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
   String groep = 'f';
+  double _filterMargin = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -44,73 +45,76 @@ class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
       ),
       body: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'f';
-                  });
-                },
-                selected: groep == 'f' ? true : false,
-                text: 'F',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'e';
-                  });
-                },
-                selected: groep == 'e' ? true : false,
-                text: 'E',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'd';
-                  });
-                },
-                selected: groep == 'd' ? true : false,
-                text: 'D',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'c';
-                  });
-                },
-                selected: groep == 'c' ? true : false,
-                text: 'C',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'b';
-                  });
-                },
-                selected: groep == 'b' ? true : false,
-                text: 'B',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'a';
-                  });
-                },
-                selected: groep == 'a' ? true : false,
-                text: 'A',
-              ),
-              FilterlButton(
-                onTap: () {
-                  setState(() {
-                    groep = 'alle';
-                  });
-                },
-                selected: groep == 'alle' ? true : false,
-                text: 'alle',
-              ),
-            ],
+          Container(
+            margin: EdgeInsets.all(_filterMargin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'f';
+                    });
+                  },
+                  selected: groep == 'f' ? true : false,
+                  text: 'F',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'e';
+                    });
+                  },
+                  selected: groep == 'e' ? true : false,
+                  text: 'E',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'd';
+                    });
+                  },
+                  selected: groep == 'd' ? true : false,
+                  text: 'D',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'c';
+                    });
+                  },
+                  selected: groep == 'c' ? true : false,
+                  text: 'C',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'b';
+                    });
+                  },
+                  selected: groep == 'b' ? true : false,
+                  text: 'B',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'a';
+                    });
+                  },
+                  selected: groep == 'a' ? true : false,
+                  text: 'A',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'alle';
+                    });
+                  },
+                  selected: groep == 'alle' ? true : false,
+                  text: 'alle',
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: SwimmerListview(
