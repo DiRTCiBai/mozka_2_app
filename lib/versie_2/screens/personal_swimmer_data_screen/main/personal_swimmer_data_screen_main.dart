@@ -10,6 +10,8 @@ import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widget
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/card_titles.dart';
 import 'package:mozka_2_app/root/constants.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/functions/future_chartdata.dart';
+import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/widgets/werkpunt_info_card.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class PersonalSwimmerDataSCreenMain extends StatefulWidget {
   static const String id = 'PersonalSwimmerDataSCreenMain';
@@ -35,69 +37,29 @@ class _PersonalSwimmerDataSCreenMainState
 //            icon: Icon(Icons.arrow_back),
 //            onPressed: () => Navigator.pop(context)),
         title: Text('Persoonlijke gegevens'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => EditSwimmerDataScreenMain(
-                  swimmerData: widget.swimmerData,
+      ),
+      body: ListView(
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: CircleAvatar(
+                  backgroundColor: widget.swimmerData.geslacht == 'man'
+                      ? kmanColor
+                      : kfemakeColor,
+                  radius: 50.0,
+                  child: Text(
+                    '${widget.swimmerData.voornaam[0].toUpperCase()}${widget.swimmerData.achternaam[0].toUpperCase()}',
+                    style: TextStyle(fontSize: 45, color: Colors.white),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: CircleAvatar(
-              backgroundColor: widget.swimmerData.geslacht == 'man'
-                  ? kmanColor
-                  : kfemakeColor,
-              radius: 50.0,
-              child: Text(
-                '${widget.swimmerData.voornaam[0].toUpperCase()}${widget.swimmerData.achternaam[0].toUpperCase()}',
-                style: TextStyle(fontSize: 45, color: Colors.white),
-              ),
-            ),
-          ),
-          BasicInfoCard(
-            swimmerData: widget.swimmerData,
-          ),
-          CardTitles(
-            title: 'Groep info',
-          ),
-          GroupInfoCard(
-            swimmerData: widget.swimmerData,
-          ),
-          CardTitles(
-            title: 'Aanwezigheden',
-          ),
-          FutureBuilder(
-            future: Aanwezigheden(widget.swimmerData),
-            builder: (BuildContext context, AsyncSnapshot<ChartData> snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data.total != 0) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Card(
-                      child: TotalPrecencesChart(
-                        total: snapshot.data.total,
-                        aanwezig: snapshot.data.precences,
-                      ),
-                    ),
-                  );
-                } else {
-                  return Center(child: Text('heeft nog geen data'));
-                }
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
+              BasicInfoCard(swimmerData: widget.swimmerData),
+              VooruitgangInfoCard(swimmerData: widget.swimmerData),
+              WerkpuntInfoCard(),
+            ],
           ),
         ],
       ),

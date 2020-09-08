@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 import 'package:mozka_2_app/root/constants.dart';
-import 'package:mozka_2_app/versie_2/screens/personal_precences_detail/main.dart';
+import 'package:mozka_2_app/versie_2/screens/personal_precences_detail/main_personal_precences_detail.dart';
+import 'package:mozka_2_app/versie_2/screens/edit_swimmer_data_screen/main/edit_swimmer_data_screen_main.dart';
 
 class CustomDrawer extends StatelessWidget {
   final SwimmerData2 swimmerData;
 
   CustomDrawer({this.swimmerData});
 
+  double iconSize = 25;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -46,7 +48,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(
               Icons.message,
               color: Colors.blueGrey,
-              size: 30,
+              size: iconSize,
             ),
             title: Text(
               'Opmerkingen',
@@ -66,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(
               Icons.check_box,
               color: Colors.blueGrey,
-              size: 30,
+              size: iconSize,
             ),
             title: Text(
               'Aanwezigheden',
@@ -85,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(
               Icons.show_chart,
               color: Colors.blueGrey,
-              size: 30,
+              size: iconSize,
             ),
             title: Text(
               'Vooruitgang',
@@ -94,6 +96,42 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               // Update the state of the app.
               // ...
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.work,
+              color: Colors.blueGrey,
+              size: iconSize,
+            ),
+            title: Text(
+              'Werkpunten',
+              style: TextStyle(fontSize: 17),
+            ),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.edit,
+              color: Colors.blueGrey,
+              size: iconSize,
+            ),
+            title: Text(
+              'Bewerken',
+              style: TextStyle(fontSize: 17),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditSwimmerDataScreenMain(
+                    swimmerData: swimmerData,
+                  ),
+                ),
+              );
             },
           ),
         ],

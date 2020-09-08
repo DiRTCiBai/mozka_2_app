@@ -7,51 +7,126 @@ import 'package:mozka_2_app/versie_2/modules/time.dart';
 /***********************************WIDGETS************************************/
 
 //widget dat grafiek mooi weergeeft
-class CustomFutureBuilderGroep extends StatelessWidget {
-  final String groep;
+class CustomFutureBuilderGroep extends StatefulWidget {
+  @override
+  _CustomFutureBuilderGroepState createState() =>
+      _CustomFutureBuilderGroepState();
+}
 
-  CustomFutureBuilderGroep({this.groep});
+class _CustomFutureBuilderGroepState extends State<CustomFutureBuilderGroep> {
   PrecencesDetails precencesDetails = PrecencesDetails();
 
   double _height = 300;
+
   double _width = double.infinity;
+
   double _marginCard = 10;
+
   double _marginTitel = 10;
+
   double _fontsize = 22.3;
+
+  String groep = 'f';
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.all(_marginCard),
-      child: Container(
-        width: _width,
-        height: _height,
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(_marginTitel),
-              child: Text(
-                'Groep ${groep.toUpperCase()} aanwezigheden',
-                style:
-                    TextStyle(fontSize: _fontsize, fontWeight: FontWeight.bold),
-              ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'f';
+                    });
+                  },
+                  selected: groep == 'f' ? true : false,
+                  text: 'F',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'e';
+                    });
+                  },
+                  selected: groep == 'e' ? true : false,
+                  text: 'E',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'd';
+                    });
+                  },
+                  selected: groep == 'd' ? true : false,
+                  text: 'D',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'c';
+                    });
+                  },
+                  selected: groep == 'c' ? true : false,
+                  text: 'C',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'b';
+                    });
+                  },
+                  selected: groep == 'b' ? true : false,
+                  text: 'B',
+                ),
+                FilterlButton(
+                  onTap: () {
+                    setState(() {
+                      groep = 'a';
+                    });
+                  },
+                  selected: groep == 'a' ? true : false,
+                  text: 'A',
+                ),
+              ],
             ),
-            Expanded(
-              child: FutureBuilder(
-                  future: precencesDetails.DetailLijst(groep),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<NumberOfWeekdagen> snapshot) {
-                    if (snapshot.hasData) {
-                      return StackedBarChart(
-                        aan: snapshot.data.aan,
-                        tot: snapshot.data.tot,
-                      );
-                    } else
-                      return CircularProgressIndicator();
-                  }),
+          ),
+          Container(
+            width: _width,
+            height: _height,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(_marginTitel),
+                  child: Text(
+                    'Groep ${groep.toUpperCase()} aanwezigheden',
+                    style: TextStyle(
+                        fontSize: _fontsize, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(
+                  child: FutureBuilder(
+                      future: precencesDetails.DetailLijst(groep),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<NumberOfWeekdagen> snapshot) {
+                        if (snapshot.hasData) {
+                          return StackedBarChart(
+                            aan: snapshot.data.aan,
+                            tot: snapshot.data.tot,
+                          );
+                        } else
+                          return CircularProgressIndicator();
+                      }),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -112,6 +187,39 @@ class StackedBarChart extends StatelessWidget {
       series,
       animate: true,
       barGroupingType: charts.BarGroupingType.stacked,
+    );
+  }
+}
+
+class FilterlButton extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  final bool selected;
+
+  FilterlButton(
+      {@required this.text, @required this.onTap, @required this.selected});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(7),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: selected ? Colors.blue : Colors.grey[200],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                  fontSize: 20, color: selected ? Colors.white : Colors.black),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

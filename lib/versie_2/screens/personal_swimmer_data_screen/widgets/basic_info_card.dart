@@ -29,6 +29,10 @@ class BasicInfoCard extends StatelessWidget {
                 ),
               ),
               BasicInfoText(
+                text: swimmerData.groep.toUpperCase(),
+                icon: Icons.group,
+              ),
+              BasicInfoText(
                 text: swimmerData.geboortejaar.toString(),
                 icon: Icons.cake,
               ),
@@ -41,6 +45,10 @@ class BasicInfoCard extends StatelessWidget {
               BasicInfoText(
                 text: swimmerData.email != null ? swimmerData.email : 'leeg',
                 icon: Icons.email,
+              ),
+              BasicInfoText(
+                text: '123456789',
+                icon: Icons.phone,
               ),
             ],
           ),

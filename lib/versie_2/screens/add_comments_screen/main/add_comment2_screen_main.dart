@@ -28,7 +28,7 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
   String titel;
   String detailOpmerking = 'algemeen';
 
-  String swimmerID;
+  SwimmerData2 swimmerID;
   String swimmerName;
 
   @override
@@ -49,7 +49,7 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
 
     void GetName() async {
       var swimmer = await showSearch(context: context, delegate: searchData);
-      swimmerID = swimmer.id;
+      swimmerID = swimmer;
 
       setState(() => swimmerName = swimmer.voornaam);
     }
@@ -60,14 +60,6 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context)),
         title: Text('Toevoegen'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              GetName();
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -130,11 +122,36 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
-                child: Container(
-                  width: 375,
-                  child: Text(swimmerName == null
-                      ? 'nog niks geselecteerd'
-                      : swimmerName),
+                child: GestureDetector(
+                  onTap: () => GetName(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    width: 375,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                          child: swimmerName == null
+                              ? Text(
+                                  'Selecteer zwemmer',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                )
+                              : Text(
+                                  '${swimmerID.voornaam} ${swimmerID.achternaam}',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                )
+//                      child: Text(swimmerName == null
+//                          ? 'Selecteer zwemmer'
+//                          : swimmerName),
+                          ),
+                    ),
+                  ),
                 ),
               ),
               CustomFormField(
@@ -160,7 +177,7 @@ class _AddCommentsScreenMain2State extends State<AddCommentsScreenMain2> {
                         _db.collection('opmerkingen').add({
                           'titel': titel,
                           'opmerking': comment,
-                          'id': swimmerID,
+                          'id': swimmerID.id,
                           'datum': Time().GetDate(),
                           'detail': detailOpmerking,
                           'trainer': loggedInUser.email,

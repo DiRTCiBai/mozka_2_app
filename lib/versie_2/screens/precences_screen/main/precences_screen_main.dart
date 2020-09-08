@@ -171,15 +171,15 @@ class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
                   selected: groep == 'a' ? true : false,
                   text: 'A',
                 ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'alle';
-                    });
-                  },
-                  selected: groep == 'alle' ? true : false,
-                  text: 'alle',
-                ),
+//                FilterlButton(
+//                  onTap: () {
+//                    setState(() {
+//                      groep = 'alle';
+//                    });
+//                  },
+//                  selected: groep == 'alle' ? true : false,
+//                  text: 'alle',
+//                ),
               ],
             ),
           ),

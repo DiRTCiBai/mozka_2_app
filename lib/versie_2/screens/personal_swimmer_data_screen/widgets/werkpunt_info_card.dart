@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class VooruitgangInfoCard extends StatelessWidget {
+class WerkpuntInfoCard extends StatelessWidget {
   SwimmerData2 swimmerData;
 
-  String title = 'Vooruitgang';
+  String title = 'Werkpunten';
 
-  VooruitgangInfoCard({this.swimmerData});
+  WerkpuntInfoCard({this.swimmerData});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,21 +27,24 @@ class VooruitgangInfoCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: LinearPercentIndicator(
-                  width: MediaQuery.of(context).size.width - 65,
-                  animation: true,
-                  lineHeight: 20.0,
-                  animationDuration: 2000,
-                  percent: 0.7,
-                  center: Text(
-                    "70.0%",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  linearStrokeCap: LinearStrokeCap.roundAll,
-                  progressColor: Colors.blue,
+                padding: const EdgeInsets.only(left: 10.0, top: 5),
+                child: Text(
+                  'Werkpunt 1',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 5),
+                child: Text(
+                  'Werkpunt 1',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 5),
+                child: Text(
+                  'Werkpunt 1',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
                 ),
               ),
             ],

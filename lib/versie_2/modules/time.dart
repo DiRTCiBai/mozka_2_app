@@ -1,6 +1,7 @@
 class Time {
+  var now = new DateTime.now();
+
   String GetDate() {
-    var now = new DateTime.now();
     return '${now.day.toString()}-${now.month.toString()}-${now.year.toString()}';
   }
 
@@ -17,5 +18,13 @@ class Time {
   String GetDay() {
     var now = new DateTime.now();
     return now.day.toString();
+  }
+
+  String GetTimeStamp() {
+    return now.toString();
+  }
+
+  DateTime GetNow() {
+    return now;
   }
 }

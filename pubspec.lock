@@ -106,6 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.3"
+  datetime_picker_formfield:
+    dependency: "direct main"
+    description:
+      name: datetime_picker_formfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   firebase:
     dependency: transitive
     description:
@@ -219,6 +226,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.2"
+  loading_overlay:
+    dependency: "direct main"
+    description:
+      name: loading_overlay
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   logging:
     dependency: transitive
     description:
@@ -261,6 +275,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   petitparser:
     dependency: transitive
     description:
@@ -281,7 +302,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2"
+    version: "4.3.2+2"
   quiver:
     dependency: transitive
     description:

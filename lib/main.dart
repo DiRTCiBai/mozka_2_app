@@ -5,7 +5,7 @@ import 'package:mozka_2_app/root/swimmer_database.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
-import 'package:mozka_2_app/versie_2/screens/edit_swimmer_data_screen/main/edit_swimmer_data_screen_main.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/listview/function_training_database.dart';
 import 'screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
 import 'screens/start_screen/main/main_start_screen.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,11 @@ import 'versie_2/screens/training_home_screen/main/training_screen_main.dart';
 import 'versie_2/screens/search_bar_test/search_bar_test.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comment2_screen_main.dart';
 import 'versie_2/screens/add_training_screen/add_training_screen_main.dart';
-import 'versie_2/screens/personal_precences_detail/main.dart';
+import 'versie_2/screens/personal_precences_detail/main_personal_precences_detail.dart';
+import 'versie_2/screens/mozka_precences_screen/main.dart';
+import 'versie_2/modules/oefeningen_database.dart';
+import 'versie_2/modules/trainingen.dart';
+import 'versie_2/screens/training_screen/main_training_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,8 +74,13 @@ class MyApp extends StatelessWidget {
                   value: SwimmerDataBase().swimerlist),
               StreamProvider<List<SwimmerData2>>.value(
                   value: SwimmerListDatabase().swimerDatabase),
+              StreamProvider<List<Trainingen>>.value(
+                  value: TrainingenDatabase().trainingenDatabase),
               ChangeNotifierProvider(
                 create: (context) => PrecencesDatabase(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => OefeningenDatabase(),
               ),
             ],
             child: MaterialApp(
@@ -109,6 +118,8 @@ class MyApp extends StatelessWidget {
                 AddTrainingScreenMain.id: (context) => AddTrainingScreenMain(),
                 PersonalPrecencesDetail.id: (context) =>
                     PersonalPrecencesDetail(),
+                MozkaPrecencesScreen.id: (context) => MozkaPrecencesScreen(),
+                MainTrainingScreen.id: (context) => MainTrainingScreen(),
               },
             ),
           );

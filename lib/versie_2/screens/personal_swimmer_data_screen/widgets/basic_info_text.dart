@@ -10,7 +10,7 @@ class BasicInfoText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10, top: 3, bottom: 3),
       child: Row(
         children: <Widget>[
           Icon(
