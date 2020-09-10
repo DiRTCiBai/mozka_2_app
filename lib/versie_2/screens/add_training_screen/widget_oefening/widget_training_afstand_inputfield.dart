@@ -22,9 +22,6 @@ class TrainingAfstandInputField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(top: 0, bottom: 0),
           hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
       ),
     );

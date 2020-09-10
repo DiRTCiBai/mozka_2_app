@@ -93,17 +93,6 @@ class _MainGroepFilterState extends State<MainGroepFilter> {
           selected: groep == kGroepA ? true : false,
           text: kGroepA.toUpperCase(),
         ),
-        FilterlButton(
-          onTap: () {
-            Provider.of<FilterDatabase>(context, listen: false)
-                .SetFilter(kGroepAlle);
-            setState(() {
-              groep = kGroepAlle;
-            });
-          },
-          selected: groep == kGroepAlle ? true : false,
-          text: kGroepAlle,
-        ),
       ],
     );
   }

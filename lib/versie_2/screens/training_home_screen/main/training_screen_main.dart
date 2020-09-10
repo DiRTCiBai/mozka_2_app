@@ -4,6 +4,7 @@ import 'package:mozka_2_app/versie_2/screens/add_training_screen/add_training_sc
 import 'package:mozka_2_app/versie_2/screens/training_home_screen/listview/main_listview.dart';
 import 'widget_button.dart';
 import 'bottom_nav_bar.dart';
+import 'package:mozka_2_app/versie_2/screens/add_training_screen/tabview/main_tabview.dart';
 
 class TrainingScreenMain extends StatefulWidget {
   static const String id = 'TrainingScreenMain';
@@ -32,6 +33,10 @@ class _TrainingScreenMainState extends State<TrainingScreenMain> {
                 );
               },
               text: 'maak training',
+            ),
+            Button(
+              text: 'test',
+              onTap: () => Navigator.pushNamed(context, MainTrainingTabBar.id),
             ),
           ],
         ),

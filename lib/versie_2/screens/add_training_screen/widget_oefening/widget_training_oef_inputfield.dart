@@ -20,9 +20,6 @@ class TrainingOefeningInputField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(top: 0, bottom: 0, left: 10),
           hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
       ),
     );

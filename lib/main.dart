@@ -37,6 +37,7 @@ import 'versie_2/modules/oefeningen_database.dart';
 import 'versie_2/modules/trainingen.dart';
 import 'versie_2/screens/training_screen/main_training_screen.dart';
 import 'versie_2/modules/filter_database.dart';
+import 'versie_2/screens/add_training_screen/tabview/main_tabview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              initialRoute: StartScreenV2.id,
+              initialRoute: MainSplashScreen.id,
               routes: {
                 SwimmerPersonalDataScreen.id: (context) =>
                     SwimmerPersonalDataScreen(),
@@ -125,6 +126,8 @@ class MyApp extends StatelessWidget {
                     PersonalPrecencesDetail(),
                 MozkaPrecencesScreen.id: (context) => MozkaPrecencesScreen(),
                 MainTrainingScreen.id: (context) => MainTrainingScreen(),
+                MainSplashScreen.id: (context) => MainSplashScreen(),
+                MainTrainingTabBar.id: (context) => MainTrainingTabBar(),
               },
             ),
           );
