@@ -3,6 +3,7 @@ import 'package:mozka_2_app/modules/derest/precences_database.dart';
 import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
 import 'package:mozka_2_app/root/swimmer_database.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
+import 'package:mozka_2_app/versie_2/modules/filter_database.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/training_home_screen/listview/function_training_database.dart';
@@ -35,6 +36,7 @@ import 'versie_2/screens/mozka_precences_screen/main.dart';
 import 'versie_2/modules/oefeningen_database.dart';
 import 'versie_2/modules/trainingen.dart';
 import 'versie_2/screens/training_screen/main_training_screen.dart';
+import 'versie_2/modules/filter_database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,6 +83,9 @@ class MyApp extends StatelessWidget {
               ),
               ChangeNotifierProvider(
                 create: (context) => OefeningenDatabase(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => FilterDatabase(),
               ),
             ],
             child: MaterialApp(

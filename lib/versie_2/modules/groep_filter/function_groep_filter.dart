@@ -1,8 +1,9 @@
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
-import 'package:provider/provider.dart';
+import 'package:mozka_2_app/versie_2/constants/constants.dart';
 
 List<SwimmerData2> FilterSwimmerList(
     String filterValue, List<SwimmerData2> swimmerlist) {
+  List<SwimmerData2> PreGroep = [];
   List<SwimmerData2> FGroep = [];
   List<SwimmerData2> EGroep = [];
   List<SwimmerData2> DGroep = [];
@@ -13,6 +14,8 @@ List<SwimmerData2> FilterSwimmerList(
   for (var swimmer in swimmerlist) {
     if (swimmer.groep == 'f') {
       FGroep.add(swimmer);
+    } else if (swimmer.groep == kGroepPre) {
+      PreGroep.add(swimmer);
     } else if (swimmer.groep == 'e') {
       EGroep.add(swimmer);
     } else if (swimmer.groep == 'd') {
@@ -25,6 +28,8 @@ List<SwimmerData2> FilterSwimmerList(
       AGroep.add(swimmer);
     }
   }
+  print(filterValue);
+  if (filterValue == kGroepPre) return PreGroep;
   if (filterValue == 'f') return FGroep;
   if (filterValue == 'e') return EGroep;
   if (filterValue == 'd') return DGroep;

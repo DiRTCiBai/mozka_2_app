@@ -45,13 +45,4 @@ class OefeningenData {
   String oefening;
 
   OefeningenData({this.afstand, this.oefening});
-
-  OefeningenData.fromJson(Map<String, dynamic> json)
-      : afstand = json['afstand'],
-        oefening = json['OefeningenData'];
-
-  Map<String, dynamic> toJson() => {
-        'name': afstand,
-        'email': oefening,
-      };
 }

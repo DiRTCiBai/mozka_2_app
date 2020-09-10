@@ -3,7 +3,7 @@ import 'package:mozka_2_app/versie_2/modules/trainingen.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:mozka_2_app/versie_2/screens/training_screen/main_training_screen.dart';
-import 'package:mozka_2_app/versie_2/modules/oefeningen_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TrainingenListview extends StatelessWidget {
   @override
@@ -16,11 +16,6 @@ class TrainingenListview extends StatelessWidget {
 
           var decodeData = jsonDecode(training.data);
 
-//          Map userMap = jsonDecode(training.data);
-//          var trainings = OefeningenData.fromJson(userMap);
-//
-//          print(trainings);
-
           return Card(
             child: ListTile(
               leading: Text(training.datum.replaceRange(10, 23, '')),
@@ -31,10 +26,16 @@ class TrainingenListview extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MainTrainingScreen(
-                            trainingen: training.data,
-                          )),
+                    builder: (context) => MainTrainingScreen(
+                      trainingen: decodeData,
+                    ),
+                  ),
                 );
+              },
+              onLongPress: () {
+                FirebaseFirestore _db = FirebaseFirestore.instance;
+
+                _db.collection('trainingen').doc(training.datum).delete();
               },
             ),
           );

@@ -17,3 +17,15 @@ const List<BottomNavigationBarItem> kBottomNav = [
     title: Text('Training'),
   ),
 ];
+
+//groep filter
+const kGroepPre = "pre";
+const kGroepF = "f";
+const kGroepE = "e";
+const kGroepD = "d";
+const kGroepC = "c";
+const kGroepB = "b";
+const kGroepA = "a";
+const kGroepAlle = "alle";
+
+const kTextPre = 'P';

@@ -6,10 +6,12 @@ import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/widgets/save_button.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/search_data.dart';
-import 'package:mozka_2_app/versie_2/screens/precences_screen/functions/filters.dart';
 import 'package:mozka_2_app/versie_2/screens/precences_screen/widgets/filter_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
+import 'groep_filter/main_groep_filter.dart';
+import 'package:mozka_2_app/versie_2/modules/filter_database.dart';
+import 'package:mozka_2_app/versie_2/modules/groep_filter/function_groep_filter.dart';
 
 class PrecencesScreenMain extends StatefulWidget {
   static const String id = 'PrecencesScreenMain';
@@ -114,79 +116,14 @@ class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(_filterMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'f';
-                    });
-                  },
-                  selected: groep == 'f' ? true : false,
-                  text: 'F',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'e';
-                    });
-                  },
-                  selected: groep == 'e' ? true : false,
-                  text: 'E',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'd';
-                    });
-                  },
-                  selected: groep == 'd' ? true : false,
-                  text: 'D',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'c';
-                    });
-                  },
-                  selected: groep == 'c' ? true : false,
-                  text: 'C',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'b';
-                    });
-                  },
-                  selected: groep == 'b' ? true : false,
-                  text: 'B',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'a';
-                    });
-                  },
-                  selected: groep == 'a' ? true : false,
-                  text: 'A',
-                ),
-//                FilterlButton(
-//                  onTap: () {
-//                    setState(() {
-//                      groep = 'alle';
-//                    });
-//                  },
-//                  selected: groep == 'alle' ? true : false,
-//                  text: 'alle',
-//                ),
-              ],
-            ),
+            child: MainGroepFilter(),
           ),
           Expanded(
             child: ListView.builder(
                 itemBuilder: (context, index) {
-                  var swimmers = FilterSwimmerList(groep, swimmerlist)[index];
+                  var swimmers = FilterSwimmerList(
+                      Provider.of<FilterDatabase>(context).GetFilter(),
+                      swimmerlist)[index];
                   return ListTileSwimmer(
                     swimmerData: swimmers,
                     aanwezig: swimmers.aanwezig,
@@ -197,12 +134,15 @@ class _PrecencesScreenMainState extends State<PrecencesScreenMain> {
                     },
                   );
                 },
-                itemCount: FilterSwimmerList(groep, swimmerlist).length),
+                itemCount: FilterSwimmerList(
+                        Provider.of<FilterDatabase>(context).GetFilter(),
+                        swimmerlist)
+                    .length),
           ),
           PrecencesSaveButton(
             swimmerlist: swimmerlist,
             color: color,
-            groep: groep,
+            groep: Provider.of<FilterDatabase>(context).GetFilter(),
           ),
         ],
       ),

@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/search_data_class.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/widgets/filter_button.dart';
+import 'package:mozka_2_app/versie_2/modules/filter_database.dart';
+import 'groep_filter/main_groep_filter.dart';
 
 class ListOfSwimmersScreenMain extends StatefulWidget {
   static const String id = 'ListOfSwimmersScreenMain';
@@ -16,13 +18,11 @@ class ListOfSwimmersScreenMain extends StatefulWidget {
 }
 
 class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
-  String groep = 'f';
   double _filterMargin = 10;
 
   @override
   Widget build(BuildContext context) {
     List<SwimmerData2> swimmerlist = Provider.of<List<SwimmerData2>>(context);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -47,78 +47,11 @@ class _ListOfSwimmersScreenMainState extends State<ListOfSwimmersScreenMain> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(_filterMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'f';
-                    });
-                  },
-                  selected: groep == 'f' ? true : false,
-                  text: 'F',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'e';
-                    });
-                  },
-                  selected: groep == 'e' ? true : false,
-                  text: 'E',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'd';
-                    });
-                  },
-                  selected: groep == 'd' ? true : false,
-                  text: 'D',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'c';
-                    });
-                  },
-                  selected: groep == 'c' ? true : false,
-                  text: 'C',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'b';
-                    });
-                  },
-                  selected: groep == 'b' ? true : false,
-                  text: 'B',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'a';
-                    });
-                  },
-                  selected: groep == 'a' ? true : false,
-                  text: 'A',
-                ),
-                FilterlButton(
-                  onTap: () {
-                    setState(() {
-                      groep = 'alle';
-                    });
-                  },
-                  selected: groep == 'alle' ? true : false,
-                  text: 'alle',
-                ),
-              ],
-            ),
+            child: MainGroepFilter(),
           ),
           Expanded(
             child: SwimmerListview(
-              groep: groep,
+              groep: Provider.of<FilterDatabase>(context).GetFilter(),
             ),
           ),
           ListAddButton(),

@@ -5,7 +5,7 @@ import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_commen
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/widgets/add_swimmers_list_tile.dart';
 import 'package:mozka_2_app/versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
 import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/delete_swimmer.dart';
-import 'package:mozka_2_app/versie_2/screens/list_of_swimmers_screen/functions/filters.dart';
+import 'package:mozka_2_app/versie_2/modules/groep_filter/function_groep_filter.dart';
 
 class SwimmerListview extends StatefulWidget {
   final String groep;
@@ -54,34 +54,5 @@ class _SwimmerListviewState extends State<SwimmerListview> {
             },
             itemCount: FilterSwimmerList(widget.groep, swimmerlist).length,
           );
-
-//    ListView.builder(
-//            itemBuilder: (context, index) {
-//              return ListTileSwimmer(
-//                onTap: () {
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(
-//                      builder: (context) => PersonalSwimmerDataSCreenMain(
-//                        swimmerData: swimmerlist[index],
-//                      ),
-//                    ),
-//                  );
-//                },
-//                onLongPress: () {
-//                  DeleteSwimmerFromFirestore(swimmerlist[index]);
-//                },
-//                onDoubleTap: () => Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                    builder: (context) => AddCommentsScreenMain(
-//                      swimmerData: swimmerlist[index],
-//                    ),
-//                  ),
-//                ),
-//                swimmerData: swimmerlist[index],
-//              );
-//            },
-//            itemCount: swimmerlist.length);
   }
 }

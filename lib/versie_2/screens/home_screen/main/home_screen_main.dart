@@ -27,10 +27,8 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Flexible(
-                      child: Image(
-                        image: AssetImage('images/MozkaLogo.png'),
-                      ),
+                    child: Image(
+                      image: AssetImage('images/MozkaLogo.png'),
                     ),
                   ),
                 ],
