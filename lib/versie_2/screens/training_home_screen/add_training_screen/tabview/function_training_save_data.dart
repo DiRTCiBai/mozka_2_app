@@ -4,6 +4,7 @@ class TrainingSaveData extends ChangeNotifier {
   String _datum;
   String _type;
   String _slag;
+  String _groep;
 
   void SetDatum(String datum) {
     _datum = datum;
@@ -20,6 +21,11 @@ class TrainingSaveData extends ChangeNotifier {
     notifyListeners();
   }
 
+  void SetGroep(String groep) {
+    _groep = groep;
+    notifyListeners();
+  }
+
   String GetDatum() {
     return _datum;
   }
@@ -30,5 +36,9 @@ class TrainingSaveData extends ChangeNotifier {
 
   String GetSlag() {
     return _slag;
+  }
+
+  String GetGroep() {
+    return _groep;
   }
 }

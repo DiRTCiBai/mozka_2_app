@@ -15,10 +15,12 @@ class TrainingenDatabase {
                   aanmaakDatum: documentSnapshot.data()['aanmaakDatum'],
                   opmerking: documentSnapshot.data()['opmerking'],
                   datum: documentSnapshot.data()['datum'],
-                  duur: documentSnapshot.data()['duur'],
+                  slag: documentSnapshot.data()['slag'],
                   trainer: documentSnapshot.data()['trainer'],
                   type: documentSnapshot.data()['type'],
                   sterren: documentSnapshot.data()['sterren'],
+                  groep: documentSnapshot.data()['groep'],
+                  afstand: documentSnapshot.data()['afstand'],
                 ))
             .toList());
   }

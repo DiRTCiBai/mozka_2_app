@@ -3,7 +3,7 @@ import 'package:mozka_2_app/versie_2/modules/swimmer_data.dart';
 import 'file:///D:/AndroidstudioProjects/mozka_2_app/lib/versie_2/modules/time.dart';
 
 void SavePrecencesToFirestore(List<SwimmerData2> swimmerlist, String groep) {
-  String jaar = Time().GetYear() + 'test3';
+  String jaar = Time().GetYear() + 'test';
   String maand = Time().GetMonth();
   String dag = Time().GetDay();
   var now = new DateTime.now();

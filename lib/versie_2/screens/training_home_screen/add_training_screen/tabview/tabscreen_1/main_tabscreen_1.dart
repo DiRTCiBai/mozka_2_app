@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/constants.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/tabview/function_training_save_data.dart';
+import 'constants.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/tabview/function_training_save_data.dart';
 import 'widget_dropdown_menu.dart';
 import 'package:provider/provider.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/tabview/widget_button.dart';
-
-const kdropDownList2 = ['E1', 'E2', 'E3', 'S1', 'S2', 'S3'];
-const kpadding = 20.0;
-const kbuttonColor = Colors.blue;
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/tabview/widget_button.dart';
 
 class TabBarScreen1 extends StatefulWidget {
   @override
@@ -15,8 +11,9 @@ class TabBarScreen1 extends StatefulWidget {
 }
 
 class _TabBarScreen1State extends State<TabBarScreen1> {
-  String dropdownValue1 = kdropDownMenu[0];
-  String dropdownValue2 = kdropDownList2[0];
+  String slag = kdropDownMenu.last;
+  String type = kdropDownList2.last;
+  String groep = kGroepDropDownMenu.last;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +34,11 @@ class _TabBarScreen1State extends State<TabBarScreen1> {
             ),
             child: Center(
               child: DropDown(
-                dropdownValue: dropdownValue1,
+                dropdownValue: slag,
                 items: kdropDownMenu,
                 onChanged: (String newValue) {
                   setState(() {
-                    dropdownValue1 = newValue;
+                    slag = newValue;
                     Provider.of<TrainingSaveData>(context, listen: false)
                         .SetSlag(newValue);
                   });
@@ -60,13 +57,36 @@ class _TabBarScreen1State extends State<TabBarScreen1> {
             ),
             child: Center(
               child: DropDown(
-                dropdownValue: dropdownValue2,
+                dropdownValue: type,
                 items: kdropDownList2,
                 onChanged: (String newValue) {
                   setState(() {
-                    dropdownValue2 = newValue;
+                    type = newValue;
                     Provider.of<TrainingSaveData>(context, listen: false)
                         .SetType(newValue);
+                  });
+                },
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(kpadding),
+            width: 350,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(30),
+              ),
+              color: kbuttonColor,
+            ),
+            child: Center(
+              child: DropDown(
+                dropdownValue: groep,
+                items: kGroepDropDownMenu,
+                onChanged: (String newValue) {
+                  setState(() {
+                    groep = newValue;
+                    Provider.of<TrainingSaveData>(context, listen: false)
+                        .SetGroep(newValue);
                   });
                 },
               ),

@@ -4,6 +4,7 @@ import 'package:mozka_2_app/versie_2/modules/oefeningen_database.dart';
 import 'function_training_save_data.dart';
 import 'tabscreen_1/main_tabscreen_1.dart';
 import 'tabscreen_2/main_tabscreen_2.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/constants.dart';
 
 class MainTrainingTabBar extends StatelessWidget {
   static const String id = 'MainTrainingTabBar';
@@ -25,11 +26,11 @@ class MainTrainingTabBar extends StatelessWidget {
                   Provider.of<OefeningenDatabase>(context, listen: false)
                       .ClearData();
                 }),
-            title: Text('Training'),
+            title: Text(kTitleAppBar),
             bottom: TabBar(
               tabs: <Widget>[
-                Tab(text: 'Gegevens'),
-                Tab(text: 'Training'),
+                Tab(text: kTabText1),
+                Tab(text: kTabText2),
               ],
             ),
           ),

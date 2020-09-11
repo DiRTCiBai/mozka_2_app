@@ -5,13 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
 import 'package:mozka_2_app/versie_2/modules/time.dart';
 
+int totAfstand = 0;
+
 String ConvertListToData(BuildContext context) {
   var list = Provider.of<OefeningenDatabase>(context, listen: false).GetLijst();
   if (list.length != 1) {
     list.remove(list.last);
   }
 
-  int totAfstand = 0;
+  totAfstand = 0;
 
   List<String> training = [];
 
@@ -25,20 +27,17 @@ String ConvertListToData(BuildContext context) {
     print(oef.oefening);
   }
 
-  training.add(totAfstand.toString());
-  training.add('totale afstand');
-
   var data = jsonEncode(training);
 
   return data;
 }
 
 void SaveTraining(String data, String loggedInUser, String datum,
-    String typeTraining, String slag) {
+    String typeTraining, String slag, String groep) {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  if (datum != null && data != null) {
-    _db.collection('trainingen2').doc(datum).set({
+  if (datum != null && data != null && slag != null && groep != null) {
+    _db.collection('trainingen').doc('$groep${datum}').set({
       'training': data,
       'aanmaakDatum': Time().GetTimeStamp(),
       'sterren': 0,
@@ -47,6 +46,8 @@ void SaveTraining(String data, String loggedInUser, String datum,
       'type': typeTraining,
       'trainer': loggedInUser,
       'slag': slag,
+      'groep': groep.toLowerCase(),
+      'afstand': totAfstand,
     });
   }
 }

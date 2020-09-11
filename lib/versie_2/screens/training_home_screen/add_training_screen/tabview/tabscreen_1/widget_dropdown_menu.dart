@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/constants.dart';
 
 class DropDown extends StatelessWidget {
   final Function onChanged;

@@ -14,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:mozka_2_app/screens/test/testscreen.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_precences_screen/main/main_list_of_precences_screen.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_swimmers_screen/main/main_list_of_swimmers_screen.dart';
-import 'package:mozka_2_app/screens/test/testscreen.dart';
 import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabview_screen.dart';
 import 'versie_2/screens/add_swimmer_screen/main/add_swimmer_screen_main.dart';
 import 'versie_2/screens/start/start_screen.dart';
@@ -30,14 +29,13 @@ import 'versie_2/screens/login_screen/main/login_screen_main.dart';
 import 'versie_2/screens/training_home_screen/main/training_screen_main.dart';
 import 'versie_2/screens/search_bar_test/search_bar_test.dart';
 import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comment2_screen_main.dart';
-import 'versie_2/screens/add_training_screen/add_training_screen_main.dart';
 import 'versie_2/screens/personal_precences_detail/main_personal_precences_detail.dart';
 import 'versie_2/screens/mozka_precences_screen/main.dart';
 import 'versie_2/modules/oefeningen_database.dart';
 import 'versie_2/modules/trainingen.dart';
 import 'versie_2/screens/training_screen/main_training_screen.dart';
 import 'versie_2/modules/filter_database.dart';
-import 'versie_2/screens/add_training_screen/tabview/main_tabview.dart';
+import 'versie_2/screens/training_home_screen/add_training_screen/tabview/main_tabview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -121,7 +119,6 @@ class MyApp extends StatelessWidget {
                 SearchBarTest.id: (context) => SearchBarTest(),
                 AddCommentsScreenMain2.id: (context) =>
                     AddCommentsScreenMain2(),
-                AddTrainingScreenMain.id: (context) => AddTrainingScreenMain(),
                 PersonalPrecencesDetail.id: (context) =>
                     PersonalPrecencesDetail(),
                 MozkaPrecencesScreen.id: (context) => MozkaPrecencesScreen(),

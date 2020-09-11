@@ -19,7 +19,7 @@ class _GroepFilterState extends State<GroepFilter> {
           onTap: () {
             setState(() {
               Provider.of<FilterDatabase>(context, listen: false)
-                  .SetFilter('p');
+                  .SetFilter('pre');
               groep = 'p';
             });
           },

@@ -3,10 +3,12 @@ class Trainingen {
   String aanmaakDatum;
   String opmerking;
   String datum;
-  String duur;
+  String slag;
   String trainer;
   String type;
   int sterren;
+  String groep;
+  int afstand;
 
   Trainingen(
       {this.data,
@@ -14,7 +16,9 @@ class Trainingen {
       this.trainer,
       this.opmerking,
       this.aanmaakDatum,
-      this.duur,
+      this.slag,
       this.sterren,
-      this.type});
+      this.type,
+      this.groep,
+      this.afstand});
 }

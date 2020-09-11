@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mozka_2_app/versie_2/modules/oefeningen_database.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/widget_oefening/main_oefening.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/widget_oefening/main_oefening.dart';
 import 'function_save_training.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/tabview/function_training_save_data.dart';
-import 'package:mozka_2_app/versie_2/screens/add_training_screen/tabview/widget_button.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/tabview/widget_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/tabview/function_training_save_data.dart';
 
 class TabBarScreen2 extends StatefulWidget {
   @override
@@ -84,9 +84,12 @@ class _TabBarScreen2State extends State<TabBarScreen2> {
               String slag =
                   Provider.of<TrainingSaveData>(context, listen: false)
                       .GetSlag();
+              String groep =
+                  Provider.of<TrainingSaveData>(context, listen: false)
+                      .GetGroep();
 
               var data = ConvertListToData(context);
-              SaveTraining(data, loggedInUser.email, datum, type, slag);
+              SaveTraining(data, loggedInUser.email, datum, type, slag, groep);
 
               CheckIfHasData(datum, data);
             },
