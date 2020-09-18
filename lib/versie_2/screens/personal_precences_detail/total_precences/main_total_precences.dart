@@ -29,7 +29,7 @@ class TotalPrecencesIndicator extends StatelessWidget {
                   lineWidth: MediaQuery.of(context).size.width * 0.04,
                   percent: percentage,
                   center: new Text(
-                    "${percentage * 100}%",
+                    "${(percentage * 100).roundToDouble()}%",
                     style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: MediaQuery.of(context).size.width * 0.1),

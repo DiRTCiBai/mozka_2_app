@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/versie_2/screens/training_home_screen/add_training_screen/code_training/main_code_training.dart';
 import 'package:mozka_2_app/versie_2/screens/training_home_screen/listview/main_listview.dart';
 import 'widget_button.dart';
 import 'bottom_nav_bar.dart';
@@ -26,6 +27,10 @@ class _TrainingScreenMainState extends State<TrainingScreenMain> {
           children: <Widget>[
             MainGroepFilter(),
             Expanded(child: TrainingenListview()),
+            Button(
+              text: 'code test',
+              onTap: () => Navigator.pushNamed(context, MainCodeTraining.id),
+            ),
             Button(
               text: kButtonText,
               onTap: () => Navigator.pushNamed(context, MainTrainingTabBar.id),
