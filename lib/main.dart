@@ -1,42 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:mozka_2_app/modules/derest/precences_database.dart';
-import 'package:mozka_2_app/modules/derest/swimmer_data.dart';
-import 'package:mozka_2_app/root/swimmer_database.dart';
-import 'package:mozka_2_app/screens/tabview_swimmers_list/add_swimmer_screen/main/main_add_swimmer_screen.dart';
-import 'package:mozka_2_app/versie_2/modules/filter_database.dart';
-import 'package:mozka_2_app/versie_2/modules/swimmer_database.dart';
-import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comments_screen_main.dart';
-import 'package:mozka_2_app/versie_2/screens/training_home_screen/listview/function_training_database.dart';
-import 'screens/personal_swimmer_data/main/main_swimmer_personal_data_screen.dart';
-import 'screens/start_screen/main/main_start_screen.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_v2.1_app/lib/precences_database.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_v2.1_app/lib/swimmer_data.dart';
+import 'file:///D:/AndroidstudioProjects/mozka_v2.1_app/lib/swimmer_database.dart';
+
+import 'package:mozka_2_app/modules/filter_database.dart';
+import 'package:mozka_2_app/modules/swimmer_database.dart';
+import 'package:mozka_2_app/screens/add_comments_screen/main/add_comments_screen_main.dart';
+import 'package:mozka_2_app/screens/training_home_screen/listview/function_training_database.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
-import 'package:mozka_2_app/screens/test/testscreen.dart';
-import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_precences_screen/main/main_list_of_precences_screen.dart';
-import 'package:mozka_2_app/screens/tabview_swimmers_list/list_of_swimmers_screen/main/main_list_of_swimmers_screen.dart';
-import 'package:mozka_2_app/screens/tabview_swimmers_list/main_screen/main_tabview_screen.dart';
-import 'versie_2/screens/add_swimmer_screen/main/add_swimmer_screen_main.dart';
-import 'versie_2/screens/start/start_screen.dart';
-import 'versie_2/screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
-import 'versie_2/screens/precences_screen/main/precences_screen_main.dart';
-import 'versie_2/modules/swimmer_data.dart';
-import 'versie_2/screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
-import 'versie_2/screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
+
+import 'screens/add_swimmer_screen/main_add_swimmer_screen.dart';
+import 'screens/start/start_screen.dart';
+import 'screens/list_of_swimmers_screen/main/list_of_swimmers_screen_main.dart';
+import 'screens/precences_screen/main/precences_screen_main.dart';
+import 'modules/swimmer_data.dart';
+import 'screens/personal_swimmer_data_screen/main/personal_swimmer_data_screen_main.dart';
+import 'screens/list_of_comments_screen/main/list_of_comments_screen_main.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'versie_2/screens/registration_screen/main/registration_screen_main.dart';
-import 'versie_2/screens/home_screen/main/home_screen_main.dart';
-import 'versie_2/screens/login_screen/main/login_screen_main.dart';
-import 'versie_2/screens/training_home_screen/main/training_screen_main.dart';
-import 'versie_2/screens/search_bar_test/search_bar_test.dart';
-import 'package:mozka_2_app/versie_2/screens/add_comments_screen/main/add_comment2_screen_main.dart';
-import 'versie_2/screens/personal_precences_detail/main_personal_precences_detail.dart';
-import 'versie_2/screens/mozka_precences_screen/main.dart';
-import 'versie_2/modules/oefeningen_database.dart';
-import 'versie_2/modules/trainingen.dart';
-import 'versie_2/screens/training_screen/main_training_screen.dart';
-import 'versie_2/modules/filter_database.dart';
-import 'versie_2/screens/training_home_screen/add_training_screen/tabview/main_tabview.dart';
-import 'versie_2/screens/training_home_screen/add_training_screen/code_training/main_code_training.dart';
+import 'screens/registration_screen/main/registration_screen_main.dart';
+import 'screens/home_screen/main_home_screen.dart';
+import 'screens/login_screen/main/login_screen_main.dart';
+import 'screens/training_home_screen/main/training_screen_main.dart';
+import 'screens/search_bar_test/search_bar_test.dart';
+import 'package:mozka_2_app/screens/add_comments_screen/main/add_comment2_screen_main.dart';
+import 'screens/personal_precences_detail/main_personal_precences_detail.dart';
+import 'screens/mozka_precences_screen/main.dart';
+import 'modules/oefeningen_database.dart';
+import 'modules/trainingen.dart';
+import 'screens/training_screen/main_training_screen.dart';
+import 'modules/filter_database.dart';
+import 'screens/training_home_screen/add_training_screen/tabview/main_tabview.dart';
+import 'screens/training_home_screen/add_training_screen/code_training/main_code_training.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,17 +88,6 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               initialRoute: MainSplashScreen.id,
               routes: {
-                SwimmerPersonalDataScreen.id: (context) =>
-                    SwimmerPersonalDataScreen(),
-                StartScreen.id: (context) => StartScreen(),
-                TestDonutPie.id: (context) => TestDonutPie(),
-                MainListOfPrecencesScreen.id: (context) =>
-                    MainListOfPrecencesScreen(),
-                MainListOfSwimmersScreen.id: (context) =>
-                    MainListOfSwimmersScreen(),
-                MainAddSwimmerScreen.id: (context) => MainAddSwimmerScreen(),
-                TestDonutPie.id: (context) => TestDonutPie(),
-                TabViewScreen.id: (context) => TabViewScreen(),
                 AddSwimmerScreenMain.id: (context) => AddSwimmerScreenMain(),
                 StartScreenV2.id: (context) => StartScreenV2(),
                 ListOfSwimmersScreenMain.id: (context) =>
