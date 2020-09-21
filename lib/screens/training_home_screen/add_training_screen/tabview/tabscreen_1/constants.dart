@@ -6,7 +6,7 @@ const kdropDownMenu = <String>[
   'Schoolslag',
   'Vrijeslag',
   'Wissel',
-  '',
+  'Selecteer',
 ];
 
 const kGroepDropDownMenu = [
@@ -17,17 +17,13 @@ const kGroepDropDownMenu = [
   'C',
   'B',
   'A',
-  '',
+  'Selecteer',
 ];
 
 const kdropDownList2 = [
-  'E1',
-  'E2',
-  'E3',
-  'S1',
-  'S2',
-  'S3',
-  '',
+  'afstand',
+  'techniek',
+  'Selecteer',
 ];
 const kpadding = 20.0;
 const kbuttonColor = Colors.blue;

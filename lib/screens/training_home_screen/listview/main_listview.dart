@@ -13,7 +13,7 @@ class TrainingenListview extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Trainingen> trainingenlist = Provider.of<List<Trainingen>>(context);
     String groep = Provider.of<FilterDatabase>(context).GetFilter();
-    var groepList = GetGroepList(groep, trainingenlist);
+    var groepList = GetGroepList(groep, trainingenlist).reversed.toList();
 
     return ListView.builder(
         itemBuilder: (context, index) {

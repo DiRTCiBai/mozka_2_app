@@ -42,6 +42,7 @@ class _TabBarScreen2State extends State<TabBarScreen2> {
   List<int> meters = [];
   List<int> aantalSets = [];
   List<String> oefening = [];
+  int totaal = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,8 @@ class _TabBarScreen2State extends State<TabBarScreen2> {
                   Provider.of<TrainingSaveData>(context, listen: false)
                       .GetGroep();
 
-              SaveTraining(code, loggedInUser.email, datum, type, slag, groep);
+              SaveTraining(
+                  code, loggedInUser.email, datum, type, slag, groep, totaal);
               Navigator.pop(context);
             },
           ),
@@ -187,70 +189,10 @@ class _TabBarScreen2State extends State<TabBarScreen2> {
       }
     }
 
-    int totaal = 0;
+    totaal = 0;
 
     for (var tot in meters) {
       totaal += tot;
     }
   }
-//  @override
-//  Widget build(BuildContext context) {
-//    void CheckIfHasData(String datum, String data) {
-//      if (datum != null && data != null) {
-//        Provider.of<OefeningenDatabase>(context, listen: false).ClearData();
-//        Navigator.pop(context);
-//      }
-//    }
-//
-//    if (Provider.of<OefeningenDatabase>(context).GetAantalOefeningen() == 0)
-//      Provider.of<OefeningenDatabase>(context).ExpanedList();
-//
-//    return Column(
-//      children: <Widget>[
-//        Container(
-//          child:
-//              Provider.of<OefeningenDatabase>(context).GetAantalOefeningen() !=
-//                      0
-//                  ? Expanded(
-//                      child: ListView.builder(
-//                        itemBuilder: (context, index) {
-//                          return Oefening(
-//                            index: index,
-//                          );
-//                        },
-//                        itemCount: Provider.of<OefeningenDatabase>(context)
-//                            .GetAantalOefeningen(),
-//                      ),
-//                    )
-//                  : CircularProgressIndicator(),
-//        ),
-//        Padding(
-//          padding: const EdgeInsets.all(20),
-//          child: Button(
-//            color: Colors.blue,
-//            text: 'Opslaan',
-//            onTap: () {
-//              String datum =
-//                  Provider.of<TrainingSaveData>(context, listen: false)
-//                      .GetDatum();
-//              String type =
-//                  Provider.of<TrainingSaveData>(context, listen: false)
-//                      .GetType();
-//              String slag =
-//                  Provider.of<TrainingSaveData>(context, listen: false)
-//                      .GetSlag();
-//              String groep =
-//                  Provider.of<TrainingSaveData>(context, listen: false)
-//                      .GetGroep();
-//
-//              var data = ConvertListToData(context);
-//              SaveTraining(data, loggedInUser.email, datum, type, slag, groep);
-//
-//              CheckIfHasData(datum, data);
-//            },
-//          ),
-//        ),
-//      ],
-//    );
-//  }
 }
