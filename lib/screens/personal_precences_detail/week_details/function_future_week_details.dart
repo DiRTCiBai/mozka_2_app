@@ -31,8 +31,6 @@ class PrecencesDetails {
   NumberOfWeekdagen ConvertDataToPercentage() {
     List<double> percentage = [];
 
-    print('zit hier');
-    print(numberOfAanwezighedenWeekdagenTotaal.length);
     for (int index = 0;
         index < numberOfAanwezighedenWeekdagenTotaal.length;
         index++) {
@@ -44,9 +42,11 @@ class PrecencesDetails {
       else
         percentage.add(0);
     }
+
     NumberOfWeekdagen dataList = NumberOfWeekdagen(
-      percentage: percentage,
-    );
+        percentage: percentage,
+        aanwezigheden: numberOfAanwezighedenWeekdagen,
+        totaleAanwezigheden: numberOfAanwezighedenWeekdagenTotaal);
 
     return dataList;
   }

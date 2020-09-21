@@ -75,6 +75,7 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 17),
             ),
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(

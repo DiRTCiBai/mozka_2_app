@@ -5,9 +5,11 @@ import 'constants.dart';
 
 class CustomPercentageBar extends StatelessWidget {
   final double percent;
-  final String dag;
+  final int aawezig;
+  final int totaal;
 
-  CustomPercentageBar({this.percent, this.dag});
+  CustomPercentageBar(
+      {@required this.percent, @required this.totaal, @required this.aawezig});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CustomPercentageBar extends StatelessWidget {
         lineHeight: klineHeight,
         animationDuration: kanimationDuration,
         percent: percent,
-        center: Text("${(percent * 100).roundToDouble()}%", style: klineStyle),
+        center: Text("$aawezig/$totaal", style: klineStyle),
         linearStrokeCap: LinearStrokeCap.roundAll,
         progressColor: kprogressColor,
       ),
