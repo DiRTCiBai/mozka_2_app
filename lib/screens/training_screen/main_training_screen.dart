@@ -52,17 +52,26 @@ class _MainTrainingScreenState extends State<MainTrainingScreen> {
       int totaal = 0;
       for (int i = 0; i < oefening.length; i++) {
         totaal += meters[i];
-
-        list.add(Card(
-          child: ListTile(
-            leading: Text('${meters[i]}',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            title: Text('${aantalSets[i]}x ${oefening[i]}',
-                style: TextStyle(
-                  fontSize: 25,
-                )),
-          ),
-        ));
+        if (aantalSets[i] == 1) {
+          list.add(Card(
+            child: ListTile(
+              leading: Text('${meters[i]}',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              title: Text('${oefening[i]}', style: TextStyle(fontSize: 25)),
+            ),
+          ));
+        } else {
+          list.add(Card(
+            child: ListTile(
+              leading: Text('${meters[i]}',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              title: Text('${aantalSets[i]}x ${oefening[i]}',
+                  style: TextStyle(
+                    fontSize: 25,
+                  )),
+            ),
+          ));
+        }
       }
 
       list.add(Card(

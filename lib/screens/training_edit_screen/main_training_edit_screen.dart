@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widget_textfield.dart';
+import 'package:provider/provider.dart';
+import 'textfield_decoder/main_textfield_decoder.dart';
+import 'textfield_decoder/function_decoder_database.dart';
 
 class MainTrainingEditScreen extends StatefulWidget {
   static const String id = 'MainTrainingEditScreen';
@@ -23,20 +25,25 @@ class _MainTrainingEditScreenState extends State<MainTrainingEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Bewerk training'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DecoderDatabase()),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Bewerk training'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      //widget waar code int textfield wordt gegschreven en gedecodeerd
-      body: EditTextField(
-        controler: _controller,
-        trainingId: widget.trainingId,
+        //widget waar code int textfield wordt gegschreven en gedecodeerd
+        body: EditTextField(
+          controler: _controller,
+          trainingId: widget.trainingId,
+        ),
       ),
     );
   }

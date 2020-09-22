@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void SaveTraining(String data, int afstand, String trainingId) {
+void UpdateTraining(String data, int afstand, String trainingId) {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
   if (data != null) {
