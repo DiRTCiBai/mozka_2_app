@@ -20,6 +20,7 @@ class TrainingenDatabase {
                   sterren: documentSnapshot.data()['sterren'],
                   groep: documentSnapshot.data()['groep'],
                   afstand: documentSnapshot.data()['afstand'],
+                  id: documentSnapshot.data()['id'],
                 ))
             .toList());
   }

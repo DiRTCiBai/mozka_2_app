@@ -48,6 +48,7 @@ void SaveTraining(String data, String loggedInUser, String datum,
       'slag': slag,
       'groep': groep.toLowerCase(),
       'afstand': totAfstand,
+      'id': '$groep$datum',
     });
   }
 }

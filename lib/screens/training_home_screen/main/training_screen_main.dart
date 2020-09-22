@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mozka_2_app/screens/training_edit_screen/main_training_edit_screen.dart';
 import 'package:mozka_2_app/screens/training_home_screen/add_training_screen/code_training/main_code_training.dart';
 import 'package:mozka_2_app/screens/training_home_screen/listview/main_listview.dart';
 import 'widget_button.dart';

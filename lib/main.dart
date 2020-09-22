@@ -33,6 +33,7 @@ import 'screens/training_screen/main_training_screen.dart';
 import 'modules/filter_database.dart';
 import 'screens/training_home_screen/add_training_screen/tabview/main_tabview.dart';
 import 'screens/training_home_screen/add_training_screen/code_training/main_code_training.dart';
+import 'screens/training_edit_screen/main_training_edit_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,6 +113,8 @@ class MyApp extends StatelessWidget {
                 MainSplashScreen.id: (context) => MainSplashScreen(),
                 MainTrainingTabBar.id: (context) => MainTrainingTabBar(),
                 MainCodeTraining.id: (context) => MainCodeTraining(),
+                MainTrainingEditScreen.id: (context) =>
+                    MainTrainingEditScreen(),
               },
             ),
           );

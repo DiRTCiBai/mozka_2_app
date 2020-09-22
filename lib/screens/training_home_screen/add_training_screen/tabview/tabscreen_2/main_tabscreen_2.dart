@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:mozka_2_app/modules/oefeningen_database.dart';
-import 'package:mozka_2_app/screens/training_home_screen/add_training_screen/widget_oefening/main_oefening.dart';
 import 'function_save_training.dart';
 import 'package:mozka_2_app/screens/training_home_screen/add_training_screen/tabview/widget_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';

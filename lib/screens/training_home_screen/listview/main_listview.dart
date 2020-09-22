@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozka_2_app/modules/trainingen.dart';
+import 'package:mozka_2_app/screens/training_edit_screen/main_training_edit_screen.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:mozka_2_app/screens/training_screen/main_training_screen.dart';
@@ -19,37 +20,48 @@ class TrainingenListview extends StatelessWidget {
         itemBuilder: (context, index) {
           var training = groepList[index];
 
-          return Card(
-            child: ListTile(
-              leading: Text(
-                training.type,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+          return GestureDetector(
+            child: Card(
+              child: ListTile(
+                leading: Text(
+                  training.type,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+                ),
+                title: Text(
+                  training.slag,
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                ),
+                subtitle: Text('${training.afstand.toString()}m'),
+                trailing: Text(training.datum.replaceRange(10, 23, '')),
               ),
-              title: Text(
-                training.slag,
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
-              ),
-              subtitle: Text('${training.afstand.toString()}m'),
-              trailing: Text(training.datum.replaceRange(10, 23, '')),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainTrainingScreen(
-                      trainingen: training.data,
-                    ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MainTrainingScreen(
+                    trainingen: training.data,
                   ),
-                );
-              },
-              onLongPress: () {
-                print(groep);
-                FirebaseFirestore _db = FirebaseFirestore.instance;
+                ),
+              );
+            },
+            onLongPress: () {
+              print(groep);
+              FirebaseFirestore _db = FirebaseFirestore.instance;
 
-                _db
-                    .collection(kSaveColection)
-                    .doc('${groep.toUpperCase()}${training.datum}')
-                    .delete();
-              },
+              _db
+                  .collection(kSaveColection)
+                  .doc('${groep.toUpperCase()}${training.datum}')
+                  .delete();
+            },
+            onDoubleTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainTrainingEditScreen(
+                  training: training.data,
+                  trainingId: training.id,
+                ),
+              ),
             ),
           );
         },

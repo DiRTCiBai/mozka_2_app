@@ -9,6 +9,7 @@ class Trainingen {
   int sterren;
   String groep;
   int afstand;
+  String id;
 
   Trainingen(
       {this.data,
@@ -20,5 +21,6 @@ class Trainingen {
       this.sterren,
       this.type,
       this.groep,
-      this.afstand});
+      this.afstand,
+      this.id});
 }
