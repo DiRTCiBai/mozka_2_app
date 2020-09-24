@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'widget_speed_dial_list.dart';
 import 'widget_bottom_nav_bar.dart';
 import 'package:mozka_2_app/screens/mozka_precences_screen/main.dart';
+import 'groep_info/main_groep_info.dart';
 
 class HomeScreenMain extends StatefulWidget {
   static const String id = 'HomeScreenMain';
@@ -50,7 +51,8 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
               onTap: () {
                 Navigator.pushNamed(context, MozkaPrecencesScreen.id);
               },
-            )
+            ),
+            MainGroepInfo(),
           ],
         ),
       ),

@@ -41,6 +41,7 @@ dependencies:
   percent_indicator: "^2.1.5"
   datetime_picker_formfield: ^1.0.0
   splashscreen: ^1.2.0
+  clipboard_manager: ^0.0.4
 
 
 dev_dependencies:
